@@ -34,6 +34,10 @@ Enterprise-darajadagi admin dashboard - Feature-Sliced Design arxitekturasi bila
 
 - ✅ ESLint 9.39.2
 - ✅ TypeScript ESLint 8.50.0
+- ✅ Prettier 3.7.4
+- ✅ Husky 9.1.7 (Git hooks)
+- ✅ Lint-staged 16.2.7
+- ✅ Commitlint 20.2.0
 - ✅ pnpm 10.26.0
 
 ## 🏗️ Arxitektura
@@ -271,6 +275,8 @@ Loyiha to'liq ishga tayyor!
 - ✅ Misol kod yozilgan
 - ✅ Hujjatlar to'liq
 - ✅ Development server ishlayapti
+- ✅ Git hooks va kod sifati nazorati o'rnatilgan
+- ✅ Birinchi commit muvaffaqiyatli bajarildi!
 
 **Omad! Katta loyihalar qurishda muvaffaqiyatlar tilaymiz! 🚀**
 
