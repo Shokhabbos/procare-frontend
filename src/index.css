@@ -1,59 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;500;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Radius */
     --radius: 0.5rem;
+
+    /* Brand colors */
+    --brand-blue: #00bfff;
+    --brand-green: #16a34a;
+    --brand-orange: #d97706;
+    --brand-red: #dc2626;
+    --brand-purple: #bb73ff;
+
+    /* Background colors */
+    --bg-blue: #e6f3f9;
+    --bg-green: #e8f6ed;
+    --bg-orange: #fcf4e8;
+    --bg-red: #fcebeb;
+
+    /* Black scale */
+    --black-50: #f8fafc;
+    --black-100: #f1f5f9;
+    --black-200: #e2e8f0;
+    --black-300: #cbd5e1;
+    --black-400: #94a3b8;
+    --black-500: #64748b;
+    --black-600: #475569;
+    --black-700: #334155;
+    --black-800: #1e293b;
+
+    /* Semantic colors */
+    --text-body: var(--black-800);
+    --text-description: var(--black-500);
+    --text-brand: var(--brand-blue);
+
+    --border-primary: var(--black-200);
+    --border-divider: var(--black-100);
+
+    --bg-container: var(--black-50);
+    --bg-primary: var(--black-100);
+    --bg-brand: var(--bg-blue);
+    --bg-success: var(--bg-green);
+    --bg-warning: var(--bg-orange);
+    --bg-error: var(--bg-red);
   }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+  * {
+    @apply border-border-divider;
+  }
+
+  body {
+    @apply bg-background-container text-text-body font-sans;
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1;
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
+/* Typography utilities */
+@layer utilities {
+  /* Text sizes with line heights */
+  .text-24-bold {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 700;
   }
-  body {
-    @apply bg-background text-foreground;
+
+  .text-24-medium {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 500;
+  }
+
+  .text-24-regular {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 400;
+  }
+
+  .text-24-light {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 300;
+  }
+
+  .text-20-bold {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 700;
+  }
+
+  .text-20-medium {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 500;
+  }
+
+  .text-20-regular {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 400;
+  }
+
+  .text-20-light {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 300;
+  }
+
+  .text-16-bold {
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 700;
+  }
+
+  .text-16-medium {
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 500;
+  }
+
+  .text-16-regular {
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 400;
+  }
+
+  .text-16-light {
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 300;
+  }
+
+  .text-14-bold {
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 700;
+  }
+
+  .text-14-medium {
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 500;
+  }
+
+  .text-14-regular {
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
+  }
+
+  .text-14-light {
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 300;
+  }
+
+  .text-12-bold {
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 700;
+  }
+
+  .text-12-medium {
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 500;
+  }
+
+  .text-12-regular {
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 400;
+  }
+
+  .text-12-light {
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 300;
   }
 }
