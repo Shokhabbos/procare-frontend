@@ -5,18 +5,33 @@
 export const ROUTES = {
   HOME: '/',
   LOGIN: '/login',
+  // Main pages
   DASHBOARD: '/dashboard',
-  CUSTOMERS: {
-    LIST: '/customers',
-    DETAIL: (id: string) => `/customers/${id}`,
-    CREATE: '/customers/new',
-    EDIT: (id: string) => `/customers/${id}/edit`,
+  TASKS: '/tasks',
+  CUSTOMERS: '/customers',
+  ANALYTICS: '/analytics',
+
+  // Products
+  PRODUCTS: {
+    SERVICES: '/products/services',
+    REPAIR_PARTS: '/products/repair-parts',
   },
-  ORDERS: {
-    LIST: '/orders',
-    DETAIL: (id: string) => `/orders/${id}`,
-    CREATE: '/orders/new',
-    EDIT: (id: string) => `/orders/${id}/edit`,
+
+  // Settings
+  SETTINGS: {
+    ROOT: '/settings',
+    ROLES: '/settings/roles',
+    BRANCHES: '/settings/branches',
+    EMPLOYEES: '/settings/employees',
+    STATUSES: '/settings/statuses',
+    PHONES: '/settings/phones',
+    WARRANTY: '/settings/warranty',
+    OFFER: '/settings/offer',
+    TELEGRAM_BOT: '/settings/telegram-bot',
+    TEMPLATES: '/settings/templates',
+    MESSAGES: '/settings/messages',
+    LOGS: '/settings/logs',
   },
-  SETTINGS: '/settings',
+
+  LOGOUT: '/logout',
 } as const;
