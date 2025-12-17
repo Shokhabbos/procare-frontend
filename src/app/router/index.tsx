@@ -21,7 +21,6 @@ const StatusesPage = lazy(() => import('@pages/statuses'));
 const PhonesPage = lazy(() => import('@pages/phones'));
 const WarrantyPage = lazy(() => import('@pages/warranty'));
 const OfferPage = lazy(() => import('@pages/offer'));
-const TelegramBotPage = lazy(() => import('@pages/telegram-bot'));
 const TemplatesPage = lazy(() => import('@pages/templates'));
 const MessagesPage = lazy(() => import('@pages/messages'));
 const LogsPage = lazy(() => import('@pages/logs'));
@@ -106,20 +105,22 @@ export const router = createBrowserRouter([
             path: ROUTES.SETTINGS.OFFER,
             element: <OfferPage />,
           },
+
+          // Telegram bot (alohida bo'lim)
           {
-            path: ROUTES.SETTINGS.TELEGRAM_BOT,
-            element: <TelegramBotPage />,
+            path: ROUTES.TELEGRAM_BOT.ROOT,
+            element: <Navigate to={ROUTES.TELEGRAM_BOT.TEMPLATES} replace />,
           },
           {
-            path: ROUTES.SETTINGS.TEMPLATES,
+            path: ROUTES.TELEGRAM_BOT.TEMPLATES,
             element: <TemplatesPage />,
           },
           {
-            path: ROUTES.SETTINGS.MESSAGES,
+            path: ROUTES.TELEGRAM_BOT.MESSAGES,
             element: <MessagesPage />,
           },
           {
-            path: ROUTES.SETTINGS.LOGS,
+            path: ROUTES.TELEGRAM_BOT.LOGS,
             element: <LogsPage />,
           },
 

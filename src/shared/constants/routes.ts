@@ -17,6 +17,14 @@ export const ROUTES = {
     REPAIR_PARTS: '/products/repair-parts',
   },
 
+  // Telegram bot (alohida bo'lim)
+  TELEGRAM_BOT: {
+    ROOT: '/telegram-bot',
+    TEMPLATES: '/telegram-bot/templates',
+    MESSAGES: '/telegram-bot/messages',
+    LOGS: '/telegram-bot/logs',
+  },
+
   // Settings
   SETTINGS: {
     ROOT: '/settings',
@@ -27,10 +35,6 @@ export const ROUTES = {
     PHONES: '/settings/phones',
     WARRANTY: '/settings/warranty',
     OFFER: '/settings/offer',
-    TELEGRAM_BOT: '/settings/telegram-bot',
-    TEMPLATES: '/settings/templates',
-    MESSAGES: '/settings/messages',
-    LOGS: '/settings/logs',
   },
 
   LOGOUT: '/logout',
