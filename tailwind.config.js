@@ -26,23 +26,15 @@ export default {
         bold: '700',
       },
 
-      // Brand colors
+      // Colors
       colors: {
-        // Brand accent colors
+        // Brand colors
         brand: {
           blue: '#00BFFF',
           green: '#16A34A',
           orange: '#D97706',
           red: '#DC2626',
           purple: '#BB73FF',
-        },
-
-        // Background colors
-        bg: {
-          blue: '#E6F3F9',
-          green: '#E8F6ED',
-          orange: '#FCF4E8',
-          red: '#FCEBEB',
         },
 
         // Black scale
@@ -72,22 +64,26 @@ export default {
         },
 
         // Semantic colors - Background
-        background: {
+        bg: {
           container: '#f8fafc', // Black-50
           primary: '#f1f5f9', // Black-100
-          brand: '#E6F3F9', // bg_Blue
-          success: '#E8F6ED', // bg_Green
-          warning: '#FCF4E8', // bg_Orange
-          error: '#FCEBEB', // bg_Red
+          brand: '#E6F3F9', // Blue light
+          success: '#E8F6ED', // Green light
+          warning: '#FCF4E8', // Orange light
+          error: '#FCEBEB', // Red light
+          blue: '#E6F3F9',
+          green: '#E8F6ED',
+          orange: '#FCF4E8',
+          red: '#FCEBEB',
         },
       },
 
       // Gradient colors
       backgroundImage: {
-        'gradient-linear-1': 'linear-gradient(to right, #BB73FF, #FF333F)',
-        'gradient-linear-2': 'linear-gradient(to right, #FFAA21, #FF333F)',
-        'gradient-linear-3': 'linear-gradient(to right, #00BFFF, #BB73FF)',
-        'gradient-linear-4': 'linear-gradient(to right, #00BFFF, #00B8A9)',
+        'gradient-1': 'linear-gradient(to right, #BB73FF, #FF333F)',
+        'gradient-2': 'linear-gradient(to right, #FFAA21, #FF333F)',
+        'gradient-3': 'linear-gradient(to right, #00BFFF, #BB73FF)',
+        'gradient-4': 'linear-gradient(to right, #00BFFF, #00B8A9)',
       },
 
       borderRadius: {

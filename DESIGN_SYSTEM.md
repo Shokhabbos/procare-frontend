@@ -35,8 +35,8 @@ bg_Red:    #FCEBEB   /* Error foni */
 **Tailwind:**
 
 ```tsx
-<div className="bg-bg-blue">Blue background</div>
-<div className="bg-bg-green">Green background</div>
+<div className="bg-blue">Blue background</div>
+<div className="bg-green">Green background</div>
 ```
 
 ### Black Scale (Qora rang shkala)
@@ -65,51 +65,51 @@ Black-800: #1e293b   /* Eng qoramtir */
 
 #### Text Colors
 
-| Nom               | Qiymat              | Qachon ishlatiladi                 | Tailwind Class          |
-| ----------------- | ------------------- | ---------------------------------- | ----------------------- |
-| `textBody`        | Black-800 (#1e293b) | Sarlavhalar va muhim matnlar       | `text-text-body`        |
-| `textDescription` | Black-500 (#64748b) | Qo'shimcha matnlar va labellar     | `text-text-description` |
-| `textBrand`       | Blue (#00BFFF)      | Brend matnlari (masalan, tugmalar) | `text-text-brand`       |
+| Nom               | Qiymat              | Qachon ishlatiladi                 | Tailwind Class     |
+| ----------------- | ------------------- | ---------------------------------- | ------------------ |
+| `textBody`        | Black-800 (#1e293b) | Sarlavhalar va muhim matnlar       | `text-body`        |
+| `textDescription` | Black-500 (#64748b) | Qo'shimcha matnlar va labellar     | `text-description` |
+| `textBrand`       | Blue (#00BFFF)      | Brend matnlari (masalan, tugmalar) | `text-brand`       |
 
 **Misol:**
 
 ```tsx
-<h1 className="text-text-body text-24-bold">Sarlavha</h1>
-<p className="text-text-description text-14-regular">Tavsif</p>
-<button className="text-text-brand">Tugma</button>
+<h1 className="text-body text-24-bold">Sarlavha</h1>
+<p className="text-description text-14-regular">Tavsif</p>
+<button className="text-brand">Tugma</button>
 ```
 
 #### Border Colors
 
-| Nom             | Qiymat              | Qachon ishlatiladi         | Tailwind Class          |
-| --------------- | ------------------- | -------------------------- | ----------------------- |
-| `borderPrimary` | Black-200 (#e2e8f0) | Yuqori kontrastli border   | `border-border-primary` |
-| `divider`       | Black-100 (#f1f5f9) | O'rtacha kontrastli border | `border-border-divider` |
+| Nom             | Qiymat              | Qachon ishlatiladi         | Tailwind Class   |
+| --------------- | ------------------- | -------------------------- | ---------------- |
+| `borderPrimary` | Black-200 (#e2e8f0) | Yuqori kontrastli border   | `border-primary` |
+| `divider`       | Black-100 (#f1f5f9) | O'rtacha kontrastli border | `border-divider` |
 
 **Misol:**
 
 ```tsx
-<div className="border border-border-primary">High contrast</div>
-<hr className="border-t border-border-divider" />
+<div className="border border-primary">High contrast</div>
+<hr className="border-t border-divider" />
 ```
 
 #### Background Colors
 
-| Nom           | Qiymat              | Qachon ishlatiladi | Tailwind Class            |
-| ------------- | ------------------- | ------------------ | ------------------------- |
-| `bgContainer` | Black-50 (#f8fafc)  | Asosiy fon         | `bg-background-container` |
-| `bgPrimary`   | Black-100 (#f1f5f9) | Elementlar foni    | `bg-background-primary`   |
-| `bgBrand`     | bg_Blue (#E6F3F9)   | Brend elementlar   | `bg-background-brand`     |
-| `bgSuccess`   | bg_Green (#E8F6ED)  | Success holati     | `bg-background-success`   |
-| `bgWarning`   | bg_Orange (#FCF4E8) | Warning holati     | `bg-background-warning`   |
-| `bgError`     | bg_Red (#FCEBEB)    | Error holati       | `bg-background-error`     |
+| Nom           | Qiymat              | Qachon ishlatiladi | Tailwind Class |
+| ------------- | ------------------- | ------------------ | -------------- |
+| `bgContainer` | Black-50 (#f8fafc)  | Asosiy fon         | `bg-container` |
+| `bgPrimary`   | Black-100 (#f1f5f9) | Elementlar foni    | `bg-primary`   |
+| `bgBrand`     | bg_Blue (#E6F3F9)   | Brend elementlar   | `bg-brand`     |
+| `bgSuccess`   | bg_Green (#E8F6ED)  | Success holati     | `bg-success`   |
+| `bgWarning`   | bg_Orange (#FCF4E8) | Warning holati     | `bg-warning`   |
+| `bgError`     | bg_Red (#FCEBEB)    | Error holati       | `bg-error`     |
 
 **Misol:**
 
 ```tsx
-<div className="bg-background-container">Main background</div>
-<div className="bg-background-success p-4">Success alert</div>
-<div className="bg-background-error p-4">Error alert</div>
+<div className="bg-container">Main background</div>
+<div className="bg-success p-4">Success alert</div>
+<div className="bg-error p-4">Error alert</div>
 ```
 
 ### Linear Gradients
@@ -124,10 +124,10 @@ Linear_4: #00BFFF → #00B8A9 (Blue to Teal)
 **Tailwind:**
 
 ```tsx
-<div className="bg-gradient-linear-1">Purple to Red</div>
-<div className="bg-gradient-linear-2">Orange to Red</div>
-<div className="bg-gradient-linear-3">Blue to Purple</div>
-<div className="bg-gradient-linear-4">Blue to Teal</div>
+<div className="bg-gradient-1">Purple to Red</div>
+<div className="bg-gradient-2">Orange to Red</div>
+<div className="bg-gradient-3">Blue to Purple</div>
+<div className="bg-gradient-4">Blue to Teal</div>
 ```
 
 ## 🔤 Typography (Geologica Font)
@@ -196,17 +196,17 @@ Har bir o'lcham uchun to'rt xil weight mavjud: Bold, Medium, Regular, Light.
 
 ```tsx
 // H1 - Sahifa sarlavhasi
-<h1 className="text-24-bold text-text-body">
+<h1 className="text-24-bold text-body">
   Dashboard
 </h1>
 
 // H2 - Bo'lim sarlavhasi
-<h2 className="text-20-medium text-text-body">
+<h2 className="text-20-medium text-body">
   Statistika
 </h2>
 
 // H3 - Kichik sarlavha
-<h3 className="text-16-medium text-text-body">
+<h3 className="text-16-medium text-body">
   Oxirgi buyurtmalar
 </h3>
 ```
@@ -215,17 +215,17 @@ Har bir o'lcham uchun to'rt xil weight mavjud: Bold, Medium, Regular, Light.
 
 ```tsx
 // Asosiy matn
-<p className="text-16-regular text-text-body">
+<p className="text-16-regular text-body">
   Bu yerda asosiy matn joylashadi
 </p>
 
 // Tavsif matni
-<p className="text-14-regular text-text-description">
+<p className="text-14-regular text-description">
   Bu yerda qo'shimcha tavsif
 </p>
 
 // Kichik matn (label, caption)
-<span className="text-12-regular text-text-description">
+<span className="text-12-regular text-description">
   Label yoki caption
 </span>
 ```
@@ -235,9 +235,9 @@ Har bir o'lcham uchun to'rt xil weight mavjud: Bold, Medium, Regular, Light.
 ### Card
 
 ```tsx
-<div className="bg-white border border-border-divider rounded-lg p-6">
-  <h3 className="text-20-medium text-text-body mb-2">Card sarlavhasi</h3>
-  <p className="text-14-regular text-text-description">
+<div className="bg-white border border-divider rounded-lg p-6">
+  <h3 className="text-20-medium text-body mb-2">Card sarlavhasi</h3>
+  <p className="text-14-regular text-description">
     Card tavsifi va qo'shimcha ma'lumot
   </p>
 </div>
@@ -247,21 +247,21 @@ Har bir o'lcham uchun to'rt xil weight mavjud: Bold, Medium, Regular, Light.
 
 ```tsx
 // Success alert
-<div className="bg-background-success border border-brand-green rounded-lg p-4">
+<div className="bg-success border border-brand-green rounded-lg p-4">
   <p className="text-16-medium text-brand-green">
     Muvaffaqiyatli saqlandi!
   </p>
 </div>
 
 // Error alert
-<div className="bg-background-error border border-brand-red rounded-lg p-4">
+<div className="bg-error border border-brand-red rounded-lg p-4">
   <p className="text-16-medium text-brand-red">
     Xatolik yuz berdi!
   </p>
 </div>
 
 // Warning alert
-<div className="bg-background-warning border border-brand-orange rounded-lg p-4">
+<div className="bg-warning border border-brand-orange rounded-lg p-4">
   <p className="text-16-medium text-brand-orange">
     Diqqat! Ma'lumotni tekshiring.
   </p>
@@ -277,12 +277,12 @@ Har bir o'lcham uchun to'rt xil weight mavjud: Bold, Medium, Regular, Light.
 </button>
 
 // Secondary button
-<button className="bg-background-primary text-text-body text-16-medium px-4 py-2 rounded-lg hover:bg-black-200">
+<button className="bg-primary text-body text-16-medium px-4 py-2 rounded-lg hover:bg-black-200">
   Bekor qilish
 </button>
 
 // Gradient button
-<button className="bg-gradient-linear-3 text-white text-16-bold px-6 py-3 rounded-lg">
+<button className="bg-gradient-3 text-white text-16-bold px-6 py-3 rounded-lg">
   Premium xizmat
 </button>
 ```
@@ -291,22 +291,22 @@ Har bir o'lcham uchun to'rt xil weight mavjud: Bold, Medium, Regular, Light.
 
 ```tsx
 <table className="w-full">
-  <thead className="bg-background-primary">
+  <thead className="bg-primary">
     <tr>
-      <th className="text-14-medium text-text-body text-left p-4 border-b border-border-divider">
+      <th className="text-14-medium text-body text-left p-4 border-b border-divider">
         Ism
       </th>
-      <th className="text-14-medium text-text-body text-left p-4 border-b border-border-divider">
+      <th className="text-14-medium text-body text-left p-4 border-b border-divider">
         Email
       </th>
     </tr>
   </thead>
   <tbody>
-    <tr className="hover:bg-background-container">
-      <td className="text-14-regular text-text-body p-4 border-b border-border-divider">
+    <tr className="hover:bg-container">
+      <td className="text-14-regular text-body p-4 border-b border-divider">
         John Doe
       </td>
-      <td className="text-14-regular text-text-description p-4 border-b border-border-divider">
+      <td className="text-14-regular text-description p-4 border-b border-divider">
         john@example.com
       </td>
     </tr>
@@ -318,17 +318,17 @@ Har bir o'lcham uchun to'rt xil weight mavjud: Bold, Medium, Regular, Light.
 
 ```tsx
 // Success badge
-<span className="bg-background-success text-brand-green text-12-medium px-2 py-1 rounded">
+<span className="bg-success text-brand-green text-12-medium px-2 py-1 rounded">
   Faol
 </span>
 
 // Warning badge
-<span className="bg-background-warning text-brand-orange text-12-medium px-2 py-1 rounded">
+<span className="bg-warning text-brand-orange text-12-medium px-2 py-1 rounded">
   Kutilmoqda
 </span>
 
 // Error badge
-<span className="bg-background-error text-brand-red text-12-medium px-2 py-1 rounded">
+<span className="bg-error text-brand-red text-12-medium px-2 py-1 rounded">
   Bekor qilingan
 </span>
 ```
@@ -355,13 +355,13 @@ Tailwind'ning standart spacing sistemasidan foydalaning:
 
 ```tsx
 // Semantic class'lardan foydalaning
-<p className="text-text-body text-16-regular">Matn</p>
+<p className="text-body text-16-regular">Matn</p>
 
 // Typography class'laridan foydalaning
 <h1 className="text-24-bold">Sarlavha</h1>
 
 // Background color'larni to'g'ri ishlating
-<div className="bg-background-container">Content</div>
+<div className="bg-container">Content</div>
 ```
 
 ### ❌ Noto'g'ri
