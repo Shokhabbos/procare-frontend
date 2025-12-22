@@ -1,12 +1,8 @@
 import { Outlet } from 'react-router-dom';
 
 /**
- * Root layout - barcha sahifalar uchun asosiy layout
+ * Root Layout - barcha sahifalar uchun asosiy wrapper
  */
 export function RootLayout() {
-  return (
-    <div className="min-h-screen bg-background">
-      <Outlet />
-    </div>
-  );
+  return <Outlet />;
 }

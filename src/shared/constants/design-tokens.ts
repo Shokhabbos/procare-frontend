@@ -75,7 +75,7 @@ export const FONT_WEIGHTS = {
 
 // Font Sizes (with line heights)
 export const FONT_SIZES = {
-  12: { fontSize: '12px', lineHeight: '18px' },
+  12: { fontSize: '12px', lineHeight: '16px' },
   14: { fontSize: '14px', lineHeight: '18px' },
   16: { fontSize: '16px', lineHeight: '22px' },
   20: { fontSize: '20px', lineHeight: '28px' },

@@ -1,33 +1,35 @@
 import { Outlet } from 'react-router-dom';
+import { Sidebar, Header, Main } from './components';
 
 /**
- * Dashboard layout - autentifikatsiya kerak bo'lgan sahifalar uchun
- * Keyinchalik sidebar, header qo'shiladi
+ * Dashboard Layout - CSS Grid asosida responsive layout
+ *
+ * Struktura:
+ * - Chap: Sidebar (260px fixed)
+ * - O'ng: Content area (HeaderTop + HeaderBottom + Main)
+ * - Gap: 16px (gap-4) hamma joyda
+ * - Min height: screen
+ * - Background: light gray
  */
 export function DashboardLayout() {
   return (
-    <div className="flex min-h-screen">
-      {/* Sidebar keyinchalik qo'shiladi */}
-      <aside className="w-64 border-r bg-card">
-        <div className="p-6">
-          <h2 className="text-xl font-bold">ProCare Admin</h2>
-        </div>
-        <nav className="space-y-1 px-3">
-          {/* Navigation items keyinchalik qo'shiladi */}
-        </nav>
-      </aside>
+    <div className="min-h-screen bg-gray-50 p-4">
+      {/* Grid layout: Sidebar + Content */}
+      <div className="grid grid-cols-[260px_1fr] gap-4 min-h-[calc(100vh-2rem)]">
+        {/* Chap: Sidebar */}
+        <Sidebar />
 
-      {/* Main content */}
-      <main className="flex-1">
-        <header className="border-b bg-card">
-          <div className="flex h-16 items-center px-6">
-            <h1 className="text-lg font-semibold">Dashboard</h1>
-          </div>
-        </header>
-        <div className="p-6">
-          <Outlet />
+        {/* O'ng: Content area */}
+        <div className="grid grid-rows-[auto_auto_1fr] gap-4">
+          {/* Header (HeaderTop + HeaderBottom) */}
+          <Header />
+
+          {/* Main content */}
+          <Main>
+            <Outlet />
+          </Main>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

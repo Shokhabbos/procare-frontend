@@ -16,3 +16,29 @@ export type { InputProps } from './input';
 
 export { Label } from './label';
 export type { LabelProps } from './label';
+
+export { Icon, createIcon } from './icon';
+export type { IconProps, IconComponentProps } from './icon';
+
+export {
+  Collapsible,
+  CollapsibleTrigger,
+  CollapsibleContent,
+} from './collapsible';
+export {
+  Sidebar,
+  SidebarProvider,
+  SidebarTrigger,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
+  useSidebar,
+} from './sidebar';

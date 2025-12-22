@@ -47,10 +47,18 @@
     --bg-success: var(--bg-green);
     --bg-warning: var(--bg-orange);
     --bg-error: var(--bg-red);
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   * {
-    @apply border-border-divider;
+    border-color: var(--border-divider);
   }
 
   body {
@@ -58,6 +66,16 @@
     font-feature-settings:
       'rlig' 1,
       'calt' 1;
+  }
+  .dark {
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
@@ -137,50 +155,60 @@
   }
 
   .text-14-bold {
-    font-size: 14px;
-    line-height: 18px;
-    font-weight: 700;
+    font-size: 14px !important;
+    line-height: 18px !important;
+    font-weight: 700 !important;
   }
 
   .text-14-medium {
-    font-size: 14px;
-    line-height: 18px;
-    font-weight: 500;
+    font-size: 14px !important;
+    line-height: 18px !important;
+    font-weight: 500 !important;
   }
 
   .text-14-regular {
-    font-size: 14px;
-    line-height: 18px;
-    font-weight: 400;
+    font-size: 14px !important;
+    line-height: 18px !important;
+    font-weight: 400 !important;
   }
 
   .text-14-light {
-    font-size: 14px;
-    line-height: 18px;
-    font-weight: 300;
+    font-size: 14px !important;
+    line-height: 18px !important;
+    font-weight: 300 !important;
   }
 
   .text-12-bold {
     font-size: 12px;
-    line-height: 18px;
+    line-height: 16px;
     font-weight: 700;
   }
 
   .text-12-medium {
     font-size: 12px;
-    line-height: 18px;
+    line-height: 16px;
     font-weight: 500;
   }
 
   .text-12-regular {
     font-size: 12px;
-    line-height: 18px;
+    line-height: 16px;
     font-weight: 400;
   }
 
   .text-12-light {
     font-size: 12px;
-    line-height: 18px;
+    line-height: 16px;
     font-weight: 300;
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--border-primary);
+  }
+  body {
+    background-color: var(--bg-container);
+    color: var(--text-body);
   }
 }
