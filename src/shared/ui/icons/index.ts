@@ -16,13 +16,15 @@
 import CollapseIconSvg from '@assets/svg/collapse-icon.svg?react';
 import ProcareTinyLogoSvg from '@assets/svg/procare-tiny-logo.svg?react';
 import ProcareBigLogoSvg from '@assets/svg/procare-big-logo.svg?react';
-// import LogoSvg from '@assets/svg/logo.svg?react';
-// import MenuSvg from '@assets/svg/menu.svg?react';
+import UzIconSvg from '@assets/svg/uz-icon.svg?react';
+import RuIconSvg from '@assets/svg/ru-icon.svg?react';
+import LangIconSvg from '@assets/svg/lang-icon.svg?react';
 
 import { createIcon } from '../icon';
 
 export const CollapseIcon = createIcon(CollapseIconSvg);
 export const ProcareTinyLogo = createIcon(ProcareTinyLogoSvg);
 export const ProcareBigLogo = createIcon(ProcareBigLogoSvg);
-// export const LogoIcon = createIcon(LogoSvg);
-// export const MenuIcon = createIcon(MenuSvg);
+export const UzIcon = createIcon(UzIconSvg);
+export const RuIcon = createIcon(RuIconSvg);
+export const LangIcon = createIcon(LangIconSvg);

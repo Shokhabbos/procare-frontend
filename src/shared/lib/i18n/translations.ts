@@ -21,6 +21,7 @@ export type TranslationKey =
   | 'nav.messages'
   | 'nav.logs'
   | 'nav.logout'
+  | 'nav.pages'
   | 'common.loading';
 
 export const TRANSLATIONS: Record<Locale, Record<TranslationKey, string>> = {
@@ -40,11 +41,12 @@ export const TRANSLATIONS: Record<Locale, Record<TranslationKey, string>> = {
     'nav.phones': 'Telefonlar',
     'nav.warranty': 'Kafolat',
     'nav.offer': 'Oferta',
-    'nav.telegramBot': 'Telegram bot',
+    'nav.telegramBot': 'Bot',
     'nav.templates': 'Shablonlar',
     'nav.messages': 'Xabarlar',
     'nav.logs': 'Loglar',
     'nav.logout': 'Chiqish',
+    'nav.pages': 'Sahifalar',
     'common.loading': 'Yuklanmoqda...',
   },
   ru: {
@@ -63,11 +65,12 @@ export const TRANSLATIONS: Record<Locale, Record<TranslationKey, string>> = {
     'nav.phones': 'Телефоны',
     'nav.warranty': 'Гарантия',
     'nav.offer': 'Оферта',
-    'nav.telegramBot': 'Telegram бот',
+    'nav.telegramBot': 'Бот',
     'nav.templates': 'Шаблоны',
     'nav.messages': 'Сообщения',
     'nav.logs': 'Логи',
     'nav.logout': 'Выйти',
+    'nav.pages': 'Страницы',
     'common.loading': 'Загрузка...',
   },
 } as const;

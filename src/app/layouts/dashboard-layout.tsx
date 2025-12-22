@@ -1,35 +1,46 @@
+import type { CSSProperties } from 'react';
 import { Outlet } from 'react-router-dom';
+import { SidebarProvider } from '@shared/ui/sidebar';
 import { Sidebar, Header, Main } from './components';
 
 /**
- * Dashboard Layout - CSS Grid asosida responsive layout
+ * Dashboard Layout - Shadcn Sidebar bilan
  *
  * Struktura:
- * - Chap: Sidebar (260px fixed)
- * - O'ng: Content area (HeaderTop + HeaderBottom + Main)
- * - Gap: 16px (gap-4) hamma joyda
- * - Min height: screen
- * - Background: light gray
+ * - SidebarProvider - state management
+ * - Sidebar - collapsible sidebar
+ * - Content area - HeaderTop + HeaderBottom + Main
+ * - Gap: 16px (gap-4) content area ichida
  */
 export function DashboardLayout() {
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
-      {/* Grid layout: Sidebar + Content */}
-      <div className="grid grid-cols-[260px_1fr] gap-4 min-h-[calc(100vh-2rem)]">
-        {/* Chap: Sidebar */}
+    <SidebarProvider
+      style={
+        {
+          '--sidebar-background': '#ffffff',
+          '--sidebar-border': '#EBECEC',
+          '--sidebar-width': '260px',
+          '--sidebar-width-icon': '64px',
+        } as CSSProperties
+      }
+    >
+      <div className="flex min-h-screen w-full bg-gray-50 gap-4">
+        {/* Sidebar */}
         <Sidebar />
 
-        {/* O'ng: Content area */}
-        <div className="grid grid-rows-[auto_auto_1fr] gap-4">
-          {/* Header (HeaderTop + HeaderBottom) */}
-          <Header />
+        {/* Main content area */}
+        <main className="flex-1 p-4">
+          <div className="grid grid-rows-[auto_auto_1fr] gap-4 min-h-[calc(100vh-2rem)]">
+            {/* Header (HeaderTop + HeaderBottom) */}
+            <Header />
 
-          {/* Main content */}
-          <Main>
-            <Outlet />
-          </Main>
-        </div>
+            {/* Main content */}
+            <Main>
+              <Outlet />
+            </Main>
+          </div>
+        </main>
       </div>
-    </div>
+    </SidebarProvider>
   );
 }
