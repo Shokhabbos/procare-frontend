@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
 
-# Run type check before push
+# Husky v10-compatible pre-push hook
+# Bu hook pushdan oldin TypeScript type-check ishga tushiradi
+
 pnpm type-check
 
