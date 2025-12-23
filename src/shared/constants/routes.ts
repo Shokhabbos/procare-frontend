@@ -37,5 +37,13 @@ export const ROUTES = {
     OFFER: '/settings/offer',
   },
 
+  // App Settings
+  APP_SETTINGS: {
+    ROOT: '/app-settings',
+    NEWS: '/app-settings/news',
+    GUIDES: '/app-settings/guides',
+    INFOGRAPHICS: '/app-settings/infographics',
+  },
+
   LOGOUT: '/logout',
 } as const;

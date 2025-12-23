@@ -1,5 +1,3 @@
-export { Sidebar } from './Sidebar';
-export { Header } from './Header';
-export { HeaderTop } from './HeaderTop';
-export { HeaderBottom } from './HeaderBottom';
-export { Main } from './Main';
+export { Sidebar } from './sidebar';
+export { Header } from './header';
+export { Main } from './main';

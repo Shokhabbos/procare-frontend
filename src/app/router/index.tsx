@@ -25,6 +25,10 @@ const TemplatesPage = lazy(() => import('@pages/templates'));
 const MessagesPage = lazy(() => import('@pages/messages'));
 const LogsPage = lazy(() => import('@pages/logs'));
 
+const NewsPage = lazy(() => import('@pages/app-settings/news'));
+const GuidesPage = lazy(() => import('@pages/app-settings/guides'));
+const InfographicsPage = lazy(() => import('@pages/app-settings/infographics'));
+
 const LogoutPage = lazy(() => import('@pages/logout'));
 const DesignSystemDemoPage = lazy(() => import('@pages/design-system-demo'));
 
@@ -122,6 +126,24 @@ export const router = createBrowserRouter([
           {
             path: ROUTES.TELEGRAM_BOT.LOGS,
             element: <LogsPage />,
+          },
+
+          // App Settings
+          {
+            path: ROUTES.APP_SETTINGS.ROOT,
+            element: <Navigate to={ROUTES.APP_SETTINGS.NEWS} replace />,
+          },
+          {
+            path: ROUTES.APP_SETTINGS.NEWS,
+            element: <NewsPage />,
+          },
+          {
+            path: ROUTES.APP_SETTINGS.GUIDES,
+            element: <GuidesPage />,
+          },
+          {
+            path: ROUTES.APP_SETTINGS.INFOGRAPHICS,
+            element: <InfographicsPage />,
           },
 
           // Internal/dev

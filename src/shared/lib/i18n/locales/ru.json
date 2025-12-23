@@ -1,0 +1,86 @@
+{
+  "nav": {
+    "home": "Главная",
+    "tasks": "Задачи",
+    "customers": "Клиенты",
+    "analytics": "Аналитика",
+    "products": "Продукты",
+    "services": "Услуги",
+    "repairParts": "Запчасти",
+    "settings": "Настройки",
+    "roles": "Роли",
+    "branches": "Филиалы",
+    "employees": "Сотрудники",
+    "statuses": "Статусы",
+    "phones": "Телефоны",
+    "warranty": "Гарантия",
+    "offer": "Оферта",
+    "telegramBot": "Telegram бот",
+    "templates": "Шаблоны",
+    "messages": "Сообщения",
+    "logs": "Логи",
+    "logout": "Выйти",
+    "pages": "Страницы",
+    "appSettings": "Настройки приложения",
+    "news": "Новости",
+    "guides": "Руководства",
+    "infographics": "Инфографика"
+  },
+  "pages": {
+    "dashboard": {
+      "title": "Главная",
+      "welcome": "Добро пожаловать!"
+    },
+    "tasks": {
+      "title": "Задачи"
+    },
+    "customers": {
+      "title": "Клиенты"
+    }
+  },
+  "buttons": {
+    "add": "Добавить",
+    "edit": "Редактировать",
+    "delete": "Удалить",
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "submit": "Отправить",
+    "search": "Поиск",
+    "filter": "Фильтр",
+    "export": "Экспорт",
+    "import": "Импорт",
+    "close": "Закрыть",
+    "back": "Назад",
+    "next": "Далее",
+    "previous": "Предыдущий",
+    "confirm": "Подтвердить"
+  },
+  "common": {
+    "loading": "Загрузка...",
+    "error": "Ошибка",
+    "success": "Успешно",
+    "warning": "Предупреждение",
+    "info": "Информация",
+    "noData": "Нет данных",
+    "search": "Поиск...",
+    "total": "Всего",
+    "actions": "Действия",
+    "status": "Статус",
+    "createdAt": "Создано",
+    "updatedAt": "Обновлено"
+  },
+  "validation": {
+    "required": "Обязательное поле",
+    "email": "Неверный формат email",
+    "minLength": "Минимум {min} символов",
+    "maxLength": "Максимум {max} символов",
+    "phone": "Неверный номер телефона"
+  },
+  "messages": {
+    "saveSuccess": "Успешно сохранено",
+    "deleteSuccess": "Успешно удалено",
+    "updateSuccess": "Успешно обновлено",
+    "error": "Произошла ошибка",
+    "deleteConfirm": "Подтвердите удаление"
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "nav": {
+    "home": "Bosh sahifa",
+    "tasks": "Vazifalar",
+    "customers": "Mijozlar",
+    "analytics": "Analitika",
+    "products": "Mahsulotlar",
+    "services": "Xizmatlar",
+    "repairParts": "Ta'mirlash qismlari",
+    "settings": "Sozlamalar",
+    "roles": "Rollar",
+    "branches": "Filiallar",
+    "employees": "Xodimlar",
+    "statuses": "Status",
+    "phones": "Telefonlar",
+    "warranty": "Kafolat",
+    "offer": "Oferta",
+    "telegramBot": "Telegram bot",
+    "templates": "Shablonlar",
+    "messages": "Xabarlar",
+    "logs": "Loglar",
+    "logout": "Chiqish",
+    "pages": "Sahifalar",
+    "appSettings": "Ilova sozlamalari",
+    "news": "Yangiliklar",
+    "guides": "Qo'llanmalar",
+    "infographics": "Infografikalar"
+  },
+  "pages": {
+    "dashboard": {
+      "title": "Bosh sahifa",
+      "welcome": "Xush kelibsiz!"
+    },
+    "tasks": {
+      "title": "Vazifalar"
+    },
+    "customers": {
+      "title": "Mijozlar"
+    }
+  },
+  "buttons": {
+    "add": "Qo'shish",
+    "edit": "Tahrirlash",
+    "delete": "O'chirish",
+    "save": "Saqlash",
+    "cancel": "Bekor qilish",
+    "submit": "Yuborish",
+    "search": "Qidirish",
+    "filter": "Filtrlash",
+    "export": "Eksport",
+    "import": "Import",
+    "close": "Yopish",
+    "back": "Orqaga",
+    "next": "Keyingi",
+    "previous": "Oldingi",
+    "confirm": "Tasdiqlash"
+  },
+  "common": {
+    "loading": "Yuklanmoqda...",
+    "error": "Xatolik",
+    "success": "Muvaffaqiyatli",
+    "warning": "Ogohlantirish",
+    "info": "Ma'lumot",
+    "noData": "Ma'lumot yo'q",
+    "search": "Qidirish...",
+    "total": "Jami",
+    "actions": "Amallar",
+    "status": "Status",
+    "createdAt": "Yaratilgan",
+    "updatedAt": "Yangilangan"
+  },
+  "validation": {
+    "required": "Majburiy maydon",
+    "email": "Noto'g'ri email format",
+    "minLength": "Kamida {min} ta belgi bo'lishi kerak",
+    "maxLength": "Ko'pi bilan {max} ta belgi bo'lishi kerak",
+    "phone": "Noto'g'ri telefon raqam"
+  },
+  "messages": {
+    "saveSuccess": "Muvaffaqiyatli saqlandi",
+    "deleteSuccess": "Muvaffaqiyatli o'chirildi",
+    "updateSuccess": "Muvaffaqiyatli yangilandi",
+    "error": "Xatolik yuz berdi",
+    "deleteConfirm": "O'chirishni tasdiqlaysizmi?"
+  }
+}
