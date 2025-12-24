@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { CollapseIcon, UzIcon, RuIcon } from '@shared/ui/icons';
 import { SidebarTrigger } from '@shared/ui/sidebar';
 import { useLocaleStore } from '@shared/lib/i18n/locale-store';
+import { Bell, ChevronDown } from 'lucide-react';
 
 /**
  * HeaderTop komponenti - yuqori header (top bar)
@@ -35,14 +36,14 @@ export function HeaderTop() {
   return (
     <div className="h-16 flex items-center justify-between px-6 bg-white rounded-xl border border-[#EBECEC]">
       {/* Chap: Sidebar Trigger */}
-      <SidebarTrigger className="p-2 rounded-lg hover:bg-gray-100">
-        <CollapseIcon size={20} className="text-gray-600" />
+      <SidebarTrigger className="p-2 rounded-lg hover:bg-black-50">
+        <CollapseIcon size={24} className="text-brand-blue" />
       </SidebarTrigger>
 
       {/* O'ng: Actions */}
       <div className="flex items-center gap-3">
         {/* Til tanlash - Dropdown */}
-        <div className="relative" ref={dropdownRef}>
+        <div className="relative bg-black-50 rounded-lg" ref={dropdownRef}>
           <button
             onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
             className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
@@ -118,21 +119,9 @@ export function HeaderTop() {
         </div>
 
         {/* Notification */}
-        <button className="relative p-2 rounded-lg hover:bg-gray-100">
-          <svg
-            className="w-5 h-5 text-gray-600"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-            />
-          </svg>
-          <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+        <button className="relative px-3 py-2.5  bg-black-50 rounded-lg hover:bg-gray-100">
+          <Bell size={20} className="text-brand-blue" />
+          <span className="absolute top-2.5 right-3 w-2.5 h-2.5 bg-red-500 rounded-full"></span>
         </button>
 
         {/* User profile */}
@@ -146,19 +135,7 @@ export function HeaderTop() {
             <p className="text-sm font-medium text-gray-700">User Name</p>
             <p className="text-xs text-gray-500">Admin</p>
           </div>
-          <svg
-            className="w-4 h-4 text-gray-500"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 9l-7 7-7-7"
-            />
-          </svg>
+          <ChevronDown size={20} className="text-brand-blue" />
         </button>
       </div>
     </div>

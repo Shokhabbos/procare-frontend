@@ -36,6 +36,71 @@
     },
     "customers": {
       "title": "Клиенты"
+    },
+    "analytics": {
+      "title": "Аналитика"
+    },
+    "products": {
+      "services": {
+        "title": "Услуги"
+      },
+      "repairParts": {
+        "title": "Запчасти"
+      }
+    },
+    "telegramBot": {
+      "root": {
+        "title": "Telegram бот"
+      },
+      "templates": {
+        "title": "Шаблоны"
+      },
+      "messages": {
+        "title": "Сообщения"
+      },
+      "logs": {
+        "title": "Логи"
+      }
+    },
+    "settings": {
+      "root": {
+        "title": "Настройки"
+      },
+      "roles": {
+        "title": "Роли"
+      },
+      "branches": {
+        "title": "Филиалы"
+      },
+      "employees": {
+        "title": "Сотрудники"
+      },
+      "statuses": {
+        "title": "Статусы"
+      },
+      "phones": {
+        "title": "Телефоны"
+      },
+      "warranty": {
+        "title": "Гарантия"
+      },
+      "offer": {
+        "title": "Оферта"
+      }
+    },
+    "appSettings": {
+      "root": {
+        "title": "Настройки приложения"
+      },
+      "news": {
+        "title": "Новости"
+      },
+      "guides": {
+        "title": "Руководства"
+      },
+      "infographics": {
+        "title": "Инфографика"
+      }
     }
   },
   "buttons": {

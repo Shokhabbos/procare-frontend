@@ -45,6 +45,71 @@ export interface Translations {
     customers: {
       title: string;
     };
+    analytics: {
+      title: string;
+    };
+    products: {
+      services: {
+        title: string;
+      };
+      repairParts: {
+        title: string;
+      };
+    };
+    telegramBot: {
+      root: {
+        title: string;
+      };
+      templates: {
+        title: string;
+      };
+      messages: {
+        title: string;
+      };
+      logs: {
+        title: string;
+      };
+    };
+    settings: {
+      root: {
+        title: string;
+      };
+      roles: {
+        title: string;
+      };
+      branches: {
+        title: string;
+      };
+      employees: {
+        title: string;
+      };
+      statuses: {
+        title: string;
+      };
+      phones: {
+        title: string;
+      };
+      warranty: {
+        title: string;
+      };
+      offer: {
+        title: string;
+      };
+    };
+    appSettings: {
+      root: {
+        title: string;
+      };
+      news: {
+        title: string;
+      };
+      guides: {
+        title: string;
+      };
+      infographics: {
+        title: string;
+      };
+    };
   };
   buttons: {
     add: string;
@@ -110,6 +175,25 @@ export type TranslationKey =
   | `pages.dashboard.${keyof Translations['pages']['dashboard']}`
   | `pages.tasks.${keyof Translations['pages']['tasks']}`
   | `pages.customers.${keyof Translations['pages']['customers']}`
+  | `pages.analytics.${keyof Translations['pages']['analytics']}`
+  | `pages.products.services.${keyof Translations['pages']['products']['services']}`
+  | `pages.products.repairParts.${keyof Translations['pages']['products']['repairParts']}`
+  | `pages.telegramBot.root.${keyof Translations['pages']['telegramBot']['root']}`
+  | `pages.telegramBot.templates.${keyof Translations['pages']['telegramBot']['templates']}`
+  | `pages.telegramBot.messages.${keyof Translations['pages']['telegramBot']['messages']}`
+  | `pages.telegramBot.logs.${keyof Translations['pages']['telegramBot']['logs']}`
+  | `pages.settings.root.${keyof Translations['pages']['settings']['root']}`
+  | `pages.settings.roles.${keyof Translations['pages']['settings']['roles']}`
+  | `pages.settings.branches.${keyof Translations['pages']['settings']['branches']}`
+  | `pages.settings.employees.${keyof Translations['pages']['settings']['employees']}`
+  | `pages.settings.statuses.${keyof Translations['pages']['settings']['statuses']}`
+  | `pages.settings.phones.${keyof Translations['pages']['settings']['phones']}`
+  | `pages.settings.warranty.${keyof Translations['pages']['settings']['warranty']}`
+  | `pages.settings.offer.${keyof Translations['pages']['settings']['offer']}`
+  | `pages.appSettings.root.${keyof Translations['pages']['appSettings']['root']}`
+  | `pages.appSettings.news.${keyof Translations['pages']['appSettings']['news']}`
+  | `pages.appSettings.guides.${keyof Translations['pages']['appSettings']['guides']}`
+  | `pages.appSettings.infographics.${keyof Translations['pages']['appSettings']['infographics']}`
   | `buttons.${keyof Translations['buttons']}`
   | `common.${keyof Translations['common']}`
   | `validation.${keyof Translations['validation']}`

@@ -26,16 +26,82 @@
     "guides": "Qo'llanmalar",
     "infographics": "Infografikalar"
   },
+
   "pages": {
     "dashboard": {
       "title": "Bosh sahifa",
-      "welcome": "Xush kelibsiz!"
+      "welcome": "Xush kelibsiz"
     },
     "tasks": {
       "title": "Vazifalar"
     },
     "customers": {
       "title": "Mijozlar"
+    },
+    "analytics": {
+      "title": "Analitika"
+    },
+    "products": {
+      "services": {
+        "title": "Xizmatlar"
+      },
+      "repairParts": {
+        "title": "Ta'mirlash qismlari"
+      }
+    },
+    "telegramBot": {
+      "root": {
+        "title": "Telegram Bot"
+      },
+      "templates": {
+        "title": "Shablonlar"
+      },
+      "messages": {
+        "title": "Xabarlar"
+      },
+      "logs": {
+        "title": "Loglar"
+      }
+    },
+    "settings": {
+      "root": {
+        "title": "Sozlamalar"
+      },
+      "roles": {
+        "title": "Rollar"
+      },
+      "branches": {
+        "title": "Filiallar"
+      },
+      "employees": {
+        "title": "Xodimlar"
+      },
+      "statuses": {
+        "title": "Statuslar"
+      },
+      "phones": {
+        "title": "Telefonlar"
+      },
+      "warranty": {
+        "title": "Kafolat"
+      },
+      "offer": {
+        "title": "Oferta"
+      }
+    },
+    "appSettings": {
+      "root": {
+        "title": "Ilova sozlamalari"
+      },
+      "news": {
+        "title": "Yangiliklar"
+      },
+      "guides": {
+        "title": "Qo'llanmalar"
+      },
+      "infographics": {
+        "title": "Infografikalar"
+      }
     }
   },
   "buttons": {
