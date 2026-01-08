@@ -1,7 +1,12 @@
 #!/usr/bin/env sh
 
 # Husky v10-compatible pre-push hook
-# Bu hook pushdan oldin TypeScript type-check ishga tushiradi
+# Bu hook pushdan oldin TypeScript type-check va build tekshiruvini ishga tushiradi
 
+echo "🔍 TypeScript type checking..."
 pnpm type-check
 
+echo "🔨 Build tekshiruvi (runtime xatolarni topish uchun)..."
+pnpm build
+
+echo "✅ Barcha tekshiruvlar o'tdi!"
