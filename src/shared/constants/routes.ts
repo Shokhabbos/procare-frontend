@@ -4,7 +4,13 @@
 
 export const ROUTES = {
   HOME: '/',
-  LOGIN: '/login',
+  // Auth
+  AUTH: {
+    LOGIN: '/auth/login',
+    REGISTER: '/auth/register',
+    OTP: '/auth/otp',
+    FORGOT_PASSWORD: '/auth/forgot-password',
+  },
   // Main pages
   DASHBOARD: '/dashboard',
   TASKS: '/tasks',

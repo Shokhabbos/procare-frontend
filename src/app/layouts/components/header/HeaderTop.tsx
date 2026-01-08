@@ -36,8 +36,8 @@ export function HeaderTop() {
   return (
     <div className="h-16 flex items-center justify-between px-6 bg-white rounded-xl border border-[#EBECEC]">
       {/* Chap: Sidebar Trigger */}
-      <SidebarTrigger className="p-2 rounded-lg hover:bg-black-50">
-        <CollapseIcon size={24} className="text-brand-blue" />
+      <SidebarTrigger className="h-9 w-9 p-2 rounded-lg hover:bg-black-50 [&_svg]:!size-5">
+        <CollapseIcon size={20} className="text-brand-blue" />
       </SidebarTrigger>
 
       {/* O'ng: Actions */}

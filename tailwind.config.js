@@ -2,6 +2,31 @@
 export default {
   darkMode: ['class'],
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  safelist: [
+    // Typography classes
+    'text-12-bold',
+    'text-12-medium',
+    'text-12-regular',
+    'text-12-light',
+    'text-14-bold',
+    'text-14-medium',
+    'text-14-regular',
+    'text-14-light',
+    'text-16-bold',
+    'text-16-medium',
+    'text-16-regular',
+    'text-16-light',
+    'text-20-bold',
+    'text-20-medium',
+    'text-20-regular',
+    'text-20-light',
+    'text-24-bold',
+    'text-24-medium',
+    'text-24-regular',
+    'text-24-light',
+    'text-32-bold',
+    'text-40-bold',
+  ],
   theme: {
     extend: {
       fontFamily: {

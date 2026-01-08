@@ -2,9 +2,16 @@ import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { RootLayout } from '@app/layouts/root-layout';
 import { DashboardLayout } from '@app/layouts/dashboard-layout';
 import { ROUTES } from '@shared/constants';
+import { AuthGuard, GuestGuard } from './auth-guard';
 
 // Lazy load pages
 import { lazy } from 'react';
+
+// Auth pages
+const LoginPage = lazy(() => import('@pages/auth/login'));
+const RegisterPage = lazy(() => import('@pages/auth/register'));
+const OTPPage = lazy(() => import('@pages/auth/otp'));
+const ForgotPasswordPage = lazy(() => import('@pages/auth/forgot-password'));
 
 const DashboardPage = lazy(() => import('@pages/dashboard'));
 const CustomersPage = lazy(() => import('@pages/customers'));
@@ -44,10 +51,47 @@ export const router = createBrowserRouter([
         index: true,
         element: <Navigate to={ROUTES.DASHBOARD} replace />,
       },
+      // Auth routes (Guest only)
       {
-        // Protected area layout (UI keyinroq auth bilan bog'lanadi)
+        path: ROUTES.AUTH.LOGIN,
+        element: (
+          <GuestGuard>
+            <LoginPage />
+          </GuestGuard>
+        ),
+      },
+      {
+        path: ROUTES.AUTH.REGISTER,
+        element: (
+          <GuestGuard>
+            <RegisterPage />
+          </GuestGuard>
+        ),
+      },
+      {
+        path: ROUTES.AUTH.OTP,
+        element: (
+          <GuestGuard>
+            <OTPPage />
+          </GuestGuard>
+        ),
+      },
+      {
+        path: ROUTES.AUTH.FORGOT_PASSWORD,
+        element: (
+          <GuestGuard>
+            <ForgotPasswordPage />
+          </GuestGuard>
+        ),
+      },
+      {
+        // Protected area layout
         path: '/',
-        element: <DashboardLayout />,
+        element: (
+          <AuthGuard>
+            <DashboardLayout />
+          </AuthGuard>
+        ),
         children: [
           {
             path: ROUTES.DASHBOARD,

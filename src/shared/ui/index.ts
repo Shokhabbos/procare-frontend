@@ -42,3 +42,14 @@ export {
   SidebarMenuSubItem,
   useSidebar,
 } from './sidebar';
+
+export { OTPInput } from './otp-input';
+export type { OTPInputProps } from './otp-input';
+
+export { PhoneInput } from './phone-input';
+export type { PhoneInputProps } from './phone-input';
+
+export { PasswordInput } from './password-input';
+export type { PasswordInputProps } from './password-input';
+
+export { LanguageSwitcher } from './language-switcher';
