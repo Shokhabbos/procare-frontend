@@ -15,7 +15,7 @@ export function LoginForm() {
     handleSubmit,
     formState: { errors },
     setValue,
-    watch,
+    control,
     setError,
   } = useForm<LoginRequest>({
     defaultValues: {
@@ -25,8 +25,8 @@ export function LoginForm() {
     mode: 'onChange',
   });
 
-  const phoneValue = watch('phone');
-  const passwordValue = watch('password');
+  const phoneValue = useWatch({ control, name: 'phone' });
+  const passwordValue = useWatch({ control, name: 'password' });
 
   // Phone validation
   const validatePhone = (phone: string): boolean => {

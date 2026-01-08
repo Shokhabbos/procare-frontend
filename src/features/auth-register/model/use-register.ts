@@ -12,7 +12,7 @@ export function useRegister() {
 
   return useMutation({
     mutationFn: (data: RegisterRequest) => userApi.register(data),
-    onSuccess: (response, variables) => {
+    onSuccess: (_response, variables) => {
       // OTP sahifasiga o'tish
       navigate(ROUTES.AUTH.OTP, {
         state: { phone: variables.phone },

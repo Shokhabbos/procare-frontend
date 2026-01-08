@@ -12,7 +12,7 @@ export function useLogin() {
 
   return useMutation({
     mutationFn: (data: LoginRequest) => userApi.login(data),
-    onSuccess: (response) => {
+    onSuccess: (response, variables) => {
       // Token ni saqlash
       if (response.token) {
         localStorage.setItem('auth_token', response.token);
@@ -21,7 +21,7 @@ export function useLogin() {
       // Agar OTP kerak bo'lsa, OTP sahifasiga o'tish
       if (response.requiresOtp) {
         navigate(ROUTES.AUTH.OTP, {
-          state: { phone: data.phone },
+          state: { phone: variables.phone },
         });
       } else {
         // Dashboard'ga o'tish

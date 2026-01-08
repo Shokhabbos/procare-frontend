@@ -66,6 +66,7 @@ Icon.displayName = 'Icon';
  * export const LogoIcon = createIcon(LogoSvg);
  * ```
  */
+// eslint-disable-next-line react-refresh/only-export-components
 export function createIcon(
   SvgComponent: React.ComponentType<React.SVGProps<SVGSVGElement>>,
 ) {

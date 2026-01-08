@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { Button, PhoneInput } from '@shared/ui';
 import { useForgotPassword } from '../model/use-forgot-password';
@@ -15,7 +15,7 @@ export function ForgotPasswordForm() {
     handleSubmit,
     formState: { errors },
     setValue,
-    watch,
+    control,
     setError,
   } = useForm<ForgotPasswordRequest>({
     defaultValues: {
@@ -24,7 +24,7 @@ export function ForgotPasswordForm() {
     mode: 'onChange',
   });
 
-  const phoneValue = watch('phone');
+  const phoneValue = useWatch({ control, name: 'phone' });
 
   // Phone validation
   const validatePhone = (phone: string): boolean => {
