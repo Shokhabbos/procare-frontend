@@ -9,36 +9,60 @@ Bu papkada custom SVG iconlar saqlanadi.
 
 ## Ishlatish
 
-### 1-usul: To'g'ridan-to'g'ri import
+### 1-usul: To'g'ridan-to'g'ri import (SVG fayl sifatida)
 
 ```tsx
-import LogoSvg from '@assets/svg/logo.svg?react';
+// Background pattern yoki static SVG uchun
+import authBgPattern from '@assets/svg/auth-bg-pattern.svg';
 
 function MyComponent() {
-  return <LogoSvg className="w-8 h-8 text-blue-500" />;
+  return (
+    <div style={{ backgroundImage: `url(${authBgPattern})` }}>Content</div>
+  );
 }
 ```
+
+**Eslatma:** Icon'lar uchun `?react` parametri bilan import qiling (2-usul yoki 3-usul).
 
 ### 2-usul: Icon komponenti orqali
 
 ```tsx
 import { Icon } from '@shared/ui';
-import LogoSvg from '@assets/svg/logo.svg?react';
+import ProcareBigLogoSvg from '@assets/svg/procare-big-logo.svg?react';
 
 function MyComponent() {
-  return <Icon as={LogoSvg} size={32} className="text-blue-500" />;
+  return <Icon as={ProcareBigLogoSvg} size={32} className="text-blue-500" />;
 }
 ```
 
 ### 3-usul: Icons registry orqali (tavsiya etiladi)
 
 ```tsx
-import { LogoIcon } from '@shared/ui/icons';
+import {
+  ProcareBigLogo,
+  ProcareTinyLogo,
+  UzIcon,
+  RuIcon,
+} from '@shared/ui/icons';
 
 function MyComponent() {
-  return <LogoIcon size={32} className="text-blue-500" />;
+  return (
+    <>
+      <ProcareBigLogo size={32} className="text-blue-500" />
+      <UzIcon size={24} className="text-green-500" />
+    </>
+  );
 }
 ```
+
+**Mavjud iconlar:**
+
+- `CollapseIcon` - Collapse/expand icon
+- `ProcareTinyLogo` - Procare kichik logo
+- `ProcareBigLogo` - Procare katta logo
+- `UzIcon` - O'zbekiston bayrog'i icon
+- `RuIcon` - Rossiya bayrog'i icon
+- `LangIcon` - Til icon
 
 ## Best Practices
 

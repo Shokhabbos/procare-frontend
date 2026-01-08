@@ -6,9 +6,10 @@
  *
  * @example
  * ```tsx
- * import { LogoIcon, MenuIcon } from '@shared/ui/icons';
+ * import { ProcareBigLogo, UzIcon, RuIcon } from '@shared/ui/icons';
  *
- * <LogoIcon size={32} className="text-blue-500" />
+ * <ProcareBigLogo size={32} className="text-blue-500" />
+ * <UzIcon size={24} className="text-green-500" />
  * ```
  */
 
