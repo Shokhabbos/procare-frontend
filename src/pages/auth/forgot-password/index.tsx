@@ -24,16 +24,6 @@ export default function ForgotPasswordPage() {
         Agar SMS kiruvchi xabarlar qutingizda ko'rinmasa, spam yoki keraksiz
         xabarlar ("корзинка") papkasini tekshirib ko'ring.
       </p>
-      <div className="flex items-center gap-2">
-        <div className="flex -space-x-2">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="h-8 w-8 rounded-full bg-white/20" />
-          ))}
-        </div>
-        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-blue text-12-bold text-white">
-          +3695
-        </div>
-      </div>
     </>
   );
 

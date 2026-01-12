@@ -43,7 +43,7 @@ export function AuthLayout({
         />
 
         {/* Content */}
-        <div className="relative z-10">
+        <div className="relative z-10 flex flex-col justify-between h-full  ">
           {/* Logo */}
           <div className="mb-12">
             <img
@@ -53,53 +53,41 @@ export function AuthLayout({
             />
           </div>
 
-          {/* Main Heading */}
-          <h1 className="mb-4 text-32-bold text-white lg:text-40-bold">
-            {brandingTitle}
-          </h1>
+          <div>
+            {/* Main Heading */}
+            <h1 className="mb-6 text-32-bold text-white lg:text-40-bold">
+              {brandingTitle}
+            </h1>
 
-          {/* Description */}
-          <p className="text-16-regular text-white/90 lg:max-w-md">
-            {brandingDescription}
-          </p>
-        </div>
-
-        {/* Bottom Card */}
-        {showUserCard && (
-          <div className="relative z-10 rounded-2xl bg-white/10 p-6 backdrop-blur-sm">
-            {customCardContent ? (
-              customCardContent
-            ) : (
-              <>
-                <div className="mb-4 flex items-center justify-between">
-                  <h3 className="text-20-medium text-white">
-                    Hamjamiyatimizga qo'shilayotganingizdan juda xursandmiz!
-                  </h3>
-                  <div className="h-12 w-12 rounded-lg bg-white p-2">
-                    <ProcareTinyLogo size={32} className="text-brand-blue" />
-                  </div>
-                </div>
-                <p className="mb-4 text-14-regular text-white/80">
-                  Hisobingiz orqali jarayoningizni xavfsiz saqlashingiz va
-                  sozlamalaringizni moslashtirishingiz mumkin.
-                </p>
-                <div className="flex items-center gap-2">
-                  <div className="flex -space-x-2">
-                    {[1, 2, 3].map((i) => (
-                      <div
-                        key={i}
-                        className="h-8 w-8 rounded-full bg-white/20"
-                      />
-                    ))}
-                  </div>
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-blue text-12-bold text-white">
-                    +3695
-                  </div>
-                </div>
-              </>
-            )}
+            {/* Description */}
+            <p className="text-16-regular text-white/90 lg:max-w-md">
+              {brandingDescription}
+            </p>
           </div>
-        )}
+          {/* Bottom Card */}
+          {showUserCard && (
+            <div className="relative z-10 rounded-2xl bg-white/10 p-6 backdrop-blur-sm">
+              {customCardContent ? (
+                customCardContent
+              ) : (
+                <>
+                  <div className="mb-4 flex items-center justify-between">
+                    <h3 className="text-20-medium text-white">
+                      Iltimos, login ma’lumotlaringizni kiriting
+                    </h3>
+                    <div className="h-12 w-12 rounded-lg bg-white p-2">
+                      <ProcareTinyLogo size={32} className="text-brand-blue" />
+                    </div>
+                  </div>
+                  <p className="mb-4 text-14-regular text-white/80">
+                    Eng so‘nggi yangiliklar va xabarlardan xabardor bo‘lish
+                    uchun bizga ijtimoiy tarmoqlarda obuna bo’ling.
+                  </p>
+                </>
+              )}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Right Column - Form */}
