@@ -3,15 +3,6 @@ import { Outlet } from 'react-router-dom';
 import { SidebarProvider } from '@shared/ui/sidebar';
 import { Sidebar, Header, Main } from './components';
 
-/**
- * Dashboard Layout - Shadcn Sidebar bilan
- *
- * Struktura:
- * - SidebarProvider - state management
- * - Sidebar - collapsible sidebar
- * - Content area - HeaderTop + HeaderBottom + Main
- * - Gap: 16px (gap-4) content area ichida => gap-6 dashboard layout ichida
- */
 export function DashboardLayout() {
   return (
     <SidebarProvider
@@ -25,16 +16,12 @@ export function DashboardLayout() {
       }
     >
       <div className="flex min-h-screen w-full bg-gray-50 gap-6">
-        {/* Sidebar */}
         <Sidebar />
 
-        {/* Main content area */}
         <main className="flex-1 p-4">
           <div className="grid grid-rows-[auto_auto_1fr] gap-4 min-h-[calc(100vh-2rem)]">
-            {/* Header (HeaderTop + HeaderBottom) */}
             <Header />
 
-            {/* Main content */}
             <Main>
               <Outlet />
             </Main>
