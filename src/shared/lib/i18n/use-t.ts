@@ -5,5 +5,6 @@ import { t } from './t';
 export function useT() {
   const locale = useLocaleStore((s) => s.locale);
 
-  return (key: TranslationKey) => t(locale, key);
+  return (key: TranslationKey, params?: Record<string, string | number>) =>
+    t(locale, key, params);
 }
