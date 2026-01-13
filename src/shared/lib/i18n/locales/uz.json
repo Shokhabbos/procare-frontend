@@ -102,6 +102,63 @@
       "infographics": {
         "title": "Infografikalar"
       }
+    },
+    "auth": {
+      "login": {
+        "title": "Xush kelibsiz!",
+        "description": "Qaytganingizdan xursandmiz. Kirish usulini tanlang!",
+        "brandingTitle": "Assalomu alaykum, hisobingizga tez va xavfsiz kiring",
+        "brandingDescription": "Ro'yhatdan o'tganingiz uchun rahmat! Iltimos, elektron pochtangizga yuborilgan tasdiqlash havolasi ustiga bosing.",
+        "phoneLabel": "Telefon raqam*",
+        "passwordLabel": "Parol*",
+        "passwordPlaceholder": "Parolni kiriting",
+        "forgotPassword": "Parolni unutdingizmi?",
+        "submit": "Tizimga kirish",
+        "noAccount": "Sizda akkaunt yo'qmi?",
+        "registerLink": "Ro'yhatdan o'tish",
+        "phoneIncomplete": "Telefon raqami to'liq emas",
+        "passwordMinLength": "Parol kamida 6 belgi bo'lishi kerak",
+        "loginError": "Kirishda xatolik yuz berdi"
+      },
+      "register": {
+        "title": "Ro'yhatdan o'tish",
+        "description": "Agar siz tizimda mavjud bo'lmasangiz, avval ro'yhatdan o'tishingiz kerak bo'ladi!",
+        "brandingTitle": "Assalomu alaykum, boshlash uchun hisob yarating",
+        "brandingDescription": "Hisobingiz orqali ma'lumotlarni xavfsiz saqlashingiz, sozlamalaringizni moslashtirishingiz va barcha qurilmalaringizda Probox bilan uzluksiz aloqada bo'lishingiz mumkin.",
+        "phoneLabel": "Telefon raqam*",
+        "submit": "Ro'yxatdan o'tish",
+        "hasAccount": "Allaqachon akkauntingiz bormi?",
+        "loginLink": "Kirish",
+        "phoneIncomplete": "Telefon raqami to'liq emas",
+        "registerError": "Ro'yxatdan o'tishda xatolik yuz berdi"
+      },
+      "forgotPassword": {
+        "title": "Parolni unutdingizmi?",
+        "description": "Tashvishlanmang, siz uni qayta tiklay olasiz!",
+        "brandingTitle": "Xavotir olmang, bunday holatlar bo'lib turadi! Bizda parolni tiklash tez va oson.",
+        "brandingDescription": "Quyida ro'yxatdan o'tgan telefon raqamingizni kiriting, biz sizga parolni tiklash uchun SMS kodini yuboramiz. SMS'dagi ko'rsatmalarga amal qiling — qisqa fursatda hisobingizga qayta kira olasiz.",
+        "phoneLabel": "Telefon raqam*",
+        "submit": "Sms jo'natish",
+        "backLink": "Ortga qaytish",
+        "phoneIncomplete": "Telefon raqami to'liq emas",
+        "smsError": "SMS yuborishda xatolik yuz berdi",
+        "cardTitle": "Ko'rsatmalarga amal qiling",
+        "cardDescription": "Agar SMS kiruvchi xabarlar qutingizda ko'rinmasa, spam yoki keraksiz xabarlar (\"корзинка\") papkasini tekshirib ko'ring."
+      },
+      "otp": {
+        "title": "SMS kodni tasdiqlang!",
+        "brandingTitle": "Assalomu alaykum, boshlash uchun hisob yarating",
+        "brandingDescription": "Hisobingiz orqali ma'lumotlarni xavfsiz saqlashingiz, sozlamalaringizni moslashtirishingiz va barcha qurilmalaringizda Probox bilan uzluksiz aloqada bo'lishingiz mumkin.",
+        "codeSent": "Biz {phone} raqamingizga tasdiqlash kodini yubordik!",
+        "resend": "Qayta yuborish",
+        "submit": "Tasdiqlash",
+        "backLink": "Orqaga qaytish",
+        "verifyError": "Kodni tasdiqlashda xatolik yuz berdi"
+      },
+      "layout": {
+        "cardTitle": "Iltimos, login ma'lumotlaringizni kiriting",
+        "cardDescription": "Eng so'nggi yangiliklar va xabarlardan xabardor bo'lish uchun bizga ijtimoiy tarmoqlarda obuna bo'ling."
+      }
     }
   },
   "buttons": {
@@ -119,10 +176,16 @@
     "back": "Orqaga",
     "next": "Keyingi",
     "previous": "Oldingi",
-    "confirm": "Tasdiqlash"
+    "confirm": "Tasdiqlash",
+    "send": "Yuborish",
+    "login": "Tizimga kirish",
+    "register": "Ro'yxatdan o'tish"
   },
   "common": {
     "loading": "Yuklanmoqda...",
+    "pending": "Kutilmoqda...",
+    "sending": "Yuborilmoqda...",
+    "verifying": "Tasdiqlanmoqda...",
     "error": "Xatolik",
     "success": "Muvaffaqiyatli",
     "warning": "Ogohlantirish",
@@ -140,7 +203,8 @@
     "email": "Noto'g'ri email format",
     "minLength": "Kamida {min} ta belgi bo'lishi kerak",
     "maxLength": "Ko'pi bilan {max} ta belgi bo'lishi kerak",
-    "phone": "Noto'g'ri telefon raqam"
+    "phone": "Noto'g'ri telefon raqam",
+    "phoneIncomplete": "Telefon raqami to'liq emas"
   },
   "messages": {
     "saveSuccess": "Muvaffaqiyatli saqlandi",

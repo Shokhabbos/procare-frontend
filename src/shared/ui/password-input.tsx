@@ -25,7 +25,7 @@ export const PasswordInput = React.forwardRef<
   return (
     <div className="relative">
       <div className="absolute left-3 top-1/2 -translate-y-1/2">
-        <Lock className="h-5 w-5 text-text-description" />
+        <Lock className="h-5 w-5 text-brand-blue" />
       </div>
       <Input
         ref={ref}
@@ -42,7 +42,7 @@ export const PasswordInput = React.forwardRef<
       <button
         type="button"
         onClick={() => setIsVisible(!isVisible)}
-        className="absolute right-3 top-1/2 -translate-y-1/2 text-text-description transition-colors hover:text-text-body"
+        className="absolute right-3 top-1/2 -translate-y-1/2 text-brand-blue transition-colors hover:text-brand-blue/80"
       >
         {isVisible ? (
           <EyeOff className="h-5 w-5" />

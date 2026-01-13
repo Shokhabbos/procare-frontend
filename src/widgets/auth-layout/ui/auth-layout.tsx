@@ -3,6 +3,7 @@ import { LanguageSwitcher } from '@shared/ui';
 import { ProcareTinyLogo } from '@shared/ui/icons';
 import procareLogo from '@assets/svg/procare-big-logo.svg';
 import authBgPattern from '@assets/svg/auth-bg-pattern.svg';
+import { useT } from '@shared/lib/i18n';
 
 export interface AuthLayoutProps {
   children: ReactNode;
@@ -28,6 +29,7 @@ export function AuthLayout({
   showUserCard = true,
   customCardContent,
 }: AuthLayoutProps) {
+  const t = useT();
   return (
     <div className="flex min-h-screen">
       {/* Left Column - Branding */}
@@ -55,12 +57,12 @@ export function AuthLayout({
 
           <div>
             {/* Main Heading */}
-            <h1 className="mb-6 text-32-bold text-white lg:text-40-bold">
+            <h1 className="mb-6 text-32-bold text-white lg:text-40-bold ">
               {brandingTitle}
             </h1>
 
             {/* Description */}
-            <p className="text-16-regular text-white/90 lg:max-w-md">
+            <p className="text-16-regular text-white/90 lg:max-w-md xl:max-w-lg">
               {brandingDescription}
             </p>
           </div>
@@ -73,15 +75,14 @@ export function AuthLayout({
                 <>
                   <div className="mb-4 flex items-center justify-between">
                     <h3 className="text-20-medium text-white">
-                      Iltimos, login ma’lumotlaringizni kiriting
+                      {t('pages.auth.layout.cardTitle')}
                     </h3>
                     <div className="h-12 w-12 rounded-lg bg-white p-2">
                       <ProcareTinyLogo size={32} className="text-brand-blue" />
                     </div>
                   </div>
                   <p className="mb-4 text-14-regular text-white/80">
-                    Eng so‘nggi yangiliklar va xabarlardan xabardor bo‘lish
-                    uchun bizga ijtimoiy tarmoqlarda obuna bo’ling.
+                    {t('pages.auth.layout.cardDescription')}
                   </p>
                 </>
               )}
@@ -99,12 +100,12 @@ export function AuthLayout({
 
         {/* Form Container */}
         <div className="flex flex-1 items-center justify-center px-4 py-8 sm:px-6 sm:py-12">
-          <div className="w-full max-w-md">
-            <h2 className="mb-2 text-20-bold text-text-body sm:text-24-bold">
+          <div className="w-full max-w-md ">
+            <h2 className="mb-2 text-20-bold text-text-body sm:text-24-bold text-center">
               {title}
             </h2>
             {description && (
-              <p className="mb-6 text-14-regular text-text-description sm:mb-8">
+              <p className="mb-6 text-14-light text-text-description sm:mb-8 text-center">
                 {description}
               </p>
             )}

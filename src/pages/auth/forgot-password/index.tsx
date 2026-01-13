@@ -1,16 +1,19 @@
 import { AuthLayout } from '@widgets/auth-layout';
 import { ForgotPasswordForm } from '@features/auth-forgot-password';
 import procareLogo from '@assets/svg/procare-big-logo.svg';
+import { useT } from '@shared/lib/i18n';
 
 /**
  * Forgot password sahifasi
  */
 export default function ForgotPasswordPage() {
+  const t = useT();
+
   const customCardContent = (
     <>
       <div className="mb-4 flex items-center justify-between">
         <h3 className="text-20-medium text-white">
-          Ko'rsatmalarga amal qiling
+          {t('pages.auth.forgotPassword.cardTitle')}
         </h3>
         <div className="h-12 w-12 rounded-lg bg-white/20 p-2">
           <img
@@ -21,18 +24,17 @@ export default function ForgotPasswordPage() {
         </div>
       </div>
       <p className="mb-4 text-14-regular text-white/80">
-        Agar SMS kiruvchi xabarlar qutingizda ko'rinmasa, spam yoki keraksiz
-        xabarlar ("корзинка") papkasini tekshirib ko'ring.
+        {t('pages.auth.forgotPassword.cardDescription')}
       </p>
     </>
   );
 
   return (
     <AuthLayout
-      title="Parolni unutdingizmi?"
-      description="Tashvishlanmang, siz uni qayta tiklay olasiz!"
-      brandingTitle="Xavotir olmang, bunday holatlar bo'lib turadi! Bizda parolni tiklash tez va oson."
-      brandingDescription="Quyida ro'yxatdan o'tgan telefon raqamingizni kiriting, biz sizga parolni tiklash uchun SMS kodini yuboramiz. SMS'dagi ko'rsatmalarga amal qiling — qisqa fursatda hisobingizga qayta kira olasiz."
+      title={t('pages.auth.forgotPassword.title')}
+      description={t('pages.auth.forgotPassword.description')}
+      brandingTitle={t('pages.auth.forgotPassword.brandingTitle')}
+      brandingDescription={t('pages.auth.forgotPassword.brandingDescription')}
       showUserCard={true}
       customCardContent={customCardContent}
     >

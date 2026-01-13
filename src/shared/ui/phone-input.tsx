@@ -98,7 +98,7 @@ export const PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(
     return (
       <div className="relative">
         <div className="pointer-events-none absolute left-3 top-0 z-10 flex h-9 items-center">
-          <Phone className="h-5 w-5 text-text-description" />
+          <Phone className="h-5 w-5 text-brand-blue" />
         </div>
         <Input
           ref={ref}

@@ -4,11 +4,13 @@ import { Button, PhoneInput } from '@shared/ui';
 import { useRegister } from '../model/use-register';
 import type { RegisterRequest } from '@entities/user';
 import { ROUTES } from '@shared/constants';
+import { useT } from '@shared/lib/i18n';
 
 /**
  * Register form komponenti
  */
 export function RegisterForm() {
+  const t = useT();
   const { mutate: register, isPending, error } = useRegister();
 
   const {
@@ -36,7 +38,7 @@ export function RegisterForm() {
     if (!validatePhone(data.phone)) {
       setError('phone', {
         type: 'manual',
-        message: "Telefon raqami to'liq emas",
+        message: t('pages.auth.register.phoneIncomplete'),
       });
       return;
     }
@@ -51,7 +53,7 @@ export function RegisterForm() {
           htmlFor="phone"
           className="mb-2 block text-14-medium text-text-body"
         >
-          Telefon raqam*
+          {t('pages.auth.register.phoneLabel')}
         </label>
         <PhoneInput
           value={phoneValue}
@@ -68,7 +70,7 @@ export function RegisterForm() {
           <p className="text-14-regular text-brand-red">
             {error instanceof Error
               ? error.message
-              : "Ro'yxatdan o'tishda xatolik yuz berdi"}
+              : t('pages.auth.register.registerError')}
           </p>
         </div>
       )}
@@ -78,18 +80,18 @@ export function RegisterForm() {
         disabled={isPending}
         className="w-full bg-brand-blue text-white hover:bg-brand-blue/90"
       >
-        {isPending ? 'Kutilmoqda...' : "Ro'yxatdan o'tish"}
+        {isPending ? t('common.pending') : t('pages.auth.register.submit')}
       </Button>
 
       <div className="text-center">
         <span className="text-14-regular text-text-description">
-          Allaqachon akkauntingiz bormi?{' '}
+          {t('pages.auth.register.hasAccount')}{' '}
         </span>
         <Link
           to={ROUTES.AUTH.LOGIN}
           className="text-14-medium text-brand-blue hover:underline"
         >
-          Kirish
+          {t('pages.auth.register.loginLink')}
         </Link>
       </div>
     </form>

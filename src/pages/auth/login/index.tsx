@@ -1,16 +1,19 @@
 import { AuthLayout } from '@widgets/auth-layout';
 import { LoginForm } from '@features/auth-login';
+import { useT } from '@shared/lib/i18n';
 
 /**
  * Login sahifasi
  */
 export default function LoginPage() {
+  const t = useT();
+
   return (
     <AuthLayout
-      title="Xush kelibsiz!"
-      description="Qaytganingizdan xursandmiz. Kirish usulini tanlang!"
-      brandingTitle="Assalomu alaykum, hisobingizga tez va xavfsiz kiring"
-      brandingDescription="Ro'yhatdan o'tganingiz uchun rahmat! Iltimos, elektron pochtangizga yuborilgan tasdiqlash havolasi ustiga bosing."
+      title={t('pages.auth.login.title')}
+      description={t('pages.auth.login.description')}
+      brandingTitle={t('pages.auth.login.brandingTitle')}
+      brandingDescription={t('pages.auth.login.brandingDescription')}
     >
       <LoginForm />
     </AuthLayout>

@@ -110,6 +110,63 @@ export interface Translations {
         title: string;
       };
     };
+    auth: {
+      login: {
+        title: string;
+        description: string;
+        brandingTitle: string;
+        brandingDescription: string;
+        phoneLabel: string;
+        passwordLabel: string;
+        passwordPlaceholder: string;
+        forgotPassword: string;
+        submit: string;
+        noAccount: string;
+        registerLink: string;
+        phoneIncomplete: string;
+        passwordMinLength: string;
+        loginError: string;
+      };
+      register: {
+        title: string;
+        description: string;
+        brandingTitle: string;
+        brandingDescription: string;
+        phoneLabel: string;
+        submit: string;
+        hasAccount: string;
+        loginLink: string;
+        phoneIncomplete: string;
+        registerError: string;
+      };
+      forgotPassword: {
+        title: string;
+        description: string;
+        brandingTitle: string;
+        brandingDescription: string;
+        phoneLabel: string;
+        submit: string;
+        backLink: string;
+        phoneIncomplete: string;
+        smsError: string;
+        cardTitle: string;
+        cardDescription: string;
+      };
+      otp: {
+        title: string;
+        brandingTitle: string;
+        brandingDescription: string;
+        codeSent: string;
+        resend: string;
+        submit: string;
+        backLink: string;
+        verifyError: string;
+      };
+      layout: {
+        cardTitle: string;
+        cardDescription: string;
+      };
+    };
   };
   buttons: {
     add: string;
@@ -127,9 +184,15 @@ export interface Translations {
     next: string;
     previous: string;
     confirm: string;
+    send: string;
+    login: string;
+    register: string;
   };
   common: {
     loading: string;
+    pending: string;
+    sending: string;
+    verifying: string;
     error: string;
     success: string;
     warning: string;
@@ -148,6 +211,7 @@ export interface Translations {
     minLength: string;
     maxLength: string;
     phone: string;
+    phoneIncomplete: string;
   };
   messages: {
     saveSuccess: string;
@@ -194,6 +258,11 @@ export type TranslationKey =
   | `pages.appSettings.news.${keyof Translations['pages']['appSettings']['news']}`
   | `pages.appSettings.guides.${keyof Translations['pages']['appSettings']['guides']}`
   | `pages.appSettings.infographics.${keyof Translations['pages']['appSettings']['infographics']}`
+  | `pages.auth.login.${keyof Translations['pages']['auth']['login']}`
+  | `pages.auth.register.${keyof Translations['pages']['auth']['register']}`
+  | `pages.auth.forgotPassword.${keyof Translations['pages']['auth']['forgotPassword']}`
+  | `pages.auth.otp.${keyof Translations['pages']['auth']['otp']}`
+  | `pages.auth.layout.${keyof Translations['pages']['auth']['layout']}`
   | `buttons.${keyof Translations['buttons']}`
   | `common.${keyof Translations['common']}`
   | `validation.${keyof Translations['validation']}`

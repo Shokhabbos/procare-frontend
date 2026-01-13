@@ -1,15 +1,18 @@
 import { AuthLayout } from '@widgets/auth-layout';
 import { OTPForm } from '@features/auth-otp';
+import { useT } from '@shared/lib/i18n';
 
 /**
  * OTP tasdiqlash sahifasi
  */
 export default function OTPPage() {
+  const t = useT();
+
   return (
     <AuthLayout
-      title="SMS kodni tasdiqlang!"
-      brandingTitle="Assalomu alaykum, boshlash uchun hisob yarating"
-      brandingDescription="Hisobingiz orqali ma'lumotlarni xavfsiz saqlashingiz, sozlamalaringizni moslashtirishingiz va barcha qurilmalaringizda Probox bilan uzluksiz aloqada bo'lishingiz mumkin."
+      title={t('pages.auth.otp.title')}
+      brandingTitle={t('pages.auth.otp.brandingTitle')}
+      brandingDescription={t('pages.auth.otp.brandingDescription')}
       showUserCard={false}
     >
       <OTPForm />

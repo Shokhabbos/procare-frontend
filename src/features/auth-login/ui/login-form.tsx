@@ -4,11 +4,13 @@ import { Button, PhoneInput, PasswordInput } from '@shared/ui';
 import { useLogin } from '../model/use-login';
 import type { LoginRequest } from '@entities/user';
 import { ROUTES } from '@shared/constants';
+import { useT } from '@shared/lib/i18n';
 
 /**
  * Login form komponenti
  */
 export function LoginForm() {
+  const t = useT();
   const { mutate: login, isPending, error } = useLogin();
 
   const {
@@ -43,7 +45,7 @@ export function LoginForm() {
     if (!validatePhone(data.phone)) {
       setError('phone', {
         type: 'manual',
-        message: "Telefon raqami to'liq emas",
+        message: t('pages.auth.login.phoneIncomplete'),
       });
       return;
     }
@@ -51,7 +53,7 @@ export function LoginForm() {
     if (!validatePassword(data.password)) {
       setError('password', {
         type: 'manual',
-        message: "Parol kamida 6 belgi bo'lishi kerak",
+        message: t('pages.auth.login.passwordMinLength'),
       });
       return;
     }
@@ -66,7 +68,7 @@ export function LoginForm() {
           htmlFor="phone"
           className="mb-2 block text-14-medium text-text-body"
         >
-          Telefon raqam*
+          {t('pages.auth.login.phoneLabel')}
         </label>
         <PhoneInput
           value={phoneValue}
@@ -83,7 +85,7 @@ export function LoginForm() {
           htmlFor="password"
           className="mb-2 block text-14-medium text-text-body"
         >
-          Parol*
+          {t('pages.auth.login.passwordLabel')}
         </label>
         <PasswordInput
           value={passwordValue}
@@ -92,7 +94,7 @@ export function LoginForm() {
           }
           error={errors.password?.message}
           disabled={isPending}
-          placeholder="Parolni kiriting"
+          placeholder={t('pages.auth.login.passwordPlaceholder')}
         />
       </div>
 
@@ -101,7 +103,7 @@ export function LoginForm() {
           to={ROUTES.AUTH.FORGOT_PASSWORD}
           className="text-14-regular text-brand-blue hover:underline"
         >
-          Parolni unutdingizmi?
+          {t('pages.auth.login.forgotPassword')}
         </Link>
       </div>
 
@@ -110,7 +112,7 @@ export function LoginForm() {
           <p className="text-14-regular text-brand-red">
             {error instanceof Error
               ? error.message
-              : 'Kirishda xatolik yuz berdi'}
+              : t('pages.auth.login.loginError')}
           </p>
         </div>
       )}
@@ -120,18 +122,18 @@ export function LoginForm() {
         disabled={isPending}
         className="w-full bg-brand-blue text-white hover:bg-brand-blue/90"
       >
-        {isPending ? 'Kutilmoqda...' : 'Tizimga kirish'}
+        {isPending ? t('common.pending') : t('pages.auth.login.submit')}
       </Button>
 
       <div className="text-center">
         <span className="text-14-regular text-text-description">
-          Sizda akkaunt yo'qmi?{' '}
+          {t('pages.auth.login.noAccount')}{' '}
         </span>
         <Link
           to={ROUTES.AUTH.REGISTER}
           className="text-14-medium text-brand-blue hover:underline"
         >
-          Ro'yhatdan o'tish
+          {t('pages.auth.login.registerLink')}
         </Link>
       </div>
     </form>

@@ -4,11 +4,13 @@ import { Button, PhoneInput } from '@shared/ui';
 import { useForgotPassword } from '../model/use-forgot-password';
 import type { ForgotPasswordRequest } from '@entities/user';
 import { ROUTES } from '@shared/constants';
+import { useT } from '@shared/lib/i18n';
 
 /**
  * Forgot password form komponenti
  */
 export function ForgotPasswordForm() {
+  const t = useT();
   const { mutate: forgotPassword, isPending, error } = useForgotPassword();
 
   const {
@@ -36,7 +38,7 @@ export function ForgotPasswordForm() {
     if (!validatePhone(data.phone)) {
       setError('phone', {
         type: 'manual',
-        message: "Telefon raqami to'liq emas",
+        message: t('pages.auth.forgotPassword.phoneIncomplete'),
       });
       return;
     }
@@ -51,7 +53,7 @@ export function ForgotPasswordForm() {
           htmlFor="phone"
           className="mb-2 block text-14-medium text-text-body"
         >
-          Telefon raqam*
+          {t('pages.auth.forgotPassword.phoneLabel')}
         </label>
         <PhoneInput
           value={phoneValue}
@@ -68,7 +70,7 @@ export function ForgotPasswordForm() {
           <p className="text-14-regular text-brand-red">
             {error instanceof Error
               ? error.message
-              : 'SMS yuborishda xatolik yuz berdi'}
+              : t('pages.auth.forgotPassword.smsError')}
           </p>
         </div>
       )}
@@ -78,7 +80,9 @@ export function ForgotPasswordForm() {
         disabled={isPending}
         className="w-full bg-brand-blue text-white hover:bg-brand-blue/90"
       >
-        {isPending ? 'Yuborilmoqda...' : "Sms jo'natish"}
+        {isPending
+          ? t('common.sending')
+          : t('pages.auth.forgotPassword.submit')}
       </Button>
 
       <div className="text-center">
@@ -87,7 +91,7 @@ export function ForgotPasswordForm() {
           className="inline-flex items-center gap-2 text-14-regular text-brand-blue hover:underline"
         >
           <span>←</span>
-          <span>Ortga qaytish</span>
+          <span>{t('pages.auth.forgotPassword.backLink')}</span>
         </Link>
       </div>
     </form>

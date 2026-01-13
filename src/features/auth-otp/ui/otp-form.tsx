@@ -4,11 +4,13 @@ import { Button, OTPInput } from '@shared/ui';
 import { useVerifyOtp } from '../model/use-verify-otp';
 import { useResendOtp } from '../model/use-resend-otp';
 import { ROUTES } from '@shared/constants';
+import { useT } from '@shared/lib/i18n';
 
 /**
  * OTP form komponenti
  */
 export function OTPForm() {
+  const t = useT();
   const location = useLocation();
   const phone = (location.state as { phone?: string })?.phone || '';
 
@@ -67,8 +69,9 @@ export function OTPForm() {
     <form onSubmit={handleSubmit} className="space-y-6">
       <div>
         <p className="text-14-regular text-text-description">
-          Biz {formatPhoneForDisplay(phone)} raqamingizga tasdiqlash kodini
-          yubordik!
+          {t('pages.auth.otp.codeSent', {
+            phone: formatPhoneForDisplay(phone),
+          })}
         </p>
       </div>
 
@@ -83,7 +86,7 @@ export function OTPForm() {
 
       <div className="flex items-center justify-center gap-2">
         <span className="text-14-regular text-text-description">
-          Qayta yuborish
+          {t('pages.auth.otp.resend')}
         </span>
         {canResend ? (
           <button
@@ -92,7 +95,7 @@ export function OTPForm() {
             disabled={isResending}
             className="text-14-medium text-brand-blue hover:underline disabled:opacity-50"
           >
-            {isResending ? 'Yuborilmoqda...' : 'Yuborish'}
+            {isResending ? t('common.sending') : t('buttons.send')}
           </button>
         ) : (
           <span className="text-14-medium text-text-body">
@@ -107,7 +110,7 @@ export function OTPForm() {
           <p className="text-14-regular text-brand-red">
             {error instanceof Error
               ? error.message
-              : 'Kodni tasdiqlashda xatolik yuz berdi'}
+              : t('pages.auth.otp.verifyError')}
           </p>
         </div>
       )}
@@ -117,7 +120,7 @@ export function OTPForm() {
         disabled={isPending || otp.length !== 6}
         className="w-full bg-brand-blue text-white hover:bg-brand-blue/90 disabled:opacity-50"
       >
-        {isPending ? 'Tasdiqlanmoqda...' : 'Tasdiqlash'}
+        {isPending ? t('common.verifying') : t('pages.auth.otp.submit')}
       </Button>
 
       <div className="text-center">
@@ -126,7 +129,7 @@ export function OTPForm() {
           className="inline-flex items-center gap-2 text-14-regular text-brand-blue hover:underline"
         >
           <span>←</span>
-          <span>Orqaga qaytish</span>
+          <span>{t('pages.auth.otp.backLink')}</span>
         </Link>
       </div>
     </form>
