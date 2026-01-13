@@ -31,63 +31,70 @@ export function AuthLayout({
 }: AuthLayoutProps) {
   const t = useT();
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen bg-[#F5F5F5]">
       {/* Left Column - Branding */}
-      <div className="relative hidden w-1/2 overflow-hidden bg-gradient-3 lg:flex lg:flex-col lg:justify-between lg:p-12">
-        {/* Background Pattern */}
-        <div
-          className="absolute inset-0 opacity-40"
-          style={{
-            backgroundImage: `url(${authBgPattern})`,
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
-          }}
-        />
+      <div className="relative hidden w-1/2 overflow-hidden p-4 lg:flex">
+        <div className="relative w-full overflow-hidden rounded-2xl bg-gradient-3 p-12">
+          {/* Background Pattern */}
+          <div
+            className="absolute inset-0 opacity-30"
+            style={{
+              backgroundImage: `url(${authBgPattern})`,
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          />
 
-        {/* Content */}
-        <div className="relative z-10 flex flex-col justify-between h-full  ">
-          {/* Logo */}
-          <div className="mb-12">
-            <img
-              src={procareLogo}
-              alt="Procare"
-              className="h-8 brightness-0 invert"
-            />
-          </div>
-
-          <div>
-            {/* Main Heading */}
-            <h1 className="mb-6 text-32-bold text-white lg:text-40-bold ">
-              {brandingTitle}
-            </h1>
-
-            {/* Description */}
-            <p className="text-16-regular text-white/90 lg:max-w-md xl:max-w-lg">
-              {brandingDescription}
-            </p>
-          </div>
-          {/* Bottom Card */}
-          {showUserCard && (
-            <div className="relative z-10 rounded-2xl bg-white/10 p-6 backdrop-blur-sm">
-              {customCardContent ? (
-                customCardContent
-              ) : (
-                <>
-                  <div className="mb-4 flex items-center justify-between">
-                    <h3 className="text-20-medium text-white">
-                      {t('pages.auth.layout.cardTitle')}
-                    </h3>
-                    <div className="h-12 w-12 rounded-lg bg-white p-2">
-                      <ProcareTinyLogo size={32} className="text-brand-blue" />
-                    </div>
-                  </div>
-                  <p className="mb-4 text-14-regular text-white/80">
-                    {t('pages.auth.layout.cardDescription')}
-                  </p>
-                </>
-              )}
+          {/* Content */}
+          <div className="relative z-10 flex h-full flex-col justify-between">
+            {/* Logo */}
+            <div>
+              <img
+                src={procareLogo}
+                alt="Procare"
+                className="h-8 brightness-0 invert"
+              />
             </div>
-          )}
+
+            {/* Main Content */}
+            <div className="flex-1 flex flex-col justify-center space-y-8">
+              <div>
+                <h1 className="mb-6 text-40-bold leading-tight text-white">
+                  {brandingTitle}
+                </h1>
+                <p className="text-16-regular text-white/90 max-w-lg">
+                  {brandingDescription}
+                </p>
+              </div>
+            </div>
+
+            {/* Bottom Card */}
+            {showUserCard && (
+              <div className="rounded-2xl bg-white/10 p-6 backdrop-blur-sm">
+                {customCardContent ? (
+                  customCardContent
+                ) : (
+                  <>
+                    <div className="mb-4 flex items-center justify-between">
+                      <h3 className="text-20-medium text-white">
+                        {t('pages.auth.layout.cardTitle')}
+                      </h3>
+                      <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-white p-2">
+                        <ProcareTinyLogo
+                          size={32}
+                          className="text-brand-blue"
+                        />
+                      </div>
+                    </div>
+                    <p className="text-14-regular text-white/80">
+                      {t('pages.auth.layout.cardDescription')}
+                    </p>
+                  </>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
