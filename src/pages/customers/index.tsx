@@ -14,8 +14,21 @@ export default function CustomersPage() {
   const [page, setPage] = useState(1);
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [debouncedSearch, setDebouncedSearch] = useState('');
 
-  const { data, isLoading } = useCustomers({ page, limit: 10 });
+  // Search o'zgarganda page'ni 1 ga qaytarish
+  const handleSearchChange = (value: string) => {
+    setSearchQuery(value);
+    if (value !== searchQuery) {
+      setPage(1);
+    }
+  };
+
+  const { data, isLoading } = useCustomers({
+    page,
+    limit: 10,
+    search: debouncedSearch || undefined,
+  });
 
   return (
     <div className="space-y-6">
@@ -26,7 +39,8 @@ export default function CustomersPage() {
             <SearchInput
               placeholder={t('common.search')}
               value={searchQuery}
-              onValueChange={setSearchQuery}
+              onValueChange={handleSearchChange}
+              onDebouncedChange={setDebouncedSearch}
             />
             <FilterButton />
             <Button

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Input } from './input';
 import { cn } from '@shared/lib';
 import { Search } from 'lucide-react';
+import { useDebounce } from '@shared/hooks';
 
 export interface SearchInputProps extends Omit<
   React.ComponentProps<'input'>,
@@ -9,17 +10,51 @@ export interface SearchInputProps extends Omit<
 > {
   value?: string;
   onValueChange?: (value: string) => void;
+  /**
+   * Debounced callback - 500ms kechikishdan keyin chaqiriladi
+   * API call'lar uchun ishlatiladi
+   */
+  onDebouncedChange?: (value: string) => void;
+  /**
+   * Debounce delay (millisekundlarda)
+   * @default 500
+   */
+  debounceDelay?: number;
 }
 
 /**
  * Search input komponenti
  * Header'larda qidiruv uchun ishlatiladi
+ * Ichida debounce logikasi bor
  */
 export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
-  ({ value, onValueChange, className, onChange, ...props }, ref) => {
+  (
+    {
+      value,
+      onValueChange,
+      onDebouncedChange,
+      debounceDelay = 500,
+      className,
+      onChange,
+      ...props
+    },
+    ref,
+  ) => {
+    // Debounce value - API call'lar uchun
+    const debouncedValue = useDebounce(value || '', debounceDelay);
+
+    // Debounced value o'zgarganda callback chaqirish
+    React.useEffect(() => {
+      if (onDebouncedChange && debouncedValue !== undefined) {
+        onDebouncedChange(debouncedValue);
+      }
+    }, [debouncedValue, onDebouncedChange]);
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newValue = e.target.value;
+      // Immediate update - UI uchun
       if (onValueChange) {
-        onValueChange(e.target.value);
+        onValueChange(newValue);
       }
       if (onChange) {
         onChange(e);

@@ -8,6 +8,8 @@ import { useT } from '@shared/lib/i18n';
 export default function TasksPage() {
   const t = useT();
   const [searchQuery, setSearchQuery] = useState('');
+  // Kelajakda tasks API qo'shilganda ishlatiladi
+  const [_debouncedSearch, setDebouncedSearch] = useState('');
 
   return (
     <>
@@ -19,6 +21,7 @@ export default function TasksPage() {
               placeholder={t('common.search')}
               value={searchQuery}
               onValueChange={setSearchQuery}
+              onDebouncedChange={setDebouncedSearch}
             />
             <FilterButton />
             <Button className="bg-brand-blue text-white hover:bg-brand-blue/90">
