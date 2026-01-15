@@ -7,7 +7,7 @@ import ruIcon from '@assets/svg/ru-icon.svg';
 
 const LOCALES = [
   { code: 'uz' as const, label: "O'zb", icon: uzIcon },
-  { code: 'ru' as const, label: 'Rus', icon: ruIcon },
+  { code: 'ru' as const, label: 'Рус', icon: ruIcon },
 ] as const;
 
 export interface LanguageSwitcherProps {
