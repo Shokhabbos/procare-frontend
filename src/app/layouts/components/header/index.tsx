@@ -1,11 +1,17 @@
+import type { ReactNode } from 'react';
 import { HeaderTop } from './HeaderTop';
 import { HeaderBottom } from './HeaderBottom';
 
-export function Header() {
+export interface HeaderProps {
+  headerLeft?: ReactNode;
+  headerRight?: ReactNode;
+}
+
+export function Header({ headerLeft, headerRight }: HeaderProps) {
   return (
     <>
       <HeaderTop />
-      <HeaderBottom />
+      <HeaderBottom left={headerLeft} right={headerRight} />
     </>
   );
 }

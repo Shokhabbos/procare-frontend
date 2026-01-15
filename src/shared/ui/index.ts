@@ -52,6 +52,15 @@ export type { PhoneInputProps } from './phone-input';
 export { PasswordInput } from './password-input';
 export type { PasswordInputProps } from './password-input';
 
+export { SearchInput } from './search-input';
+export type { SearchInputProps } from './search-input';
+
+export { FilterButton } from './filter-button';
+export type { FilterButtonProps } from './filter-button';
+
+export { PageHeader } from './page-header';
+export type { PageHeaderProps } from './page-header';
+
 export { LanguageSwitcher } from './language-switcher';
 
 export { ToastViewport } from './toast';

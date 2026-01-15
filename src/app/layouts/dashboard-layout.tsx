@@ -1,9 +1,23 @@
-import type { CSSProperties } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
+import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { SidebarProvider } from '@shared/ui/sidebar';
 import { Sidebar, Header, Main } from './components';
 
+export interface DashboardOutletContext {
+  setHeaderLeft: (content: ReactNode) => void;
+  setHeaderRight: (content: ReactNode) => void;
+}
+
 export function DashboardLayout() {
+  const [headerLeft, setHeaderLeft] = useState<ReactNode>(null);
+  const [headerRight, setHeaderRight] = useState<ReactNode>(null);
+
+  const context: DashboardOutletContext = {
+    setHeaderLeft,
+    setHeaderRight,
+  };
+
   return (
     <SidebarProvider
       style={
@@ -20,10 +34,10 @@ export function DashboardLayout() {
 
         <main className="flex-1 p-4">
           <div className="grid grid-rows-[auto_auto_1fr] gap-4 min-h-[calc(100vh-2rem)]">
-            <Header />
+            <Header headerLeft={headerLeft} headerRight={headerRight} />
 
             <Main>
-              <Outlet />
+              <Outlet context={context} />
             </Main>
           </div>
         </main>
