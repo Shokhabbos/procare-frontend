@@ -10,6 +10,8 @@ export const ROUTES = {
     REGISTER: '/auth/register',
     OTP: '/auth/otp',
     FORGOT_PASSWORD: '/auth/forgot-password',
+    COMPLETE_REGISTRATION: '/auth/complete-registration',
+    RESET_PASSWORD: '/auth/reset-password',
   },
   // Main pages
   DASHBOARD: '/dashboard',

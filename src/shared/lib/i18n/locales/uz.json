@@ -155,6 +155,32 @@
         "backLink": "Orqaga qaytish",
         "verifyError": "Kodni tasdiqlashda xatolik yuz berdi"
       },
+      "completeRegistration": {
+        "title": "Parol o'rnating",
+        "description": "Hisobingizni yakunlash uchun yangi parol yarating",
+        "brandingTitle": "Xavfsiz parol bilan hisobingizni yakunlang",
+        "brandingDescription": "Parolingiz kamida 6 ta belgidan iborat bo'lsin. Parolni hech kimga bermang.",
+        "passwordLabel": "Yangi parol*",
+        "confirmPasswordLabel": "Parolni tasdiqlang*",
+        "confirmPasswordPlaceholder": "Parolni qayta kiriting",
+        "passwordMismatch": "Parollar mos kelmadi",
+        "submit": "Yakunlash",
+        "submitError": "Registratsiyani yakunlashda xatolik yuz berdi",
+        "backToLogin": "Login sahifasiga qaytish"
+      },
+      "resetPassword": {
+        "title": "Parolni tiklash",
+        "description": "Yangi parol o'rnating",
+        "brandingTitle": "Hisobingizga qayta kirish uchun parolni yangilang",
+        "brandingDescription": "SMS kod orqali parolni yangilashingiz mumkin. Parolingiz xavfsiz bo'lsin.",
+        "newPasswordLabel": "Yangi parol*",
+        "confirmNewPasswordLabel": "Yangi parolni tasdiqlang*",
+        "confirmNewPasswordPlaceholder": "Parolni qayta kiriting",
+        "passwordMismatch": "Parollar mos kelmadi",
+        "submit": "Parolni yangilash",
+        "submitError": "Parolni tiklashda xatolik yuz berdi",
+        "backToLogin": "Login sahifasiga qaytish"
+      },
       "layout": {
         "cardTitle": "Iltimos, login ma'lumotlaringizni kiriting",
         "cardDescription": "Eng so'nggi yangiliklar va xabarlardan xabardor bo'lish uchun bizga ijtimoiy tarmoqlarda obuna bo'ling."
@@ -211,6 +237,25 @@
     "deleteSuccess": "Muvaffaqiyatli o'chirildi",
     "updateSuccess": "Muvaffaqiyatli yangilandi",
     "error": "Xatolik yuz berdi",
-    "deleteConfirm": "O'chirishni tasdiqlaysizmi?"
+    "deleteConfirm": "O'chirishni tasdiqlaysizmi?",
+    "passwordUpdatedTitle": "Parol o'zgartirildi!",
+    "passwordUpdatedDescription": "Yangi parol muvaffaqiyatli yaratildi!",
+    "codeSentTitle": "SMS yuborildi",
+    "codeSentDescription": "Tasdiqlash kodi telefon raqamingizga yuborildi",
+    "codeResentTitle": "SMS qayta yuborildi",
+    "codeResentDescription": "Tasdiqlash kodi qayta yuborildi",
+    "codeVerifiedTitle": "Kod tasdiqlandi",
+    "codeVerifiedDescription": "Endi yangi parolni o'rnatishingiz mumkin",
+    "loggedOutSuccessfully": "Muvaffaqiyatli chiqildi"
+  },
+  "errors": {
+    "api": {
+      "unknown": "Noma'lum xatolik",
+      "admin_not_found": "Admin topilmadi, iltimos superadmin bilan bog'laning",
+      "already_registered": "Admin allaqachon ro'yxatdan o'tgan yoki tasdiqlashga ruxsat yo'q",
+      "invalid_phone": "Telefon raqami noto'g'ri formatda",
+      "invalid_code": "Tasdiqlash kodi noto'g'ri",
+      "invalid_login": "Telefon raqami yoki parol noto'g'ri"
+    }
   }
 }

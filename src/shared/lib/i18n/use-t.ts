@@ -1,10 +1,12 @@
 import { useLocaleStore } from './locale-store';
-import type { TranslationKey } from './translations';
+import type { ExtendedTranslationKey } from './translations';
 import { t } from './t';
 
 export function useT() {
   const locale = useLocaleStore((s) => s.locale);
 
-  return (key: TranslationKey, params?: Record<string, string | number>) =>
-    t(locale, key, params);
+  return (
+    key: ExtendedTranslationKey,
+    params?: Record<string, string | number>,
+  ) => t(locale, key, params);
 }

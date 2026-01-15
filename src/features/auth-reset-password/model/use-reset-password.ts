@@ -1,30 +1,27 @@
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { userApi } from '@entities/user';
-import type { LoginRequest } from '@entities/user';
+import type { ResetPasswordRequest } from '@entities/user';
 import { ROUTES } from '@shared/constants';
-import { setAuthToken } from '@shared/lib/auth-token';
 import { getApiErrorMessage } from '@shared/lib/get-api-error-message';
 import { notify } from '@shared/lib/notify';
 import { useT } from '@shared/lib/i18n';
 
 /**
- * Login mutation hook
+ * Reset password using reset code
  */
-export function useLogin() {
+export function useResetPassword() {
   const navigate = useNavigate();
   const t = useT();
 
   return useMutation({
-    mutationFn: (data: LoginRequest) => userApi.login(data),
-    onSuccess: (response) => {
-      // Token ni saqlash
-      if (response.token) {
-        setAuthToken(response.token);
-      }
-
-      // Admin login flow: token olindi -> dashboard
-      navigate(ROUTES.DASHBOARD);
+    mutationFn: (data: ResetPasswordRequest) => userApi.resetPassword(data),
+    onSuccess: () => {
+      notify.success({
+        title: t('messages.passwordUpdatedTitle'),
+        description: t('messages.passwordUpdatedDescription'),
+      });
+      navigate(ROUTES.AUTH.LOGIN);
     },
     onError: (error) => {
       notify.error({

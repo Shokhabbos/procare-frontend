@@ -12,6 +12,10 @@ const LoginPage = lazy(() => import('@pages/auth/login'));
 const RegisterPage = lazy(() => import('@pages/auth/register'));
 const OTPPage = lazy(() => import('@pages/auth/otp'));
 const ForgotPasswordPage = lazy(() => import('@pages/auth/forgot-password'));
+const CompleteRegistrationPage = lazy(
+  () => import('@pages/auth/complete-registration'),
+);
+const ResetPasswordPage = lazy(() => import('@pages/auth/reset-password'));
 
 const DashboardPage = lazy(() => import('@pages/dashboard'));
 const CustomersPage = lazy(() => import('@pages/customers'));
@@ -81,6 +85,22 @@ export const router = createBrowserRouter([
         element: (
           <GuestGuard>
             <ForgotPasswordPage />
+          </GuestGuard>
+        ),
+      },
+      {
+        path: ROUTES.AUTH.COMPLETE_REGISTRATION,
+        element: (
+          <GuestGuard>
+            <CompleteRegistrationPage />
+          </GuestGuard>
+        ),
+      },
+      {
+        path: ROUTES.AUTH.RESET_PASSWORD,
+        element: (
+          <GuestGuard>
+            <ResetPasswordPage />
           </GuestGuard>
         ),
       },

@@ -11,7 +11,7 @@ import { useT } from '@shared/lib/i18n';
  */
 export function RegisterForm() {
   const t = useT();
-  const { mutate: register, isPending, error } = useRegister();
+  const { mutate: register, isPending } = useRegister();
 
   const {
     handleSubmit,
@@ -19,6 +19,7 @@ export function RegisterForm() {
     setValue,
     control,
     setError,
+    clearErrors,
   } = useForm<RegisterRequest>({
     defaultValues: {
       phone: '+998 ',
@@ -57,23 +58,17 @@ export function RegisterForm() {
         </label>
         <PhoneInput
           value={phoneValue}
-          onChange={(value) =>
-            setValue('phone', value, { shouldValidate: true })
-          }
+          onChange={(value) => {
+            setValue('phone', value, { shouldValidate: true });
+            // Telefon to'g'ri bo'lsa, manual error'ni tozalash
+            if (validatePhone(value)) {
+              clearErrors('phone');
+            }
+          }}
           error={errors.phone?.message}
           disabled={isPending}
         />
       </div>
-
-      {error && (
-        <div className="rounded-lg bg-bg-error p-3">
-          <p className="text-14-regular text-brand-red">
-            {error instanceof Error
-              ? error.message
-              : t('pages.auth.register.registerError')}
-          </p>
-        </div>
-      )}
 
       <Button
         type="submit"

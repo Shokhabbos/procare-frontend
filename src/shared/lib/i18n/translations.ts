@@ -162,6 +162,32 @@ export interface Translations {
         backLink: string;
         verifyError: string;
       };
+      completeRegistration: {
+        title: string;
+        description: string;
+        brandingTitle: string;
+        brandingDescription: string;
+        passwordLabel: string;
+        confirmPasswordLabel: string;
+        confirmPasswordPlaceholder: string;
+        passwordMismatch: string;
+        submit: string;
+        submitError: string;
+        backToLogin: string;
+      };
+      resetPassword: {
+        title: string;
+        description: string;
+        brandingTitle: string;
+        brandingDescription: string;
+        newPasswordLabel: string;
+        confirmNewPasswordLabel: string;
+        confirmNewPasswordPlaceholder: string;
+        passwordMismatch: string;
+        submit: string;
+        submitError: string;
+        backToLogin: string;
+      };
       layout: {
         cardTitle: string;
         cardDescription: string;
@@ -219,6 +245,18 @@ export interface Translations {
     updateSuccess: string;
     error: string;
     deleteConfirm: string;
+    passwordUpdatedTitle: string;
+    passwordUpdatedDescription: string;
+    codeSentTitle: string;
+    codeSentDescription: string;
+    codeResentTitle: string;
+    codeResentDescription: string;
+    codeVerifiedTitle: string;
+    codeVerifiedDescription: string;
+    loggedOutSuccessfully: string;
+  };
+  errors: {
+    api: Record<string, string>;
   };
 }
 
@@ -262,8 +300,13 @@ export type TranslationKey =
   | `pages.auth.register.${keyof Translations['pages']['auth']['register']}`
   | `pages.auth.forgotPassword.${keyof Translations['pages']['auth']['forgotPassword']}`
   | `pages.auth.otp.${keyof Translations['pages']['auth']['otp']}`
+  | `pages.auth.completeRegistration.${keyof Translations['pages']['auth']['completeRegistration']}`
+  | `pages.auth.resetPassword.${keyof Translations['pages']['auth']['resetPassword']}`
   | `pages.auth.layout.${keyof Translations['pages']['auth']['layout']}`
   | `buttons.${keyof Translations['buttons']}`
   | `common.${keyof Translations['common']}`
   | `validation.${keyof Translations['validation']}`
   | `messages.${keyof Translations['messages']}`;
+// `errors.api.*` backend `location` mapping uchun dynamic key'lar
+// Masalan: errors.api.admin_not_found
+export type ExtendedTranslationKey = TranslationKey | `errors.api.${string}`;

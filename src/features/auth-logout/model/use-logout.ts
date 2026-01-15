@@ -1,32 +1,39 @@
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { userApi } from '@entities/user';
-import type { ForgotPasswordRequest } from '@entities/user';
 import { ROUTES } from '@shared/constants';
+import { clearAuthToken } from '@shared/lib/auth-token';
 import { getApiErrorMessage } from '@shared/lib/get-api-error-message';
 import { notify } from '@shared/lib/notify';
 import { useT } from '@shared/lib/i18n';
 
 /**
- * Forgot password mutation hook
+ * Logout mutation hook
  */
-export function useForgotPassword() {
+export function useLogout() {
   const navigate = useNavigate();
   const t = useT();
 
   return useMutation({
-    mutationFn: (data: ForgotPasswordRequest) => userApi.forgotPassword(data),
-    onSuccess: (response, variables) => {
+    mutationFn: () => userApi.logout(),
+    onSuccess: () => {
+      // Token ni tozalash
+      clearAuthToken();
+
+      // Login sahifasiga yo'naltirish
+      navigate(ROUTES.AUTH.LOGIN);
+
       notify.success({
-        title: t('messages.codeSentTitle'),
-        description: response.message ?? t('messages.codeSentDescription'),
-      });
-      // OTP sahifasiga o'tish (parolni tiklash uchun)
-      navigate(ROUTES.AUTH.OTP, {
-        state: { phone: variables.phone, isPasswordReset: true },
+        title: t('common.success'),
+        description:
+          t('messages.loggedOutSuccessfully') || 'Logged out successfully',
       });
     },
     onError: (error) => {
+      // Xato bo'lsa ham token ni tozalash va login'ga yo'naltirish
+      clearAuthToken();
+      navigate(ROUTES.AUTH.LOGIN);
+
       notify.error({
         title: t('common.error'),
         description: getApiErrorMessage(error),

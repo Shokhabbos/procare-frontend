@@ -1,4 +1,8 @@
-import type { Locale, TranslationKey, Translations } from './translations';
+import type {
+  Locale,
+  ExtendedTranslationKey,
+  Translations,
+} from './translations';
 import { TRANSLATIONS } from './translations';
 
 /**
@@ -32,7 +36,7 @@ function getNestedValue(obj: Translations, path: string): string | undefined {
  */
 export function t(
   locale: Locale,
-  key: TranslationKey,
+  key: ExtendedTranslationKey,
   params?: Record<string, string | number>,
 ): string {
   const translation = getNestedValue(TRANSLATIONS[locale], key);

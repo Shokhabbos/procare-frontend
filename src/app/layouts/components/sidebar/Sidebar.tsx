@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react';
 import { Fragment } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, LogOut } from 'lucide-react';
 import { ROUTES } from '@shared/constants';
 import { useT } from '@shared/lib/i18n';
 import { ProcareBigLogo, ProcareTinyLogo } from '@shared/ui/icons';
@@ -13,6 +13,7 @@ import {
 import {
   Sidebar as SidebarPrimitive,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarHeader,
@@ -25,6 +26,7 @@ import {
   useSidebar,
 } from '@shared/ui/sidebar';
 import { getNavItems, type NavSubItem } from './sidebar-nav-items';
+import { useLogout } from '@features/auth-logout/model/use-logout';
 
 /**
  * Sidebar komponenti - Shadcn Sidebar bilan collapsible
@@ -33,6 +35,7 @@ export function Sidebar() {
   const location = useLocation();
   const { state } = useSidebar();
   const t = useT();
+  const { mutate: logout, isPending: isLoggingOut } = useLogout();
 
   const navItems = getNavItems(t);
 
@@ -215,6 +218,27 @@ export function Sidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+
+      {/* Footer - Logout */}
+      <SidebarFooter className="border-t border-[#EBECEC] p-3 group-data-[collapsible=icon]:!px-0 group-data-[collapsible=icon]:!py-2">
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              onClick={() => logout()}
+              disabled={isLoggingOut}
+              className="!text-14-light text-body group-data-[collapsible=icon]:!w-10 group-data-[collapsible=icon]:!h-10 group-data-[collapsible=icon]:!p-0 group-data-[collapsible=icon]:!justify-center hover:!bg-red-50 hover:!text-red-600 disabled:opacity-50"
+              tooltip={state === 'collapsed' ? t('nav.logout') : undefined}
+            >
+              <span className="text-red-600">
+                <LogOut className="w-5 h-5 shrink-0" />
+              </span>
+              <span className="group-data-[collapsible=icon]:hidden">
+                {t('nav.logout')}
+              </span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
     </SidebarPrimitive>
   );
 }

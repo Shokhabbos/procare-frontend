@@ -11,7 +11,7 @@ import { useT } from '@shared/lib/i18n';
  */
 export function ForgotPasswordForm() {
   const t = useT();
-  const { mutate: forgotPassword, isPending, error } = useForgotPassword();
+  const { mutate: forgotPassword, isPending } = useForgotPassword();
 
   const {
     handleSubmit,
@@ -19,6 +19,7 @@ export function ForgotPasswordForm() {
     setValue,
     control,
     setError,
+    clearErrors,
   } = useForm<ForgotPasswordRequest>({
     defaultValues: {
       phone: '+998 ',
@@ -57,23 +58,17 @@ export function ForgotPasswordForm() {
         </label>
         <PhoneInput
           value={phoneValue}
-          onChange={(value) =>
-            setValue('phone', value, { shouldValidate: true })
-          }
+          onChange={(value) => {
+            setValue('phone', value, { shouldValidate: true });
+            // Telefon to'g'ri bo'lsa, manual error'ni tozalash
+            if (validatePhone(value)) {
+              clearErrors('phone');
+            }
+          }}
           error={errors.phone?.message}
           disabled={isPending}
         />
       </div>
-
-      {error && (
-        <div className="rounded-lg bg-bg-error p-3">
-          <p className="text-14-regular text-brand-red">
-            {error instanceof Error
-              ? error.message
-              : t('pages.auth.forgotPassword.smsError')}
-          </p>
-        </div>
-      )}
 
       <Button
         type="submit"

@@ -1,15 +1,21 @@
 import { apiClient } from '@shared/api';
+import { API_ENDPOINTS } from '@shared/constants';
+import { normalizePhoneNumber } from '@shared/lib/phone';
 import type {
   LoginRequest,
   LoginResponse,
   RegisterRequest,
-  RegisterResponse,
+  SendCodeResponse,
   VerifyOtpRequest,
-  VerifyOtpResponse,
+  VerifyCodeResponse,
   ResendOtpRequest,
   ResendOtpResponse,
   ForgotPasswordRequest,
   ForgotPasswordResponse,
+  CompleteRegistrationRequest,
+  CompleteRegistrationResponse,
+  ResetPasswordRequest,
+  ResetPasswordResponse,
 } from '../model';
 
 /**
@@ -20,36 +26,62 @@ export const userApi = {
    * Login qilish
    */
   login: async (data: LoginRequest): Promise<LoginResponse> => {
-    return apiClient.post<LoginResponse, LoginRequest>('/auth/login', data);
+    const payload = {
+      phone_number: normalizePhoneNumber(data.phone),
+      password: data.password,
+    };
+
+    const raw = await apiClient.post<
+      { access_token?: string; token?: string; user?: unknown },
+      typeof payload
+    >(API_ENDPOINTS.AUTH.ADMIN.LOGIN, payload);
+
+    const token = raw.access_token ?? raw.token;
+    return { token: token ?? '' };
   },
 
   /**
-   * Ro'yxatdan o'tish
+   * Registratsiya uchun SMS kod yuborish
    */
-  register: async (data: RegisterRequest): Promise<RegisterResponse> => {
-    return apiClient.post<RegisterResponse, RegisterRequest>(
-      '/auth/register',
-      data,
+  sendCode: async (data: RegisterRequest): Promise<SendCodeResponse> => {
+    const payload = {
+      phone_number: normalizePhoneNumber(data.phone),
+      language: data.language ?? 'uz',
+    };
+
+    return apiClient.post<SendCodeResponse, typeof payload>(
+      API_ENDPOINTS.AUTH.ADMIN.SEND_CODE,
+      payload,
     );
   },
 
   /**
-   * OTP kodni tasdiqlash
+   * Kodni tasdiqlash (registratsiya flow)
    */
-  verifyOtp: async (data: VerifyOtpRequest): Promise<VerifyOtpResponse> => {
-    return apiClient.post<VerifyOtpResponse, VerifyOtpRequest>(
-      '/auth/verify-otp',
-      data,
+  verifyCode: async (data: VerifyOtpRequest): Promise<VerifyCodeResponse> => {
+    const payload = {
+      phone_number: normalizePhoneNumber(data.phone),
+      code: data.otp,
+    };
+
+    return apiClient.post<VerifyCodeResponse, typeof payload>(
+      API_ENDPOINTS.AUTH.ADMIN.VERIFY_CODE,
+      payload,
     );
   },
 
   /**
-   * OTP kodni qayta yuborish
+   * Kodni qayta yuborish (registratsiya)
    */
   resendOtp: async (data: ResendOtpRequest): Promise<ResendOtpResponse> => {
-    return apiClient.post<ResendOtpResponse, ResendOtpRequest>(
-      '/auth/resend-otp',
-      data,
+    const payload = {
+      phone_number: normalizePhoneNumber(data.phone),
+      language: data.language ?? 'uz',
+    };
+
+    return apiClient.post<ResendOtpResponse, typeof payload>(
+      API_ENDPOINTS.AUTH.ADMIN.SEND_CODE,
+      payload,
     );
   },
 
@@ -59,9 +91,63 @@ export const userApi = {
   forgotPassword: async (
     data: ForgotPasswordRequest,
   ): Promise<ForgotPasswordResponse> => {
-    return apiClient.post<ForgotPasswordResponse, ForgotPasswordRequest>(
-      '/auth/forgot-password',
-      data,
+    const payload = { phone_number: normalizePhoneNumber(data.phone) };
+
+    return apiClient.post<ForgotPasswordResponse, typeof payload>(
+      API_ENDPOINTS.AUTH.ADMIN.FORGOT_PASSWORD,
+      payload,
+    );
+  },
+
+  /**
+   * Registratsiyani yakunlash (parol o'rnatish)
+   */
+  completeRegistration: async (
+    data: CompleteRegistrationRequest,
+  ): Promise<CompleteRegistrationResponse> => {
+    const payload = {
+      phone_number: normalizePhoneNumber(data.phone),
+      password: data.password,
+      confirm_password: data.confirmPassword,
+    };
+
+    const raw = await apiClient.post<
+      { access_token?: string; token?: string; message?: string },
+      typeof payload
+    >(API_ENDPOINTS.AUTH.ADMIN.REGISTER, payload);
+
+    return {
+      message: raw.message,
+      token: raw.access_token ?? raw.token,
+    };
+  },
+
+  /**
+   * Reset password using reset code
+   */
+  resetPassword: async (
+    data: ResetPasswordRequest,
+  ): Promise<ResetPasswordResponse> => {
+    const payload = {
+      phone_number: normalizePhoneNumber(data.phone),
+      code: data.code,
+      new_password: data.newPassword,
+      confirm_new_password: data.confirmNewPassword,
+    };
+
+    return apiClient.post<ResetPasswordResponse, typeof payload>(
+      API_ENDPOINTS.AUTH.ADMIN.RESET_PASSWORD,
+      payload,
+    );
+  },
+
+  /**
+   * Logout current admin
+   */
+  logout: async (): Promise<{ message?: string }> => {
+    return apiClient.post<{ message?: string }, undefined>(
+      API_ENDPOINTS.AUTH.ADMIN.LOGOUT,
+      undefined,
     );
   },
 };

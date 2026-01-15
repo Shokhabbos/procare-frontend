@@ -1,13 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
-import { customerApi } from '@entities/customer';
-import type { PaginationParams } from '@shared/types';
+import { customerApi, customerKeys } from '@entities/customer';
+import type { CustomerListParams } from '@entities/customer';
 
 /**
  * Customerlar ro'yxatini olish uchun hook
  */
-export function useCustomers(params: PaginationParams) {
+export function useCustomers(params: CustomerListParams) {
   return useQuery({
-    queryKey: ['customers', params],
+    queryKey: customerKeys.list(params),
     queryFn: () => customerApi.getList(params),
   });
 }

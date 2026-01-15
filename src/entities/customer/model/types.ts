@@ -29,3 +29,20 @@ export interface CreateCustomerDto {
 export interface UpdateCustomerDto extends Partial<CreateCustomerDto> {
   status?: CustomerStatus;
 }
+
+/**
+ * Customer list query paramlari (frontend perspective).
+ * UI -> feature state -> entity API shu formatni uzatadi.
+ */
+export interface CustomerListParams {
+  page: number;
+  limit: number;
+  search?: string;
+  sortField?: string;
+  sortOrder?: 'asc' | 'desc';
+  /**
+   * Key-value filterlar (masalan: status, branchId, ...)
+   * Entity CRUD layer faqat paramlarni querystring'ga aylantiradi.
+   */
+  filters?: Record<string, string | number | boolean | undefined>;
+}

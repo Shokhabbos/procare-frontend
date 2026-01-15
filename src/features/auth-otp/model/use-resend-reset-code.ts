@@ -1,29 +1,21 @@
 import { useMutation } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
 import { userApi } from '@entities/user';
 import type { ForgotPasswordRequest } from '@entities/user';
-import { ROUTES } from '@shared/constants';
 import { getApiErrorMessage } from '@shared/lib/get-api-error-message';
 import { notify } from '@shared/lib/notify';
 import { useT } from '@shared/lib/i18n';
 
 /**
- * Forgot password mutation hook
+ * Reset-password flow uchun kodni qayta yuborish
  */
-export function useForgotPassword() {
-  const navigate = useNavigate();
+export function useResendResetCode() {
   const t = useT();
-
   return useMutation({
     mutationFn: (data: ForgotPasswordRequest) => userApi.forgotPassword(data),
-    onSuccess: (response, variables) => {
+    onSuccess: (response) => {
       notify.success({
-        title: t('messages.codeSentTitle'),
-        description: response.message ?? t('messages.codeSentDescription'),
-      });
-      // OTP sahifasiga o'tish (parolni tiklash uchun)
-      navigate(ROUTES.AUTH.OTP, {
-        state: { phone: variables.phone, isPasswordReset: true },
+        title: t('messages.codeResentTitle'),
+        description: response.message ?? t('messages.codeResentDescription'),
       });
     },
     onError: (error) => {

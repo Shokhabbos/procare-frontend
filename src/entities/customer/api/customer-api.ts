@@ -1,7 +1,12 @@
 import { apiClient } from '@shared/api';
 import { API_ENDPOINTS } from '@shared/constants';
-import type { PaginatedResponse, PaginationParams } from '@shared/types';
-import type { Customer, CreateCustomerDto, UpdateCustomerDto } from '../model';
+import type { PaginatedResponse } from '@shared/types';
+import type {
+  Customer,
+  CreateCustomerDto,
+  CustomerListParams,
+  UpdateCustomerDto,
+} from '../model';
 
 /**
  * Customer API funksiyalari
@@ -13,12 +18,25 @@ export const customerApi = {
    * Customerlar ro'yxatini olish
    */
   getList: async (
-    params: PaginationParams,
+    params: CustomerListParams,
   ): Promise<PaginatedResponse<Customer>> => {
-    const searchParams = new URLSearchParams({
-      page: params.page.toString(),
-      limit: params.limit.toString(),
-    });
+    const searchParams = new URLSearchParams();
+    searchParams.set('page', String(params.page));
+    searchParams.set('limit', String(params.limit));
+
+    if (params.search) searchParams.set('search', params.search);
+    if (params.sortField) searchParams.set('sortField', params.sortField);
+    if (params.sortOrder) searchParams.set('sortOrder', params.sortOrder);
+
+    if (params.filters) {
+      Object.keys(params.filters)
+        .sort()
+        .forEach((key) => {
+          const value = params.filters?.[key];
+          if (value === undefined) return;
+          searchParams.set(key, String(value));
+        });
+    }
 
     return apiClient.get<PaginatedResponse<Customer>>(
       `${API_ENDPOINTS.CUSTOMERS.LIST}?${searchParams}`,

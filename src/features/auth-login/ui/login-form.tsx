@@ -11,7 +11,7 @@ import { useT } from '@shared/lib/i18n';
  */
 export function LoginForm() {
   const t = useT();
-  const { mutate: login, isPending, error } = useLogin();
+  const { mutate: login, isPending } = useLogin();
 
   const {
     handleSubmit,
@@ -19,6 +19,7 @@ export function LoginForm() {
     setValue,
     control,
     setError,
+    clearErrors,
   } = useForm<LoginRequest>({
     defaultValues: {
       phone: '+998 ',
@@ -72,9 +73,13 @@ export function LoginForm() {
         </label>
         <PhoneInput
           value={phoneValue}
-          onChange={(value) =>
-            setValue('phone', value, { shouldValidate: true })
-          }
+          onChange={(value) => {
+            setValue('phone', value, { shouldValidate: true });
+            // Telefon to'g'ri bo'lsa, manual error'ni tozalash
+            if (validatePhone(value)) {
+              clearErrors('phone');
+            }
+          }}
           error={errors.phone?.message}
           disabled={isPending}
         />
@@ -89,9 +94,12 @@ export function LoginForm() {
         </label>
         <PasswordInput
           value={passwordValue}
-          onChange={(value) =>
-            setValue('password', value, { shouldValidate: true })
-          }
+          onChange={(value) => {
+            setValue('password', value, { shouldValidate: true });
+            if (validatePassword(value)) {
+              clearErrors('password');
+            }
+          }}
           error={errors.password?.message}
           disabled={isPending}
           placeholder={t('pages.auth.login.passwordPlaceholder')}
@@ -106,16 +114,6 @@ export function LoginForm() {
           {t('pages.auth.login.forgotPassword')}
         </Link>
       </div>
-
-      {error && (
-        <div className="rounded-lg bg-bg-error p-3">
-          <p className="text-14-regular text-brand-red">
-            {error instanceof Error
-              ? error.message
-              : t('pages.auth.login.loginError')}
-          </p>
-        </div>
-      )}
 
       <Button
         type="submit"

@@ -154,6 +154,32 @@
         "backLink": "Вернуться назад",
         "verifyError": "Ошибка при подтверждении кода"
       },
+      "completeRegistration": {
+        "title": "Установите пароль",
+        "description": "Создайте новый пароль для завершения регистрации",
+        "brandingTitle": "Завершите регистрацию с безопасным паролем",
+        "brandingDescription": "Пароль должен содержать минимум 6 символов. Никому не сообщайте пароль.",
+        "passwordLabel": "Новый пароль*",
+        "confirmPasswordLabel": "Подтвердите пароль*",
+        "confirmPasswordPlaceholder": "Повторите пароль",
+        "passwordMismatch": "Пароли не совпадают",
+        "submit": "Завершить",
+        "submitError": "Ошибка при завершении регистрации",
+        "backToLogin": "Вернуться к входу"
+      },
+      "resetPassword": {
+        "title": "Восстановление пароля",
+        "description": "Установите новый пароль",
+        "brandingTitle": "Обновите пароль, чтобы снова войти в аккаунт",
+        "brandingDescription": "Вы можете обновить пароль с помощью SMS-кода. Сделайте пароль надежным.",
+        "newPasswordLabel": "Новый пароль*",
+        "confirmNewPasswordLabel": "Подтвердите новый пароль*",
+        "confirmNewPasswordPlaceholder": "Повторите пароль",
+        "passwordMismatch": "Пароли не совпадают",
+        "submit": "Обновить пароль",
+        "submitError": "Ошибка при восстановлении пароля",
+        "backToLogin": "Вернуться к входу"
+      },
       "layout": {
         "cardTitle": "Пожалуйста, введите данные для входа",
         "cardDescription": "Подпишитесь на нас в социальных сетях, чтобы быть в курсе последних новостей и сообщений."
@@ -210,6 +236,25 @@
     "deleteSuccess": "Успешно удалено",
     "updateSuccess": "Успешно обновлено",
     "error": "Произошла ошибка",
-    "deleteConfirm": "Подтвердите удаление"
+    "deleteConfirm": "Подтвердите удаление",
+    "passwordUpdatedTitle": "Пароль изменён!",
+    "passwordUpdatedDescription": "Новый пароль успешно создан!",
+    "codeSentTitle": "SMS отправлено",
+    "codeSentDescription": "Код подтверждения отправлен на ваш номер",
+    "codeResentTitle": "SMS отправлено повторно",
+    "codeResentDescription": "Код подтверждения отправлен повторно",
+    "codeVerifiedTitle": "Код подтвержден",
+    "codeVerifiedDescription": "Теперь вы можете установить новый пароль",
+    "loggedOutSuccessfully": "Успешно вышли"
+  },
+  "errors": {
+    "api": {
+      "unknown": "Неизвестная ошибка",
+      "admin_not_found": "Админ не найден, обратитесь к суперadmin  ",
+      "already_registered": "Админ уже зарегистрирован или нет доступа к подтверждению",
+      "invalid_phone": "Неверный формат номера телефона",
+      "invalid_code": "Неверный код подтверждения",
+      "invalid_login": "Неверный номер телефона или пароль"
+    }
   }
 }

@@ -53,3 +53,5 @@ export { PasswordInput } from './password-input';
 export type { PasswordInputProps } from './password-input';
 
 export { LanguageSwitcher } from './language-switcher';
+
+export { ToastViewport } from './toast';

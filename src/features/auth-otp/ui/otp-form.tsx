@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button, OTPInput } from '@shared/ui';
 import { useVerifyOtp } from '../model/use-verify-otp';
 import { useResendOtp } from '../model/use-resend-otp';
+import { useResendResetCode } from '../model/use-resend-reset-code';
 import { ROUTES } from '@shared/constants';
 import { useT } from '@shared/lib/i18n';
 
@@ -11,16 +12,22 @@ import { useT } from '@shared/lib/i18n';
  */
 export function OTPForm() {
   const t = useT();
+  const navigate = useNavigate();
   const location = useLocation();
-  const phone = (location.state as { phone?: string })?.phone || '';
+  const state = location.state as { phone?: string; isPasswordReset?: boolean };
+  const phone = state?.phone || '';
+  const isPasswordReset = Boolean(state?.isPasswordReset);
 
   const [otp, setOtp] = useState('');
   const [timer, setTimer] = useState(60);
 
-  const { mutate: verifyOtp, isPending, error } = useVerifyOtp();
-  const { mutate: resendOtp, isPending: isResending } = useResendOtp();
+  const { mutate: verifyOtp, isPending } = useVerifyOtp();
+  const { mutate: resendOtp, isPending: isResendingRegister } = useResendOtp();
+  const { mutate: resendResetCode, isPending: isResendingReset } =
+    useResendResetCode();
 
   const canResend = timer === 0;
+  const isResending = isPasswordReset ? isResendingReset : isResendingRegister;
 
   // Timer logikasi
   useEffect(() => {
@@ -47,21 +54,29 @@ export function OTPForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (otp.length === 6 && phone) {
+      if (isPasswordReset) {
+        // Reset-password flow: OTP sahifada verify qilmaymiz (user talabi).
+        // Kod noto'g'ri bo'lsa, reset-password request'ida backend error qaytaradi.
+        navigate(ROUTES.AUTH.RESET_PASSWORD, { state: { phone, code: otp } });
+        return;
+      }
+
       verifyOtp({ phone, otp });
     }
   };
 
   const handleResend = () => {
     if (phone && canResend) {
-      resendOtp(
-        { phone },
-        {
-          onSuccess: () => {
-            setTimer(60);
-            setOtp('');
-          },
-        },
-      );
+      const onSuccess = () => {
+        setTimer(60);
+        setOtp('');
+      };
+
+      if (isPasswordReset) {
+        resendResetCode({ phone }, { onSuccess });
+      } else {
+        resendOtp({ phone }, { onSuccess });
+      }
     }
   };
 
@@ -105,16 +120,6 @@ export function OTPForm() {
         )}
       </div>
 
-      {error && (
-        <div className="rounded-lg bg-bg-error p-3">
-          <p className="text-14-regular text-brand-red">
-            {error instanceof Error
-              ? error.message
-              : t('pages.auth.otp.verifyError')}
-          </p>
-        </div>
-      )}
-
       <Button
         type="submit"
         disabled={isPending || otp.length !== 6}
@@ -125,7 +130,9 @@ export function OTPForm() {
 
       <div className="text-center">
         <Link
-          to={ROUTES.AUTH.LOGIN}
+          to={
+            isPasswordReset ? ROUTES.AUTH.FORGOT_PASSWORD : ROUTES.AUTH.REGISTER
+          }
           className="inline-flex items-center gap-2 text-14-regular text-brand-blue hover:underline"
         >
           <span>←</span>

@@ -1,5 +1,6 @@
 import { API_BASE_URL, API_TIMEOUT } from '@shared/constants';
 import type { ApiError } from '@shared/types';
+import { getAuthToken } from '@shared/lib/auth-token';
 
 /**
  * API xatoliklarini boshqarish uchun custom Error class
@@ -8,6 +9,10 @@ export class ApiException extends Error {
   constructor(
     public statusCode: number,
     public apiError: ApiError,
+    public meta?: {
+      path?: string;
+      timestamp?: string;
+    },
   ) {
     super(apiError.message);
     this.name = 'ApiException';
@@ -20,6 +25,8 @@ export class ApiException extends Error {
 interface RequestOptions extends RequestInit {
   timeout?: number;
 }
+
+type UnknownRecord = Record<string, unknown>;
 
 /**
  * API client - barcha HTTP so'rovlar uchun asosiy funksiya
@@ -35,22 +42,16 @@ class ApiClient {
   }
 
   /**
-   * Token ni localStorage dan olish
-   */
-  private getAuthToken(): string | null {
-    return localStorage.getItem('auth_token');
-  }
-
-  /**
    * Request headerlarini tayyorlash
    */
   private getHeaders(customHeaders?: HeadersInit): HeadersInit {
     const headers: HeadersInit = {
+      Accept: 'application/json',
       'Content-Type': 'application/json',
       ...customHeaders,
     };
 
-    const token = this.getAuthToken();
+    const token = getAuthToken();
     if (token) {
       (headers as Record<string, string>)['Authorization'] = `Bearer ${token}`;
     }
@@ -89,25 +90,79 @@ class ApiClient {
     }
   }
 
+  private normalizeErrorPayload(
+    statusCode: number,
+    payload: unknown,
+  ): { apiError: ApiError; meta?: ApiException['meta'] } {
+    // Backend odatda shunday yuboradi:
+    // { statusCode, message, error, location, timestamp, path }
+    if (payload && typeof payload === 'object') {
+      const p = payload as UnknownRecord;
+
+      const messageRaw = p.message;
+      const message =
+        typeof messageRaw === 'string'
+          ? messageRaw
+          : Array.isArray(messageRaw)
+            ? messageRaw.filter((x) => typeof x === 'string').join(', ')
+            : "Noma'lum xatolik";
+
+      const location =
+        typeof p.location === 'string' ? (p.location as string) : undefined;
+      const code =
+        typeof p.code === 'string'
+          ? (p.code as string)
+          : typeof p.error === 'string'
+            ? (p.error as string)
+            : location;
+
+      const apiError: ApiError = {
+        message,
+        code,
+        location,
+        path: typeof p.path === 'string' ? (p.path as string) : undefined,
+        timestamp:
+          typeof p.timestamp === 'string' ? (p.timestamp as string) : undefined,
+        details: p,
+      };
+
+      return {
+        apiError,
+        meta: {
+          path: apiError.path,
+          timestamp: apiError.timestamp,
+        },
+      };
+    }
+
+    return {
+      apiError: {
+        message:
+          typeof payload === 'string' ? payload : `HTTP xatolik: ${statusCode}`,
+        details: payload,
+      },
+    };
+  }
+
   /**
    * Response ni parse qilish va xatolarni handle qilish
    */
   private async handleResponse<T>(response: Response): Promise<T> {
     if (!response.ok) {
-      let apiError: ApiError;
+      let payload: unknown = undefined;
 
       try {
-        const errorData = await response.json();
-        apiError = errorData.error || {
-          message: errorData.message || "Noma'lum xatolik",
-        };
+        payload = await response.json();
       } catch {
-        apiError = {
-          message: `HTTP xatolik: ${response.status}`,
-        };
+        payload = undefined;
       }
 
-      throw new ApiException(response.status, apiError);
+      const normalized = this.normalizeErrorPayload(response.status, payload);
+      throw new ApiException(
+        response.status,
+        normalized.apiError,
+        normalized.meta,
+      );
     }
 
     // 204 No Content
