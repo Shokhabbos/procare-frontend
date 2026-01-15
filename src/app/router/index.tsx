@@ -41,7 +41,6 @@ const GuidesPage = lazy(() => import('@pages/app-settings/guides'));
 const InfographicsPage = lazy(() => import('@pages/app-settings/infographics'));
 
 const LogoutPage = lazy(() => import('@pages/logout'));
-const DesignSystemDemoPage = lazy(() => import('@pages/design-system-demo'));
 
 /**
  * Ilova routing konfiguratsiyasi
@@ -208,12 +207,6 @@ export const router = createBrowserRouter([
           {
             path: ROUTES.APP_SETTINGS.INFOGRAPHICS,
             element: <InfographicsPage />,
-          },
-
-          // Internal/dev
-          {
-            path: '/design-system',
-            element: <DesignSystemDemoPage />,
           },
 
           // Logout placeholder
