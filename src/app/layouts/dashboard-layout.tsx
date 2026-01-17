@@ -7,15 +7,20 @@ import { Sidebar, Header, Main } from './components';
 export interface DashboardOutletContext {
   setHeaderLeft: (content: ReactNode) => void;
   setHeaderRight: (content: ReactNode) => void;
+  setMainVariant: (variant: 'default' | 'transparent') => void;
 }
 
 export function DashboardLayout() {
   const [headerLeft, setHeaderLeft] = useState<ReactNode>(null);
   const [headerRight, setHeaderRight] = useState<ReactNode>(null);
+  const [mainVariant, setMainVariant] = useState<'default' | 'transparent'>(
+    'default',
+  );
 
   const context: DashboardOutletContext = {
     setHeaderLeft,
     setHeaderRight,
+    setMainVariant,
   };
 
   return (
@@ -36,7 +41,7 @@ export function DashboardLayout() {
           <div className="grid grid-rows-[auto_auto_1fr] gap-4 min-h-[calc(100vh-2rem)]">
             <Header headerLeft={headerLeft} headerRight={headerRight} />
 
-            <Main>
+            <Main variant={mainVariant}>
               <Outlet context={context} />
             </Main>
           </div>

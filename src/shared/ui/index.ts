@@ -64,3 +64,9 @@ export type { PageHeaderProps } from './page-header';
 export { LanguageSwitcher } from './language-switcher';
 
 export { ToastViewport } from './toast';
+
+export { Avatar, AvatarGroup } from './avatar';
+export type { AvatarProps, AvatarGroupProps } from './avatar';
+
+export { Badge } from './badge';
+export type { BadgeProps } from './badge';

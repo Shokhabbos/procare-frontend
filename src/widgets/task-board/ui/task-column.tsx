@@ -1,0 +1,127 @@
+import { useEffect, useRef, useState } from 'react';
+import { dropTargetForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
+import { MoreHorizontal } from 'lucide-react';
+import { cn } from '@shared/lib';
+import type { TaskColumn as TaskColumnType, TaskStatus } from '@entities/task';
+
+export interface TaskColumnProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  'onDrop'
+> {
+  column: TaskColumnType;
+  taskCount: number;
+  onDrop?: (taskId: string, targetStatus: TaskStatus) => void;
+  children: React.ReactNode;
+}
+
+/**
+ * Kanban ustuni komponenti
+ * Pragmatic Drag and Drop drop target sifatida ishlaydi
+ */
+export function TaskColumn({
+  column,
+  taskCount,
+  onDrop,
+  children,
+  className,
+  ...props
+}: TaskColumnProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isOver, setIsOver] = useState(false);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
+    return dropTargetForElements({
+      element,
+      getData: () => ({ status: column.id }),
+      canDrop: ({ source }) => {
+        return source.data.type === 'task';
+      },
+      onDragEnter: () => setIsOver(true),
+      onDragLeave: () => setIsOver(false),
+      onDrop: ({ source }) => {
+        setIsOver(false);
+        const taskId = source.data.taskId as string;
+        const sourceStatus = source.data.status as TaskStatus;
+        if (sourceStatus !== column.id) {
+          onDrop?.(taskId, column.id);
+        }
+      },
+    });
+  }, [column.id, onDrop]);
+
+  const isEmpty = taskCount === 0;
+
+  return (
+    <div
+      className={cn(
+        'flex flex-col min-w-[300px] max-w-[300px]',
+        'bg-white rounded-2xl border border-black-200',
+        className,
+      )}
+      {...props}
+    >
+      {/* Column Header - border-b bilan ajratilgan */}
+      <div className="flex items-center justify-between px-4 py-3 border-b border-black-100">
+        <div className="flex items-center gap-2">
+          <h3 className="text-14 font-medium" style={{ color: column.color }}>
+            {column.title}
+          </h3>
+          <span
+            className="text-12 font-medium px-2 py-0.5 rounded-full"
+            style={{
+              color: column.color,
+              backgroundColor: `${column.color}15`,
+            }}
+          >
+            {taskCount}
+          </span>
+        </div>
+        <button className="h-8 w-8 flex items-center justify-center rounded-full bg-black-100 hover:bg-black-200 transition-colors">
+          <MoreHorizontal className="h-4 w-4 text-black-600" />
+        </button>
+      </div>
+
+      {/* Column Content - Drop Target */}
+      <div
+        ref={ref}
+        className={cn(
+          'flex-1 p-4 transition-all duration-200 min-h-[400px]',
+          isOver && 'bg-brand',
+        )}
+      >
+        {isEmpty ? (
+          <EmptyColumnState isOver={isOver} />
+        ) : (
+          <div className="space-y-4">{children}</div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+interface EmptyColumnStateProps {
+  isOver?: boolean;
+}
+
+function EmptyColumnState({ isOver }: EmptyColumnStateProps) {
+  return (
+    <div
+      className={cn(
+        'flex items-center justify-center h-full min-h-[200px]',
+        'border-2 border-dashed rounded-xl transition-all duration-200',
+        isOver
+          ? 'border-brand-blue bg-brand/50 scale-[1.02]'
+          : 'border-black-200',
+      )}
+    >
+      <div className="text-center p-4">
+        <div className="text-14 text-black-400">
+          {isOver ? "Bu yerga qo'ying" : "Hozircha bo'sh"}
+        </div>
+      </div>
+    </div>
+  );
+}
