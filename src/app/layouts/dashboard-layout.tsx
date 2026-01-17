@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactNode } from 'react';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Outlet } from 'react-router-dom';
 import { SidebarProvider } from '@shared/ui/sidebar';
 import { Sidebar, Header, Main } from './components';
@@ -17,11 +17,15 @@ export function DashboardLayout() {
     'default',
   );
 
-  const context: DashboardOutletContext = {
-    setHeaderLeft,
-    setHeaderRight,
-    setMainVariant,
-  };
+  // Memoize context to prevent infinite re-render loops
+  const context = useMemo<DashboardOutletContext>(
+    () => ({
+      setHeaderLeft,
+      setHeaderRight,
+      setMainVariant,
+    }),
+    [setHeaderLeft, setHeaderRight, setMainVariant],
+  );
 
   return (
     <SidebarProvider

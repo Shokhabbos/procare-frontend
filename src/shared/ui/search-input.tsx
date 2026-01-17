@@ -69,7 +69,7 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
         <Input
           ref={ref}
           type="text"
-          value={value}
+          value={value ?? ''}
           onChange={handleChange}
           className={cn('pl-9 h-9', className)}
           {...props}
