@@ -57,9 +57,9 @@ export function useTaskDragDrop(options: UseTaskDragDropOptions = {}) {
       setIsDragging(false);
 
       const fromStatus = findTaskStatus(taskId);
-      if (!fromStatus || fromStatus === targetStatus) return;
+      if (!fromStatus) return;
 
-      // Optimistic update
+      // Optimistic update (bir xil status ichida reorder ham mumkin)
       const dto: MoveTaskDto = {
         taskId,
         fromStatus,
@@ -91,8 +91,9 @@ export function useTaskDragDrop(options: UseTaskDragDropOptions = {}) {
       setIsDragging(false);
 
       const fromStatus = findTaskStatus(draggedTaskId);
-      if (!fromStatus || fromStatus === targetStatus) return;
+      if (!fromStatus) return;
 
+      // Bir xil status ichida reorder qilish ham mumkin
       const dto: MoveTaskDto = {
         taskId: draggedTaskId,
         fromStatus,
@@ -125,8 +126,9 @@ export function useTaskDragDrop(options: UseTaskDragDropOptions = {}) {
       setIsDragging(false);
 
       const fromStatus = findTaskStatus(draggedTaskId);
-      if (!fromStatus || fromStatus === targetStatus) return;
+      if (!fromStatus) return;
 
+      // Bir xil status ichida reorder qilish ham mumkin
       const dto: MoveTaskDto = {
         taskId: draggedTaskId,
         fromStatus,
@@ -149,6 +151,7 @@ export function useTaskDragDrop(options: UseTaskDragDropOptions = {}) {
 
   /**
    * Taskni ustunning eng pastiga qo'yish
+   * Bir xil status ichida ham ishlaydi (reorder)
    */
   const handleDropToEnd = useCallback(
     (taskId: string, targetStatus: TaskStatus) => {
@@ -156,9 +159,10 @@ export function useTaskDragDrop(options: UseTaskDragDropOptions = {}) {
       setIsDragging(false);
 
       const fromStatus = findTaskStatus(taskId);
-      if (!fromStatus || fromStatus === targetStatus) return;
+      if (!fromStatus) return;
 
       // Taskni oxiriga qo'yish - targetTaskId yo'q
+      // Bir xil status ichida ham ishlaydi (reorder)
       const dto: MoveTaskDto = {
         taskId,
         fromStatus,

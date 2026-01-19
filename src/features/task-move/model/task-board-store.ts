@@ -83,20 +83,33 @@ export const useTaskBoardStore = create<TaskBoardState & TaskBoardActions>()(
       // Taskni olish va o'chirish
       const [task] = fromTasks.splice(taskIndex, 1);
 
-      // Statusni yangilash
+      // Statusni yangilash (faqat status o'zgarganda)
       const updatedTask: Task = {
         ...task,
-        status: toStatus,
+        ...(fromStatus !== toStatus && { status: toStatus }),
         updatedAt: new Date().toISOString(),
       };
 
-      // Yangi ustun ga qo'shish
-      const toTasks = [...tasksByStatus[toStatus]];
+      // Bir xil status bo'lsa, toTasks = fromTasks (reorder)
+      // Boshqa status bo'lsa, yangi status'dan olish
+      const toTasks =
+        fromStatus === toStatus ? fromTasks : [...tasksByStatus[toStatus]];
 
       if (targetTaskId) {
         // Target task oldiga yoki orqasiga qo'yish
-        const targetIndex = toTasks.findIndex((t) => t.id === targetTaskId);
+        let targetIndex = toTasks.findIndex((t) => t.id === targetTaskId);
+
         if (targetIndex !== -1) {
+          // Bir xil status ichida reorder qilganda, index'ni to'g'ri hisoblash
+          if (fromStatus === toStatus) {
+            // Agar task target'dan oldin bo'lsa va position 'after' bo'lsa,
+            // target index 1 ga kamayadi (chunki task o'chirilgandan keyin target index o'zgaradi)
+            // Agar position 'before' bo'lsa, target index o'zgarmaydi
+            if (taskIndex < targetIndex && position === 'after') {
+              targetIndex -= 1;
+            }
+          }
+
           // Position: 'before' (oldiga) yoki 'after' (orqasiga)
           const insertIndex =
             position === 'after' ? targetIndex + 1 : targetIndex;
@@ -110,13 +123,24 @@ export const useTaskBoardStore = create<TaskBoardState & TaskBoardActions>()(
         toTasks.push(updatedTask);
       }
 
-      set({
-        tasksByStatus: {
-          ...tasksByStatus,
-          [fromStatus]: fromTasks,
-          [toStatus]: toTasks,
-        },
-      });
+      // Bir xil status bo'lsa, faqat o'sha status'ni yangilash
+      if (fromStatus === toStatus) {
+        set({
+          tasksByStatus: {
+            ...tasksByStatus,
+            [toStatus]: toTasks,
+          },
+        });
+      } else {
+        // Boshqa status bo'lsa, ikkalasini ham yangilash
+        set({
+          tasksByStatus: {
+            ...tasksByStatus,
+            [fromStatus]: fromTasks,
+            [toStatus]: toTasks,
+          },
+        });
+      }
     },
 
     setActiveTask: (taskId) => set({ activeTaskId: taskId }),

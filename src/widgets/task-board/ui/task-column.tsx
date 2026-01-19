@@ -74,10 +74,8 @@ export function TaskColumn({
       onDrop: ({ source }) => {
         setIsOverBottom(false);
         const taskId = source.data.taskId as string;
-        const sourceStatus = source.data.status as TaskStatus;
-        if (sourceStatus !== column.id) {
-          onDropToEnd?.(taskId, column.id);
-        }
+        // Bir xil status ichida ham eng pastiga qo'yish mumkin
+        onDropToEnd?.(taskId, column.id);
       },
     });
   }, [column.id, onDropToEnd, isEmpty]);

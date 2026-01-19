@@ -4,10 +4,7 @@ import {
   dropTargetForElements,
 } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
 import { combine } from '@atlaskit/pragmatic-drag-and-drop/combine';
-import {
-  attachClosestEdge,
-  extractClosestEdge,
-} from '@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge';
+import { attachClosestEdge } from '@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge';
 import { setCustomNativeDragPreview } from '@atlaskit/pragmatic-drag-and-drop/element/set-custom-native-drag-preview';
 import { TaskCard } from '@entities/task';
 import type { Task } from '@entities/task';
@@ -23,8 +20,8 @@ export interface DraggableTaskCardProps {
 }
 
 /**
- * Draggable task card - Pragmatic Drag and Drop bilan
- * Custom drag preview bilan ghosting effectni bartaraf etadi
+ * Draggable task card - Atlassian'ning rasmiy yechimi bilan
+ * closest-edge hitbox yordamida reorder qilish
  */
 export function DraggableTaskCard({
   task,
@@ -35,16 +32,16 @@ export function DraggableTaskCard({
   onDropAfter,
 }: DraggableTaskCardProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const mouseMoveHandlerRef = useRef<((e: MouseEvent) => void) | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [closestEdge, setClosestEdge] = useState<string | null>(null);
 
-  // Atlassian'ning rasmiy yechimi - combine va closest-edge hitbox
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
 
-    return combine(
-      // Draggable
+    const cleanup = combine(
+      // Draggable - taskni sudrab olish uchun
       draggable({
         element,
         getInitialData: () => ({
@@ -78,42 +75,86 @@ export function DraggableTaskCard({
           onDragEnd?.();
         },
       }),
-      // Drop target
+      // Drop target - boshqa tasklarni qabul qilish uchun
       dropTargetForElements({
         element,
         getData: ({ input, element }) => {
-          const base = {
-            type: 'task',
-            taskId: task.id,
-            status: task.status,
-          };
-          return attachClosestEdge(base, {
-            input,
-            element,
-            allowedEdges: ['top', 'bottom'],
-          });
+          // Atlassian'ning rasmiy yechimi - closest edge hitbox
+          return attachClosestEdge(
+            {
+              type: 'task',
+              taskId: task.id,
+              status: task.status,
+            },
+            {
+              input,
+              element,
+              allowedEdges: ['top', 'bottom'],
+            },
+          );
         },
         getIsSticky: () => true,
         canDrop: ({ source }) => {
           return source.data.type === 'task' && source.data.taskId !== task.id;
         },
-        onDragEnter: (args) => {
-          if (args.source.data.taskId !== task.id) {
-            const edge = extractClosestEdge(args.self.data);
+        onDragEnter: ({ source, self, location }) => {
+          if (source.data.taskId !== task.id) {
+            // Input va element dan to'g'ridan-to'g'ri edge hisoblaymiz
+            const input = location.current.input;
+            const element = self.element as HTMLElement;
+            const rect = element.getBoundingClientRect();
+            const centerY = rect.top + rect.height / 2;
+            const mouseY = input.clientY;
+            const edge = mouseY < centerY ? 'top' : 'bottom';
             setClosestEdge(edge);
+
+            // Real-time mouse tracking - chiziq'ning to'g'ri ko'rsatilishi uchun
+            mouseMoveHandlerRef.current = (e: MouseEvent) => {
+              const rect = element.getBoundingClientRect();
+              const centerY = rect.top + rect.height / 2;
+              const mouseY = e.clientY;
+              const edge = mouseY < centerY ? 'top' : 'bottom';
+              setClosestEdge(edge);
+            };
+            document.addEventListener(
+              'mousemove',
+              mouseMoveHandlerRef.current,
+              {
+                passive: true,
+              },
+            );
           }
         },
         onDragLeave: () => {
+          if (mouseMoveHandlerRef.current) {
+            document.removeEventListener(
+              'mousemove',
+              mouseMoveHandlerRef.current,
+            );
+            mouseMoveHandlerRef.current = null;
+          }
           setClosestEdge(null);
         },
-        onDrop: (args) => {
-          const { source, location } = args;
-          const target = location.current.dropTargets[0];
-          if (!target) return;
+        onDrop: ({ source, self, location }) => {
+          if (mouseMoveHandlerRef.current) {
+            document.removeEventListener(
+              'mousemove',
+              mouseMoveHandlerRef.current,
+            );
+            mouseMoveHandlerRef.current = null;
+          }
 
-          const edge = extractClosestEdge(target.data);
           const draggedTaskId = source.data.taskId as string;
 
+          // Input va element dan to'g'ridan-to'g'ri edge hisoblaymiz
+          const input = location.current.input;
+          const element = self.element as HTMLElement;
+          const rect = element.getBoundingClientRect();
+          const centerY = rect.top + rect.height / 2;
+          const mouseY = input.clientY;
+          const edge = mouseY < centerY ? 'top' : 'bottom';
+
+          // Atlassian'ning rasmiy yechimi - closest edge'ga qarab drop qilish
           if (edge === 'top') {
             onDropBefore?.(draggedTaskId, task.id);
           } else if (edge === 'bottom') {
@@ -124,6 +165,14 @@ export function DraggableTaskCard({
         },
       }),
     );
+
+    return () => {
+      if (mouseMoveHandlerRef.current) {
+        document.removeEventListener('mousemove', mouseMoveHandlerRef.current);
+        mouseMoveHandlerRef.current = null;
+      }
+      cleanup();
+    };
   }, [task.id, task.status, onDragStart, onDragEnd, onDropBefore, onDropAfter]);
 
   return (
@@ -132,14 +181,12 @@ export function DraggableTaskCard({
         ref={ref}
         className={cn(
           'transition-all duration-200 relative',
-          // Asl elementni yashirish (lekin joyini saqlash)
           isDragging && 'opacity-0 pointer-events-none',
-          // Boshqa elementlarni yengilroq qilish
           isDraggingAny && !isDragging && 'opacity-60',
           !isDragging && 'cursor-grab active:cursor-grabbing',
         )}
       >
-        {/* Drop indicator - closest-edge hitbox yordamida */}
+        {/* Drop indicator - closest edge'ga qarab ko'rsatish */}
         {closestEdge && !isDragging && (
           <div
             className={cn(
