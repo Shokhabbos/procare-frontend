@@ -129,16 +129,24 @@ export function TaskColumn({
             <div
               ref={bottomDropRef}
               className={cn(
-                'h-8 mt-4 rounded-lg transition-all duration-200 flex items-center justify-center',
+                'h-12 mt-4 rounded-lg transition-all duration-200 flex flex-col items-center justify-center gap-2',
                 isOverBottom
-                  ? 'bg-blue-100 border-2 border-blue-500 border-dashed'
+                  ? 'bg-blue-50 border-2 border-blue-500 border-dashed'
                   : 'bg-transparent border-2 border-transparent border-dashed',
               )}
             >
               {isOverBottom && (
-                <span className="text-12 text-blue-600 font-medium">
-                  Bu yerga qo'ying
-                </span>
+                <>
+                  {/* Ko'k chiziq */}
+                  <div className="w-full flex items-center px-2">
+                    <div className="flex-1 h-0.5 bg-blue-500 rounded-full" />
+                    <div className="w-2 h-2 bg-blue-500 rounded-full mx-1" />
+                    <div className="flex-1 h-0.5 bg-blue-500 rounded-full" />
+                  </div>
+                  <span className="text-12 text-blue-600 font-medium">
+                    Eng pastiga qo'ying
+                  </span>
+                </>
               )}
             </div>
           </>

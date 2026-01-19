@@ -71,7 +71,7 @@ export const useTaskBoardStore = create<TaskBoardState & TaskBoardActions>()(
     },
 
     moveTask: (dto) => {
-      const { taskId, fromStatus, toStatus, targetTaskId } = dto;
+      const { taskId, fromStatus, toStatus, targetTaskId, position } = dto;
       const { tasksByStatus } = get();
 
       // Eski ustundan topish
@@ -94,10 +94,13 @@ export const useTaskBoardStore = create<TaskBoardState & TaskBoardActions>()(
       const toTasks = [...tasksByStatus[toStatus]];
 
       if (targetTaskId) {
-        // Target task oldiga qo'yish
+        // Target task oldiga yoki orqasiga qo'yish
         const targetIndex = toTasks.findIndex((t) => t.id === targetTaskId);
         if (targetIndex !== -1) {
-          toTasks.splice(targetIndex, 0, updatedTask);
+          // Position: 'before' (oldiga) yoki 'after' (orqasiga)
+          const insertIndex =
+            position === 'after' ? targetIndex + 1 : targetIndex;
+          toTasks.splice(insertIndex, 0, updatedTask);
         } else {
           // Agar target topilmasa, oxiriga qo'yish
           toTasks.push(updatedTask);

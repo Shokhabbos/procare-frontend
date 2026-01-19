@@ -56,8 +56,10 @@ export interface MoveTaskDto {
   taskId: string;
   fromStatus: TaskStatus;
   toStatus: TaskStatus;
-  /** Target task ID - bu task oldiga qo'yish kerak (optional) */
+  /** Target task ID - bu task oldiga/orqasiga qo'yish kerak (optional) */
   targetTaskId?: string;
+  /** Pozitsiya - 'before' (oldiga) yoki 'after' (orqasiga) */
+  position?: 'before' | 'after';
 }
 
 /** Task ustunlari mapping */

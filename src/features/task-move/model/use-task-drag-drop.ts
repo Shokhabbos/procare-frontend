@@ -23,6 +23,21 @@ export function useTaskDragDrop(options: UseTaskDragDropOptions = {}) {
   const activeTask = useTaskBoardStore(selectActiveTask);
 
   /**
+   * Task statusini topish - helper function
+   */
+  const findTaskStatus = useCallback(
+    (taskId: string): TaskStatus | null => {
+      for (const [status, tasks] of Object.entries(tasksByStatus)) {
+        if (tasks.some((t) => t.id === taskId)) {
+          return status as TaskStatus;
+        }
+      }
+      return null;
+    },
+    [tasksByStatus],
+  );
+
+  /**
    * Drag boshlanishini boshqarish
    */
   const handleDragStart = useCallback(
@@ -41,15 +56,7 @@ export function useTaskDragDrop(options: UseTaskDragDropOptions = {}) {
       setActiveTask(null);
       setIsDragging(false);
 
-      // Hozirgi task statusini topish
-      let fromStatus: TaskStatus | null = null;
-      for (const [status, tasks] of Object.entries(tasksByStatus)) {
-        if (tasks.some((t) => t.id === taskId)) {
-          fromStatus = status as TaskStatus;
-          break;
-        }
-      }
-
+      const fromStatus = findTaskStatus(taskId);
       if (!fromStatus || fromStatus === targetStatus) return;
 
       // Optimistic update
@@ -61,11 +68,15 @@ export function useTaskDragDrop(options: UseTaskDragDropOptions = {}) {
       };
 
       moveTask(dto);
-
-      // Callback for future API sync
       onTaskStatusChange?.(dto);
     },
-    [setActiveTask, setIsDragging, moveTask, tasksByStatus, onTaskStatusChange],
+    [
+      setActiveTask,
+      setIsDragging,
+      moveTask,
+      findTaskStatus,
+      onTaskStatusChange,
+    ],
   );
 
   /**
@@ -73,20 +84,67 @@ export function useTaskDragDrop(options: UseTaskDragDropOptions = {}) {
    */
   const handleDropBefore = useCallback(
     (draggedTaskId: string, targetTaskId: string) => {
-      // Target task statusini topish
-      let targetStatus: TaskStatus | null = null;
-      for (const [status, tasks] of Object.entries(tasksByStatus)) {
-        if (tasks.some((t) => t.id === targetTaskId)) {
-          targetStatus = status as TaskStatus;
-          break;
-        }
-      }
-
+      const targetStatus = findTaskStatus(targetTaskId);
       if (!targetStatus) return;
 
-      handleDrop(draggedTaskId, targetStatus, targetTaskId);
+      setActiveTask(null);
+      setIsDragging(false);
+
+      const fromStatus = findTaskStatus(draggedTaskId);
+      if (!fromStatus || fromStatus === targetStatus) return;
+
+      const dto: MoveTaskDto = {
+        taskId: draggedTaskId,
+        fromStatus,
+        toStatus: targetStatus,
+        targetTaskId,
+        position: 'before',
+      };
+
+      moveTask(dto);
+      onTaskStatusChange?.(dto);
     },
-    [handleDrop, tasksByStatus],
+    [
+      setActiveTask,
+      setIsDragging,
+      moveTask,
+      findTaskStatus,
+      onTaskStatusChange,
+    ],
+  );
+
+  /**
+   * Task orqasiga drop qilish
+   */
+  const handleDropAfter = useCallback(
+    (draggedTaskId: string, targetTaskId: string) => {
+      const targetStatus = findTaskStatus(targetTaskId);
+      if (!targetStatus) return;
+
+      setActiveTask(null);
+      setIsDragging(false);
+
+      const fromStatus = findTaskStatus(draggedTaskId);
+      if (!fromStatus || fromStatus === targetStatus) return;
+
+      const dto: MoveTaskDto = {
+        taskId: draggedTaskId,
+        fromStatus,
+        toStatus: targetStatus,
+        targetTaskId,
+        position: 'after',
+      };
+
+      moveTask(dto);
+      onTaskStatusChange?.(dto);
+    },
+    [
+      setActiveTask,
+      setIsDragging,
+      moveTask,
+      findTaskStatus,
+      onTaskStatusChange,
+    ],
   );
 
   /**
@@ -97,15 +155,7 @@ export function useTaskDragDrop(options: UseTaskDragDropOptions = {}) {
       setActiveTask(null);
       setIsDragging(false);
 
-      // Hozirgi task statusini topish
-      let fromStatus: TaskStatus | null = null;
-      for (const [status, tasks] of Object.entries(tasksByStatus)) {
-        if (tasks.some((t) => t.id === taskId)) {
-          fromStatus = status as TaskStatus;
-          break;
-        }
-      }
-
+      const fromStatus = findTaskStatus(taskId);
       if (!fromStatus || fromStatus === targetStatus) return;
 
       // Taskni oxiriga qo'yish - targetTaskId yo'q
@@ -113,15 +163,18 @@ export function useTaskDragDrop(options: UseTaskDragDropOptions = {}) {
         taskId,
         fromStatus,
         toStatus: targetStatus,
-        // targetTaskId yo'q - bu oxiriga qo'yishni bildiradi
       };
 
       moveTask(dto);
-
-      // Callback for future API sync
       onTaskStatusChange?.(dto);
     },
-    [setActiveTask, setIsDragging, moveTask, tasksByStatus, onTaskStatusChange],
+    [
+      setActiveTask,
+      setIsDragging,
+      moveTask,
+      findTaskStatus,
+      onTaskStatusChange,
+    ],
   );
 
   /**
@@ -136,6 +189,7 @@ export function useTaskDragDrop(options: UseTaskDragDropOptions = {}) {
     handleDragStart,
     handleDrop,
     handleDropBefore,
+    handleDropAfter,
     handleDropToEnd,
     handleDragEnd,
     activeTask,

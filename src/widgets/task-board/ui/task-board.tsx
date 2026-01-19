@@ -32,6 +32,7 @@ export function TaskBoard({
     handleDragStart,
     handleDrop,
     handleDropBefore,
+    handleDropAfter,
     handleDropToEnd,
     handleDragEnd,
   } = useTaskDragDrop({
@@ -77,6 +78,7 @@ export function TaskBoard({
                 onDragStart={handleDragStart}
                 onDragEnd={handleDragEnd}
                 onDropBefore={handleDropBefore}
+                onDropAfter={handleDropAfter}
               />
             ))}
           </TaskColumn>
