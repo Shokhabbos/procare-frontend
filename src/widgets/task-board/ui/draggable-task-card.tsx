@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
-import { draggable } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
+import {
+  draggable,
+  dropTargetForElements,
+} from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
 import { setCustomNativeDragPreview } from '@atlaskit/pragmatic-drag-and-drop/element/set-custom-native-drag-preview';
 import { TaskCard } from '@entities/task';
 import type { Task } from '@entities/task';
@@ -10,6 +13,7 @@ export interface DraggableTaskCardProps {
   isDraggingAny?: boolean;
   onDragStart?: (taskId: string) => void;
   onDragEnd?: () => void;
+  onDropBefore?: (draggedTaskId: string, targetTaskId: string) => void;
 }
 
 /**
@@ -21,10 +25,13 @@ export function DraggableTaskCard({
   isDraggingAny,
   onDragStart,
   onDragEnd,
+  onDropBefore,
 }: DraggableTaskCardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [isOver, setIsOver] = useState(false);
 
+  // Draggable setup
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
@@ -69,16 +76,42 @@ export function DraggableTaskCard({
     });
   }, [task.id, task.status, onDragStart, onDragEnd]);
 
+  // Drop target setup - boshqa tasklarni bu task oldiga qo'yish uchun
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
+    return dropTargetForElements({
+      element,
+      canDrop: ({ source }) => {
+        // Faqat tasklarni qabul qilish va o'ziga drop qilmaslik
+        return source.data.type === 'task' && source.data.taskId !== task.id;
+      },
+      onDragEnter: () => setIsOver(true),
+      onDragLeave: () => setIsOver(false),
+      onDrop: ({ source }) => {
+        setIsOver(false);
+        const draggedTaskId = source.data.taskId as string;
+        // Bu task oldiga qo'yish
+        onDropBefore?.(draggedTaskId, task.id);
+      },
+    });
+  }, [task.id, onDropBefore]);
+
   return (
     <div
       ref={ref}
       className={cn(
-        'transition-all duration-200',
+        'transition-all duration-200 relative',
         // Asl elementni yashirish (lekin joyini saqlash)
         isDragging && 'opacity-0 pointer-events-none',
         // Boshqa elementlarni yengilroq qilish
         isDraggingAny && !isDragging && 'opacity-60',
         !isDragging && 'cursor-grab active:cursor-grabbing',
+        // Drop indicator - task oldiga drop qilganda ko'rsatish
+        isOver &&
+          !isDragging &&
+          'before:absolute before:-top-2 before:left-0 before:right-0 before:h-0.5 before:bg-blue-500 before:rounded-full before:z-10',
       )}
     >
       <TaskCard

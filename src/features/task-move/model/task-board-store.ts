@@ -71,7 +71,7 @@ export const useTaskBoardStore = create<TaskBoardState & TaskBoardActions>()(
     },
 
     moveTask: (dto) => {
-      const { taskId, fromStatus, toStatus } = dto;
+      const { taskId, fromStatus, toStatus, targetTaskId } = dto;
       const { tasksByStatus } = get();
 
       // Eski ustundan topish
@@ -90,8 +90,22 @@ export const useTaskBoardStore = create<TaskBoardState & TaskBoardActions>()(
         updatedAt: new Date().toISOString(),
       };
 
-      // Yangi ustun ga qo'shish (boshiga)
-      const toTasks = [updatedTask, ...tasksByStatus[toStatus]];
+      // Yangi ustun ga qo'shish
+      const toTasks = [...tasksByStatus[toStatus]];
+
+      if (targetTaskId) {
+        // Target task oldiga qo'yish
+        const targetIndex = toTasks.findIndex((t) => t.id === targetTaskId);
+        if (targetIndex !== -1) {
+          toTasks.splice(targetIndex, 0, updatedTask);
+        } else {
+          // Agar target topilmasa, oxiriga qo'yish
+          toTasks.push(updatedTask);
+        }
+      } else {
+        // Target yo'q bo'lsa, oxiriga qo'yish (eng pastiga)
+        toTasks.push(updatedTask);
+      }
 
       set({
         tasksByStatus: {

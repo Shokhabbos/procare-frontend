@@ -28,7 +28,13 @@ export function TaskBoard({
   const tasksByStatus = useTaskBoardStore((state) => state.tasksByStatus);
   const isDraggingAny = useTaskBoardStore(selectIsDragging);
 
-  const { handleDragStart, handleDrop, handleDragEnd } = useTaskDragDrop({
+  const {
+    handleDragStart,
+    handleDrop,
+    handleDropBefore,
+    handleDropToEnd,
+    handleDragEnd,
+  } = useTaskDragDrop({
     onTaskStatusChange,
   });
 
@@ -59,6 +65,9 @@ export function TaskBoard({
             column={column}
             taskCount={tasks.length}
             onDrop={(taskId, targetStatus) => handleDrop(taskId, targetStatus)}
+            onDropToEnd={(taskId, targetStatus) =>
+              handleDropToEnd(taskId, targetStatus)
+            }
           >
             {tasks.map((task: Task) => (
               <DraggableTaskCard
@@ -67,6 +76,7 @@ export function TaskBoard({
                 isDraggingAny={isDraggingAny}
                 onDragStart={handleDragStart}
                 onDragEnd={handleDragEnd}
+                onDropBefore={handleDropBefore}
               />
             ))}
           </TaskColumn>

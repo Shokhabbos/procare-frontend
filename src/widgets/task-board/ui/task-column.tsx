@@ -11,6 +11,7 @@ export interface TaskColumnProps extends Omit<
   column: TaskColumnType;
   taskCount: number;
   onDrop?: (taskId: string, targetStatus: TaskStatus) => void;
+  onDropToEnd?: (taskId: string, targetStatus: TaskStatus) => void;
   children: React.ReactNode;
 }
 
@@ -22,16 +23,21 @@ export function TaskColumn({
   column,
   taskCount,
   onDrop,
+  onDropToEnd,
   children,
   className,
   ...props
 }: TaskColumnProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const bottomDropRef = useRef<HTMLDivElement>(null);
   const [isOver, setIsOver] = useState(false);
+  const [isOverBottom, setIsOverBottom] = useState(false);
+  const isEmpty = taskCount === 0;
 
+  // Column drop target - bo'sh column uchun
   useEffect(() => {
     const element = ref.current;
-    if (!element) return;
+    if (!element || !isEmpty) return;
 
     return dropTargetForElements({
       element,
@@ -50,9 +56,31 @@ export function TaskColumn({
         }
       },
     });
-  }, [column.id, onDrop]);
+  }, [column.id, onDrop, isEmpty]);
 
-  const isEmpty = taskCount === 0;
+  // Bottom drop target - eng pastiga drop qilish uchun
+  useEffect(() => {
+    const element = bottomDropRef.current;
+    if (!element || isEmpty) return;
+
+    return dropTargetForElements({
+      element,
+      getData: () => ({ status: column.id, position: 'end' }),
+      canDrop: ({ source }) => {
+        return source.data.type === 'task';
+      },
+      onDragEnter: () => setIsOverBottom(true),
+      onDragLeave: () => setIsOverBottom(false),
+      onDrop: ({ source }) => {
+        setIsOverBottom(false);
+        const taskId = source.data.taskId as string;
+        const sourceStatus = source.data.status as TaskStatus;
+        if (sourceStatus !== column.id) {
+          onDropToEnd?.(taskId, column.id);
+        }
+      },
+    });
+  }, [column.id, onDropToEnd, isEmpty]);
 
   return (
     <div
@@ -88,14 +116,32 @@ export function TaskColumn({
       <div
         ref={ref}
         className={cn(
-          'flex-1 p-4 transition-all duration-200 min-h-[400px]',
+          'flex-1 p-4 transition-all duration-200 min-h-[400px] flex flex-col',
           isOver && 'bg-brand',
         )}
       >
         {isEmpty ? (
           <EmptyColumnState isOver={isOver} />
         ) : (
-          <div className="space-y-4">{children}</div>
+          <>
+            <div className="space-y-4 flex-1">{children}</div>
+            {/* Bottom drop zone - eng pastiga drop qilish uchun */}
+            <div
+              ref={bottomDropRef}
+              className={cn(
+                'h-8 mt-4 rounded-lg transition-all duration-200 flex items-center justify-center',
+                isOverBottom
+                  ? 'bg-blue-100 border-2 border-blue-500 border-dashed'
+                  : 'bg-transparent border-2 border-transparent border-dashed',
+              )}
+            >
+              {isOverBottom && (
+                <span className="text-12 text-blue-600 font-medium">
+                  Bu yerga qo'ying
+                </span>
+              )}
+            </div>
+          </>
         )}
       </div>
     </div>

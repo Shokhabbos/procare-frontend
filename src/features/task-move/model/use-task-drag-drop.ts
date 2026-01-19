@@ -37,7 +37,7 @@ export function useTaskDragDrop(options: UseTaskDragDropOptions = {}) {
    * Drag tugashi
    */
   const handleDrop = useCallback(
-    (taskId: string, targetStatus: TaskStatus) => {
+    (taskId: string, targetStatus: TaskStatus, targetTaskId?: string) => {
       setActiveTask(null);
       setIsDragging(false);
 
@@ -57,6 +57,63 @@ export function useTaskDragDrop(options: UseTaskDragDropOptions = {}) {
         taskId,
         fromStatus,
         toStatus: targetStatus,
+        targetTaskId,
+      };
+
+      moveTask(dto);
+
+      // Callback for future API sync
+      onTaskStatusChange?.(dto);
+    },
+    [setActiveTask, setIsDragging, moveTask, tasksByStatus, onTaskStatusChange],
+  );
+
+  /**
+   * Task oldiga drop qilish
+   */
+  const handleDropBefore = useCallback(
+    (draggedTaskId: string, targetTaskId: string) => {
+      // Target task statusini topish
+      let targetStatus: TaskStatus | null = null;
+      for (const [status, tasks] of Object.entries(tasksByStatus)) {
+        if (tasks.some((t) => t.id === targetTaskId)) {
+          targetStatus = status as TaskStatus;
+          break;
+        }
+      }
+
+      if (!targetStatus) return;
+
+      handleDrop(draggedTaskId, targetStatus, targetTaskId);
+    },
+    [handleDrop, tasksByStatus],
+  );
+
+  /**
+   * Taskni ustunning eng pastiga qo'yish
+   */
+  const handleDropToEnd = useCallback(
+    (taskId: string, targetStatus: TaskStatus) => {
+      setActiveTask(null);
+      setIsDragging(false);
+
+      // Hozirgi task statusini topish
+      let fromStatus: TaskStatus | null = null;
+      for (const [status, tasks] of Object.entries(tasksByStatus)) {
+        if (tasks.some((t) => t.id === taskId)) {
+          fromStatus = status as TaskStatus;
+          break;
+        }
+      }
+
+      if (!fromStatus || fromStatus === targetStatus) return;
+
+      // Taskni oxiriga qo'yish - targetTaskId yo'q
+      const dto: MoveTaskDto = {
+        taskId,
+        fromStatus,
+        toStatus: targetStatus,
+        // targetTaskId yo'q - bu oxiriga qo'yishni bildiradi
       };
 
       moveTask(dto);
@@ -78,6 +135,8 @@ export function useTaskDragDrop(options: UseTaskDragDropOptions = {}) {
   return {
     handleDragStart,
     handleDrop,
+    handleDropBefore,
+    handleDropToEnd,
     handleDragEnd,
     activeTask,
     tasksByStatus,
