@@ -230,6 +230,9 @@ export interface Translations {
     status: string;
     createdAt: string;
     updatedAt: string;
+    selectBranch: string;
+    searchBranch: string;
+    noResults: string;
   };
   validation: {
     required: string;
