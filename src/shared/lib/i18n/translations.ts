@@ -213,6 +213,8 @@ export interface Translations {
     send: string;
     login: string;
     register: string;
+    reset: string;
+    apply: string;
   };
   common: {
     loading: string;

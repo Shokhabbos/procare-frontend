@@ -58,6 +58,12 @@ export type { SearchInputProps } from './search-input';
 export { FilterButton } from './filter-button';
 export type { FilterButtonProps } from './filter-button';
 
+export { CheckboxButton } from './checkbox-button';
+export type { CheckboxButtonProps } from './checkbox-button';
+
+export { FilterModal } from './filter-modal';
+export type { FilterModalProps } from './filter-modal';
+
 export { PageHeader } from './page-header';
 export type { PageHeaderProps } from './page-header';
 

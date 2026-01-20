@@ -6,12 +6,18 @@ import {
   FilterButton,
   PageHeader,
   SearchableSelect,
+  FilterModal,
   type SelectOption,
 } from '@shared/ui';
 import { useT } from '@shared/lib/i18n';
 import { Plus } from 'lucide-react';
 import { TaskBoard } from '@widgets/task-board';
 import { useTaskBoardStore } from '@features/task-move';
+import {
+  TaskFilterForm,
+  DEFAULT_VALUES,
+  type TaskFilterFormValues,
+} from '@features/task-filter';
 import type { MoveTaskDto } from '@entities/task';
 import type { DashboardOutletContext } from '@app/layouts/dashboard-layout';
 import { MOCK_TASKS } from './mock-data';
@@ -35,6 +41,9 @@ export default function TasksPage() {
   const [selectedBranch, setSelectedBranch] = useState<SelectOption | null>(
     null,
   );
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+  const [filterValues, setFilterValues] =
+    useState<TaskFilterFormValues>(DEFAULT_VALUES);
 
   // Main container ni transparent qilish (task board uchun)
   useEffect(() => {
@@ -81,7 +90,7 @@ export default function TasksPage() {
                 // TODO: Filter tasks by branch
               }}
             />
-            <FilterButton />
+            <FilterButton onClick={() => setIsFilterModalOpen(true)} />
             <Button className="bg-brand-blue text-white hover:bg-brand-blue/90 gap-2">
               <Plus className="h-4 w-4" />
               {t('buttons.add')}
@@ -89,6 +98,18 @@ export default function TasksPage() {
           </>
         }
       />
+
+      <FilterModal
+        open={isFilterModalOpen}
+        title={t('buttons.filter')}
+        onClose={() => setIsFilterModalOpen(false)}
+        onApply={() => {
+          console.log('Filter applied:', filterValues);
+          // TODO: Apply filter logic to task board
+        }}
+      >
+        <TaskFilterForm values={filterValues} onChange={setFilterValues} />
+      </FilterModal>
 
       <div className="mt-4">
         <TaskBoard onTaskStatusChange={handleTaskStatusChange} />

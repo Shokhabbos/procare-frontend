@@ -205,7 +205,9 @@
     "confirm": "Tasdiqlash",
     "send": "Yuborish",
     "login": "Tizimga kirish",
-    "register": "Ro'yxatdan o'tish"
+    "register": "Ro'yxatdan o'tish",
+    "reset": "Tozalash",
+    "apply": "Qo'llash"
   },
   "common": {
     "loading": "Yuklanmoqda...",
