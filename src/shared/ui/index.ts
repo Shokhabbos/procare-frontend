@@ -70,3 +70,25 @@ export type { AvatarProps, AvatarGroupProps } from './avatar';
 
 export { Badge } from './badge';
 export type { BadgeProps } from './badge';
+
+export { SearchableSelect } from './searchable-select';
+export type { SelectOption, SearchableSelectProps } from './searchable-select';
+
+export {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverAnchor,
+} from './popover';
+
+export {
+  Command,
+  CommandDialog,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+  CommandShortcut,
+  CommandSeparator,
+} from './command';

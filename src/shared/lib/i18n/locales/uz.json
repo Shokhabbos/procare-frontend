@@ -222,7 +222,10 @@
     "actions": "Amallar",
     "status": "Status",
     "createdAt": "Yaratilgan",
-    "updatedAt": "Yangilangan"
+    "updatedAt": "Yangilangan",
+    "selectBranch": "Filial tanlang",
+    "searchBranch": "Filiallarni qidirish",
+    "noResults": "Hech narsa topilmadi"
   },
   "validation": {
     "required": "Majburiy maydon",

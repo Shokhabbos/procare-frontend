@@ -1,6 +1,13 @@
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
-import { Button, SearchInput, FilterButton, PageHeader } from '@shared/ui';
+import {
+  Button,
+  SearchInput,
+  FilterButton,
+  PageHeader,
+  SearchableSelect,
+  type SelectOption,
+} from '@shared/ui';
 import { useT } from '@shared/lib/i18n';
 import { Plus } from 'lucide-react';
 import { TaskBoard } from '@widgets/task-board';
@@ -13,10 +20,21 @@ import { MOCK_TASKS } from './mock-data';
  * Tasks page - Kanban Board
  * FSD - faqat kompozitsiya, mantiq bo'lmaydi
  */
+// Filiallar ro'yxati (misol - haqiqiy loyihada API dan keladi)
+const branchOptions: SelectOption[] = [
+  { value: 'qoratosh', label: 'Qoratosh filiali' },
+  { value: 'malika', label: 'Malika filiali' },
+  { value: 'sagbon', label: "Sag'bon filiali" },
+  { value: 'other', label: 'Filia nomi' },
+];
+
 export default function TasksPage() {
   const t = useT();
   const setTasks = useTaskBoardStore((state) => state.setTasks);
   const { setMainVariant } = useOutletContext<DashboardOutletContext>();
+  const [selectedBranch, setSelectedBranch] = useState<SelectOption | null>(
+    null,
+  );
 
   // Main container ni transparent qilish (task board uchun)
   useEffect(() => {
@@ -50,6 +68,17 @@ export default function TasksPage() {
               onDebouncedChange={(value) => {
                 console.log('Search:', value);
                 // TODO: Filter tasks by search
+              }}
+            />
+            <SearchableSelect
+              value={selectedBranch}
+              options={branchOptions}
+              placeholder={t('common.selectBranch')}
+              searchPlaceholder={t('common.searchBranch')}
+              onChange={(option) => {
+                setSelectedBranch(option);
+                console.log('Selected branch:', option);
+                // TODO: Filter tasks by branch
               }}
             />
             <FilterButton />

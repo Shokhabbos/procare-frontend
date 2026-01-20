@@ -221,7 +221,10 @@
     "actions": "Действия",
     "status": "Статус",
     "createdAt": "Создано",
-    "updatedAt": "Обновлено"
+    "updatedAt": "Обновлено",
+    "selectBranch": "Выберите филиал",
+    "searchBranch": "Поиск филиалов",
+    "noResults": "Ничего не найдено"
   },
   "validation": {
     "required": "Обязательное поле",

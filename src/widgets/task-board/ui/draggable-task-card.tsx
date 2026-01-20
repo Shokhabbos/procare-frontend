@@ -194,9 +194,22 @@ export function DraggableTaskCard({
               closestEdge === 'top' ? '-top-2' : '-bottom-2',
             )}
           >
-            <div className="flex-1 h-0.5 bg-blue-500 rounded-full" />
-            <div className="w-2 h-2 bg-blue-500 rounded-full mx-1" />
-            <div className="flex-1 h-0.5 bg-blue-500 rounded-full" />
+            <div
+              className="flex-1 rounded-[10px]"
+              style={{ height: '4px', backgroundColor: '#00BFFF' }}
+            />
+            <div
+              className="rounded-[10px] mx-1"
+              style={{
+                width: '8px',
+                height: '4px',
+                backgroundColor: '#00BFFF',
+              }}
+            />
+            <div
+              className="flex-1 rounded-[10px]"
+              style={{ height: '4px', backgroundColor: '#00BFFF' }}
+            />
           </div>
         )}
         <TaskCard

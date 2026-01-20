@@ -122,26 +122,47 @@ export function TaskColumn({
           <EmptyColumnState isOver={isOver} />
         ) : (
           <>
-            <div className="space-y-4 flex-1">{children}</div>
+            <div className="space-y-[10px] flex-1">{children}</div>
             {/* Bottom drop zone - eng pastiga drop qilish uchun */}
             <div
               ref={bottomDropRef}
               className={cn(
                 'h-12 mt-4 rounded-lg transition-all duration-200 flex flex-col items-center justify-center gap-2',
                 isOverBottom
-                  ? 'bg-blue-50 border-2 border-blue-500 border-dashed'
+                  ? 'bg-blue-50 border-2 border-dashed'
                   : 'bg-transparent border-2 border-transparent border-dashed',
               )}
+              style={
+                isOverBottom
+                  ? { borderColor: '#00BFFF', backgroundColor: '#E6F3F9' }
+                  : undefined
+              }
             >
               {isOverBottom && (
                 <>
                   {/* Ko'k chiziq */}
                   <div className="w-full flex items-center px-2">
-                    <div className="flex-1 h-0.5 bg-blue-500 rounded-full" />
-                    <div className="w-2 h-2 bg-blue-500 rounded-full mx-1" />
-                    <div className="flex-1 h-0.5 bg-blue-500 rounded-full" />
+                    <div
+                      className="flex-1 rounded-[10px]"
+                      style={{ height: '4px', backgroundColor: '#00BFFF' }}
+                    />
+                    <div
+                      className="rounded-[10px] mx-1"
+                      style={{
+                        width: '8px',
+                        height: '4px',
+                        backgroundColor: '#00BFFF',
+                      }}
+                    />
+                    <div
+                      className="flex-1 rounded-[10px]"
+                      style={{ height: '4px', backgroundColor: '#00BFFF' }}
+                    />
                   </div>
-                  <span className="text-12 text-blue-600 font-medium">
+                  <span
+                    className="text-12 font-medium"
+                    style={{ color: '#00BFFF' }}
+                  >
                     Eng pastiga qo'ying
                   </span>
                 </>
