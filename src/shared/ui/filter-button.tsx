@@ -20,14 +20,14 @@ export const FilterButton = React.forwardRef<
       ref={ref}
       variant="outline"
       className={cn(
-        'gap-2',
+        'gap-2 border border-brand-blue rounded-lg text-brand-blue',
         active && 'border-brand-blue text-brand-blue',
         className,
       )}
       {...props}
     >
-      <SlidersHorizontal className="h-4 w-4" />
-      {children || 'Filter'}
+      <SlidersHorizontal className="h-4 w-4 text-brand-blue" />
+      <span>{children || 'Filter'}</span>
     </Button>
   );
 });
