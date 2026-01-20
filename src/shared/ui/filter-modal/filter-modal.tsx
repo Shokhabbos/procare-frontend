@@ -43,6 +43,7 @@ export function FilterModal({
         className={cn(
           'max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col bg-white !rounded-[24px]',
         )}
+        overlayStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}
       >
         <DialogHeader className="flex-shrink-0">
           <DialogTitle className="text-20-regular">{title}</DialogTitle>

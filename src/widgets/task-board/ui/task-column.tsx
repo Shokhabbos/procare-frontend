@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { dropTargetForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
-import { MoreHorizontal } from 'lucide-react';
+import { MoreHorizontal, Pencil } from 'lucide-react';
 import { cn } from '@shared/lib';
+import { DropdownMenu } from '@shared/ui';
 import type { TaskColumn as TaskColumnType, TaskStatus } from '@entities/task';
 
 export interface TaskColumnProps extends Omit<
@@ -105,9 +106,52 @@ export function TaskColumn({
             {taskCount}
           </span>
         </div>
-        <button className="h-8 w-8 flex items-center justify-center rounded-full bg-black-100 hover:bg-black-200 transition-colors">
-          <MoreHorizontal className="h-4 w-4 text-black-600" />
-        </button>
+        <DropdownMenu
+          trigger={
+            <button
+              type="button"
+              className="h-8 w-8 flex items-center justify-center rounded-full bg-black-100 hover:bg-black-200 transition-colors"
+            >
+              <MoreHorizontal className="h-4 w-4 text-black-600" />
+            </button>
+          }
+          items={[
+            {
+              id: 'edit',
+              label: 'Text 1',
+              icon: <Pencil className="h-4 w-4 text-brand-blue" />,
+              onClick: () => {
+                console.log('Edit column:', column.id);
+              },
+            },
+            {
+              id: 'option2',
+              label: 'Text 2',
+              icon: <Pencil className="h-4 w-4 text-brand-blue" />,
+              onClick: () => {
+                console.log('Option 2 clicked');
+              },
+            },
+            {
+              id: 'option3',
+              label: 'Text 3',
+              icon: <Pencil className="h-4 w-4 text-brand-blue" />,
+              onClick: () => {
+                console.log('Option 3 clicked');
+              },
+            },
+            {
+              id: 'option4',
+              label: 'Text 4',
+              icon: <Pencil className="h-4 w-4 text-brand-blue" />,
+              onClick: () => {
+                console.log('Option 4 clicked');
+              },
+            },
+          ]}
+          align="end"
+          side="bottom"
+        />
       </div>
 
       {/* Column Content - Drop Target */}
