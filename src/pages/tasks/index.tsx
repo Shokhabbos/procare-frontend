@@ -10,7 +10,7 @@ import {
   type SelectOption,
 } from '@shared/ui';
 import { useT } from '@shared/lib/i18n';
-import { Plus } from 'lucide-react';
+import { AddIcon } from '@shared/ui/icons';
 import { TaskBoard } from '@widgets/task-board';
 import { useTaskBoardStore } from '@features/task-move';
 import {
@@ -92,7 +92,7 @@ export default function TasksPage() {
             />
             <FilterButton onClick={() => setIsFilterModalOpen(true)} />
             <Button className="bg-brand-blue text-white hover:bg-brand-blue/90 gap-2">
-              <Plus className="h-4 w-4" />
+              <AddIcon size={16} className="text-white" />
               {t('buttons.add')}
             </Button>
           </>

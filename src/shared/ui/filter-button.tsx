@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Button } from './button';
-import { SlidersHorizontal } from 'lucide-react';
 import { cn } from '@shared/lib';
+import { useT } from '@shared/lib/i18n';
+import { FilterIcon } from './icons';
 
 export interface FilterButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   active?: boolean;
@@ -15,6 +16,8 @@ export const FilterButton = React.forwardRef<
   HTMLButtonElement,
   FilterButtonProps
 >(({ active, className, children, ...props }, ref) => {
+  const t = useT();
+
   return (
     <Button
       ref={ref}
@@ -26,8 +29,8 @@ export const FilterButton = React.forwardRef<
       )}
       {...props}
     >
-      <SlidersHorizontal className="h-4 w-4 text-brand-blue" />
-      <span>{children || 'Filter'}</span>
+      <FilterIcon size={16} className="text-brand-blue" />
+      <span>{children || t('buttons.filter')}</span>
     </Button>
   );
 });

@@ -1,16 +1,15 @@
 import * as React from 'react';
-import {
-  User,
-  Phone,
-  Send,
-  Calendar,
-  PhoneCall,
-  Globe,
-  PackageCheck,
-  Truck,
-} from 'lucide-react';
+import { PhoneCall, Globe } from 'lucide-react';
 import { cn } from '@shared/lib';
 import { Avatar, AvatarGroup } from '@shared/ui';
+import {
+  DeliveryIcon,
+  UserIcon,
+  PhoneIcon,
+  PackageCheckIcon,
+  SendIcon,
+  CalendarIcon,
+} from '@shared/ui/icons';
 import type { Task, TaskPriority, TaskSource } from '../model/types';
 import { TASK_PRIORITY_CONFIG, TASK_SOURCE_CONFIG } from '../model/types';
 
@@ -44,9 +43,9 @@ const priorityTextColors: Record<TaskPriority, string> = {
 };
 
 const sourceIcons: Record<TaskSource, React.ReactNode> = {
-  telegram: <Send className="h-4 w-4" />,
+  telegram: <SendIcon size={14} className="h-[14px] w-[14px]" />,
   phone: <PhoneCall className="h-4 w-4" />,
-  walk_in: <User className="h-4 w-4" />,
+  walk_in: <UserIcon size={16} className="h-4 w-4" />,
   website: <Globe className="h-4 w-4" />,
 };
 
@@ -127,11 +126,11 @@ const TaskCard = React.forwardRef<HTMLDivElement, TaskCardProps>(
         {/* Mijoz ma'lumotlari */}
         <div className="space-y-2 mb-3">
           <div className="flex items-center gap-2">
-            <User className="h-4 w-4 text-brand-blue" />
+            <UserIcon size={16} className="text-brand-blue" />
             <span className="text-14 text-body">{task.customerName}</span>
           </div>
           <div className="flex items-center gap-2">
-            <Phone className="h-4 w-4 text-brand-blue" />
+            <PhoneIcon size={16} className="text-brand-blue" />
             <span className="text-14 text-body">{task.phoneNumber}</span>
           </div>
         </div>
@@ -140,7 +139,10 @@ const TaskCard = React.forwardRef<HTMLDivElement, TaskCardProps>(
         <div className="flex items-start gap-6 mb-3">
           <div>
             <div className="flex items-center gap-1.5 mb-0.5">
-              <PackageCheck className="h-4 w-4 text-brand-blue shrink-0" />
+              <PackageCheckIcon
+                size={16}
+                className="text-brand-blue shrink-0"
+              />
               <span className="text-12 text-black-400 whitespace-nowrap">
                 Olib ketish
               </span>
@@ -151,7 +153,7 @@ const TaskCard = React.forwardRef<HTMLDivElement, TaskCardProps>(
           </div>
           <div>
             <div className="flex items-center gap-1.5 mb-0.5">
-              <Truck className="h-4 w-4 text-brand-blue shrink-0" />
+              <DeliveryIcon size={16} className="text-brand-blue shrink-0" />
               <span className="text-12 text-black-400 whitespace-nowrap">
                 Yetkazib berish
               </span>
@@ -170,7 +172,10 @@ const TaskCard = React.forwardRef<HTMLDivElement, TaskCardProps>(
           </div>
           <div className="mx-3 h-4 w-px bg-black-200" />
           <div className="flex items-center gap-1.5">
-            <Calendar className="h-4 w-4 text-brand-blue" />
+            <CalendarIcon
+              size={14}
+              className="h-[14px] w-[14px] text-brand-blue"
+            />
             <span className="text-12 text-body">{formattedDate}</span>
           </div>
         </div>

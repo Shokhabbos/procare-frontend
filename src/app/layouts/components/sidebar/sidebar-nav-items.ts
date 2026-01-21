@@ -1,17 +1,15 @@
 import type { ComponentType } from 'react';
-import {
-  LayoutDashboard,
-  CheckSquare,
-  Users,
-  BarChart3,
-  Package,
-  Settings,
-  MessageSquare,
-  Newspaper,
-} from 'lucide-react';
+import { LayoutDashboard, Settings, Newspaper } from 'lucide-react';
 
 import { ROUTES } from '@shared/constants';
 import type { TranslationKey } from '@shared/lib/i18n';
+import {
+  TasksIcon,
+  UsersIcon,
+  AnalyticsIcon,
+  ProductsIcon,
+  MessageSquareIcon,
+} from '@shared/ui/icons';
 
 export interface NavSubItem {
   label: string;
@@ -40,22 +38,22 @@ export function getNavItems(t: TranslateFn): NavItem[] {
     },
     {
       label: t('nav.tasks'),
-      icon: CheckSquare,
+      icon: TasksIcon,
       path: ROUTES.TASKS,
     },
     {
       label: t('nav.customers'),
-      icon: Users,
+      icon: UsersIcon,
       path: ROUTES.CUSTOMERS,
     },
     {
       label: t('nav.analytics'),
-      icon: BarChart3,
+      icon: AnalyticsIcon,
       path: ROUTES.ANALYTICS,
     },
     {
       label: t('nav.products'),
-      icon: Package,
+      icon: ProductsIcon,
       children: [
         {
           label: t('nav.services'),
@@ -103,7 +101,7 @@ export function getNavItems(t: TranslateFn): NavItem[] {
     },
     {
       label: t('nav.telegramBot'),
-      icon: MessageSquare,
+      icon: MessageSquareIcon,
       children: [
         {
           label: t('nav.templates'),

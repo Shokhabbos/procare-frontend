@@ -64,7 +64,7 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
     return (
       <div className="relative w-64">
         <div className="pointer-events-none absolute left-3 top-0 z-10 flex h-9 items-center">
-          <Search className="h-4 w-4 text-gray-400" />
+          <Search className="h-4 w-4 text-brand-blue" />
         </div>
         <Input
           ref={ref}
