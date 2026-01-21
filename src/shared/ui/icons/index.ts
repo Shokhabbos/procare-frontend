@@ -39,6 +39,7 @@ import DiagnosticsIconSvg from '@assets/svg/diagnostics-icon.svg?react';
 import RepairIconSvg from '@assets/svg/repair-icon.svg?react';
 import BranchesIconSvg from '@assets/svg/branches-icon.svg?react';
 import WarrantyIconSvg from '@assets/svg/warranty-icon.svg?react';
+import EmptyStateIconSvg from '@assets/svg/empty-state-icon.svg?react';
 
 import { createIcon } from '../icon';
 
@@ -67,3 +68,4 @@ export const DiagnosticsIcon = createIcon(DiagnosticsIconSvg);
 export const RepairIcon = createIcon(RepairIconSvg);
 export const BranchesIcon = createIcon(BranchesIconSvg);
 export const WarrantyIcon = createIcon(WarrantyIconSvg);
+export const EmptyStateIcon = createIcon(EmptyStateIconSvg);

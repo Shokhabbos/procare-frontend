@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { SearchableSelect } from '@shared/ui';
 import type { SelectOption } from '@shared/ui';
 
@@ -6,6 +7,11 @@ import type { SelectOption } from '@shared/ui';
  * FSD feature: UI component with business logic
  */
 export function TaskStatusSelect() {
+  const [selectedStatus, setSelectedStatus] = useState<SelectOption>({
+    value: 'new-leads',
+    label: 'Yangi lidlar',
+  });
+
   const statusOptions: SelectOption[] = [
     { value: 'new-leads', label: 'Yangi lidlar' },
     { value: 'in-progress', label: 'Ish jarayonida' },
@@ -16,12 +22,14 @@ export function TaskStatusSelect() {
 
   return (
     <SearchableSelect
-      value={{ value: 'new-leads', label: 'Yangi lidlar' }}
+      value={selectedStatus}
       options={statusOptions}
       placeholder="Statusni tanlang"
       searchPlaceholder="Statusni qidirish"
       onChange={(option) => {
         console.log('Status changed:', option);
+        if (Array.isArray(option)) return;
+        setSelectedStatus(option);
         // TODO: Handle status change
       }}
     />

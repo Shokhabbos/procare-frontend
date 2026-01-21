@@ -1,7 +1,7 @@
 import { useEffect, useCallback } from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import { Button } from '@shared/ui';
-import { ArrowLeftIcon } from '@shared/ui/icons';
+import { ArrowLeftIcon, EmptyStateIcon, SendIcon } from '@shared/ui/icons';
 import { TaskTabs } from '@widgets/task-tabs';
 import { TaskSidebar } from '@widgets/task-sidebar';
 import type { DashboardOutletContext } from '@app/layouts/dashboard-layout';
@@ -59,39 +59,28 @@ export default function CreateTaskPage() {
       {/* Right Section */}
       <div className="w-80 flex flex-col gap-4">
         {/* Task Status Section */}
-        <div className="bg-white rounded-xl border border-gray-200 p-6">
-          <h3 className="font-medium text-gray-900 mb-4">Vazifa holati</h3>
+        <div className="bg-white rounded-xl border border-gray-200 p-4">
           {/* Status and Priority will be handled by TaskSidebar */}
           <TaskSidebar />
         </div>
 
         {/* Notifications Section */}
-        <div className="bg-white rounded-xl border border-gray-200 p-6 flex-1 flex flex-col">
-          <h3 className="font-medium text-gray-900 mb-4">Xabarnomalar</h3>
-          <div className="text-center text-gray-500 mb-4 min-h-[100px] flex items-center justify-center">
-            No messages here yet
+        <div className="bg-white rounded-xl border border-gray-200 p-4 flex-1 flex flex-col">
+          <h3 className="text-16-regular mb-4 border-b pb-2">Xabarnomalar</h3>
+          <div className="text-center text-gray-500 mb-4 flex-1 flex items-center justify-center">
+            <div className="flex flex-col items-center">
+              <EmptyStateIcon size={80} className="mb-4" />
+              <p className="text-gray-500">No messages here yet</p>
+            </div>
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center border-t pt-2">
             <input
               type="text"
               placeholder="Type here"
               className="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-            <button className="ml-2 p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-5 h-5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
-                />
-              </svg>
+            <button className="ml-2 p-2 bg-brand-blue text-white rounded-lg flex items-center justify-center ">
+              <SendIcon size={20} className="text-white" />
             </button>
           </div>
         </div>

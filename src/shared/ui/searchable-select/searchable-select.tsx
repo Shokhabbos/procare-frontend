@@ -42,6 +42,11 @@ export function SearchableSelect<T = unknown>({
   const [open, setOpen] = React.useState(false);
   const [search, setSearch] = React.useState('');
 
+  // Debug: Log open state changes
+  React.useEffect(() => {
+    console.log('SearchableSelect open state:', open);
+  }, [open]);
+
   // Normalize value to array for multi-select
   const selectedValues = React.useMemo(() => {
     if (multiple) {
@@ -62,6 +67,8 @@ export function SearchableSelect<T = unknown>({
 
   const handleSelect = React.useCallback(
     (option: SelectOption<T>) => {
+      console.log('handleSelect called with:', option);
+
       if (multiple) {
         const currentValues = Array.isArray(value) ? value : [];
         const isAlreadySelected = currentValues.some(
@@ -97,6 +104,10 @@ export function SearchableSelect<T = unknown>({
           aria-haspopup="listbox"
           aria-controls="searchable-select-listbox"
           disabled={disabled}
+          onClick={() => {
+            console.log('Button clicked, current open state:', open);
+            setOpen(!open);
+          }}
           className={cn(
             'flex h-9 w-full items-center justify-between rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm transition-colors',
             'hover:bg-accent hover:text-accent-foreground',
@@ -153,6 +164,10 @@ export function SearchableSelect<T = unknown>({
                     key={option.value}
                     value={option.value}
                     onSelect={() => handleSelect(option)}
+                    onClick={() => {
+                      console.log('CommandItem clicked:', option);
+                      handleSelect(option);
+                    }}
                     className={cn(
                       'cursor-pointer bg-white',
                       isSelected && 'bg-accent',

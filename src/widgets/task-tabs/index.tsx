@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from '@shared/ui';
 import { Card } from '@shared/ui';
 import {
@@ -35,38 +35,42 @@ export function TaskTabs() {
       {/* Tab Navigation */}
       <div className="border-b border-primary p-4">
         <nav
-          className="flex space-x-8 px-6 bg-black-50 rounded-[10px] py-[4px]"
+          className="flex items-center px-6 bg-black-50 rounded-[10px] py-[4px]"
           aria-label="Tabs"
         >
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`
-                px-1 font-medium text-14-light whitespace-nowrap transition-all py-[7px]
-                ${
-                  activeTab === tab.id
-                    ? 'bg-brand-blue border-brand text-white text-14-light py-[7px] px-[10px] rounded-[10px]'
-                    : 'border-transparent text-description hover:text-body hover:border-primary'
-                }
-              `}
-            >
-              {tab.icon && (
-                <tab.icon
-                  size={16}
-                  className="mr-2"
-                  color={activeTab === tab.id ? 'white' : '#00BFFF'}
-                />
+          {tabs.map((tab, index) => (
+            <React.Fragment key={tab.id}>
+              <button
+                onClick={() => setActiveTab(tab.id)}
+                className={`
+                  px-1 font-medium text-14-light whitespace-nowrap transition-all py-[7px]
+                  ${
+                    activeTab === tab.id
+                      ? 'bg-brand-blue border-brand text-white text-14-light py-[7px] px-[10px] rounded-[10px]'
+                      : 'border-transparent text-description hover:text-body hover:border-primary'
+                  }
+                `}
+              >
+                {tab.icon && (
+                  <tab.icon
+                    size={16}
+                    className="mr-2"
+                    color={activeTab === tab.id ? 'white' : '#00BFFF'}
+                  />
+                )}
+                {tab.label}
+              </button>
+              {index < tabs.length - 1 && (
+                <div className="w-px h-6 bg-black-200 mx-2" />
               )}
-              {tab.label}
-            </button>
+            </React.Fragment>
           ))}
         </nav>
       </div>
 
       {/* Tab Content */}
       <div className="flex-1 p-6">
-        {activeTab === 'haqida' && <TabContentHaqida />}
+        {activeTab === 'haqida' && <TabContentAbout />}
         {activeTab === 'yetkazib-berish' && (
           <TabContentPlaceholder title="Yetkazib berish va ijara" />
         )}
@@ -88,7 +92,7 @@ export function TaskTabs() {
 /**
  * Content for "Haqida" tab
  */
-function TabContentHaqida() {
+function TabContentAbout() {
   return (
     <div className="space-y-6">
       {/* Customer Information Block */}
