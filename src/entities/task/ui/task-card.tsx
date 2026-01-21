@@ -82,7 +82,7 @@ const TaskCard = React.forwardRef<HTMLDivElement, TaskCardProps>(
       >
         {/* Header: Task ID va Priority */}
         <div className="flex items-center justify-between mb-3">
-          <span className="text-14 font-bold text-body">{task.taskNumber}</span>
+          <span className="text-14-light text-body">{task.taskNumber}</span>
           <div
             className={cn(
               'inline-flex items-center gap-1.5 rounded-full px-2.5 py-1',
@@ -94,10 +94,7 @@ const TaskCard = React.forwardRef<HTMLDivElement, TaskCardProps>(
               style={{ backgroundColor: priorityDotColors[task.priority] }}
             />
             <span
-              className={cn(
-                'text-12 font-medium',
-                priorityTextColors[task.priority],
-              )}
+              className={cn('text-12-light', priorityTextColors[task.priority])}
             >
               {priorityConfig.label}
             </span>
@@ -107,9 +104,7 @@ const TaskCard = React.forwardRef<HTMLDivElement, TaskCardProps>(
         {/* Product Badge va Avatarlar - alohida qatorlarda */}
         <div className="flex items-center justify-between mb-3">
           <div className="inline-flex items-center rounded-full bg-brand-green border-2 border-brand-green/30 px-3 py-1">
-            <span className="text-12 font-medium text-white">
-              {task.productName}
-            </span>
+            <span className="text-12-light text-white">{task.productName}</span>
           </div>
           <AvatarGroup max={3} size="sm">
             {task.assignedUsers.map((user) => (
@@ -127,11 +122,11 @@ const TaskCard = React.forwardRef<HTMLDivElement, TaskCardProps>(
         <div className="space-y-2 mb-3">
           <div className="flex items-center gap-2">
             <UserIcon size={16} className="text-brand-blue" />
-            <span className="text-14 text-body">{task.customerName}</span>
+            <span className="text-14-light text-body">{task.customerName}</span>
           </div>
           <div className="flex items-center gap-2">
             <PhoneIcon size={16} className="text-brand-blue" />
-            <span className="text-14 text-body">{task.phoneNumber}</span>
+            <span className="text-14-light text-body">{task.phoneNumber}</span>
           </div>
         </div>
 
@@ -143,22 +138,22 @@ const TaskCard = React.forwardRef<HTMLDivElement, TaskCardProps>(
                 size={16}
                 className="text-brand-blue shrink-0"
               />
-              <span className="text-12 text-black-400 whitespace-nowrap">
+              <span className="text-12-light text-black-400 whitespace-nowrap">
                 Olib ketish
               </span>
             </div>
-            <span className="text-14 font-medium text-body pl-[22px]">
+            <span className="text-14-light text-body pl-[22px]">
               {task.pickupPerson}
             </span>
           </div>
           <div>
             <div className="flex items-center gap-1.5 mb-0.5">
               <DeliveryIcon size={16} className="text-brand-blue shrink-0" />
-              <span className="text-12 text-black-400 whitespace-nowrap">
+              <span className="text-12-light text-black-400 whitespace-nowrap">
                 Yetkazib berish
               </span>
             </div>
-            <span className="text-14 font-medium text-body pl-[22px]">
+            <span className="text-14-light text-body pl-[22px]">
               {task.deliveryPerson}
             </span>
           </div>
@@ -168,7 +163,7 @@ const TaskCard = React.forwardRef<HTMLDivElement, TaskCardProps>(
         <div className="flex items-center pt-3 border-t border-black-100">
           <div className="flex items-center gap-1.5 text-brand-blue">
             {sourceIcons[task.source]}
-            <span className="text-12 font-medium">{sourceConfig.label}</span>
+            <span className="text-12-light">{sourceConfig.label}</span>
           </div>
           <div className="mx-3 h-4 w-px bg-black-200" />
           <div className="flex items-center gap-1.5">
@@ -176,7 +171,7 @@ const TaskCard = React.forwardRef<HTMLDivElement, TaskCardProps>(
               size={14}
               className="h-[14px] w-[14px] text-brand-blue"
             />
-            <span className="text-12 text-body">{formattedDate}</span>
+            <span className="text-12-light text-body">{formattedDate}</span>
           </div>
         </div>
       </div>

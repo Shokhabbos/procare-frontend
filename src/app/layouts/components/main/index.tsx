@@ -15,7 +15,7 @@ export function Main({ children, className, variant = 'default' }: MainProps) {
   return (
     <main
       className={cn(
-        'rounded-xl p-6 overflow-auto',
+        'rounded-xl p-3 overflow-auto',
         variant === 'default' && 'bg-white border border-[#EBECEC]',
         variant === 'transparent' && 'bg-transparent p-0',
         className,

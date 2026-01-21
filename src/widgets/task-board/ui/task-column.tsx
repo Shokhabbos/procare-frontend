@@ -93,7 +93,7 @@ export function TaskColumn({
       {/* Column Header - border-b bilan ajratilgan */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-black-100">
         <div className="flex items-center gap-2">
-          <h3 className="text-14 font-medium" style={{ color: column.color }}>
+          <h3 className="text-16-regular" style={{ color: column.color }}>
             {column.title}
           </h3>
           <span

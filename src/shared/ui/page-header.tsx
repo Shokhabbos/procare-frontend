@@ -32,7 +32,9 @@ export function PageHeader({ title, actions }: PageHeaderProps) {
   useEffect(() => {
     setHeaderLeft(
       typeof title === 'string' ? (
-        <h1 className="text-lg font-semibold text-gray-800">{title}</h1>
+        <h1 className="text-16-regular md:text-20-medium text-gray-800">
+          {title}
+        </h1>
       ) : (
         title
       ),

@@ -12,12 +12,16 @@ const LOCALES = [
 
 export interface LanguageSwitcherProps {
   className?: string;
+  variant?: 'default' | 'compact';
 }
 
 /**
  * Til tanlovi komponenti
  */
-export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
+export function LanguageSwitcher({
+  className,
+  variant = 'default',
+}: LanguageSwitcherProps) {
   const { locale, setLocale } = useLocaleStore();
   const [isOpen, setIsOpen] = React.useState(false);
 
@@ -28,22 +32,37 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
     setIsOpen(false);
   };
 
+  const isCompact = variant === 'compact';
+
   return (
-    <div className={cn('relative w-[130px]', className)}>
+    <div
+      className={cn('relative', isCompact ? 'w-auto' : 'w-[130px]', className)}
+    >
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex w-full items-center gap-2 rounded-lg border border-border-primary bg-white px-3 py-2 text-14-regular text-text-body transition-colors hover:bg-bg-primary focus:outline-none focus:ring-2 focus:ring-brand-blue/20"
+        className={cn(
+          'flex w-full items-center gap-1.5 md:gap-2 rounded-lg border border-border-primary bg-white text-14-regular text-text-body transition-colors hover:bg-bg-primary focus:outline-none focus:ring-2 focus:ring-brand-blue/20',
+          isCompact ? 'p-1.5 md:p-2' : 'px-3 py-2',
+        )}
       >
         <img
           src={currentLocale.icon}
           alt={currentLocale.label}
-          className="h-5 w-5 rounded-md"
+          className={cn(
+            'rounded-md flex-shrink-0',
+            isCompact ? 'h-4 w-4 md:h-5 md:w-5' : 'h-5 w-5',
+          )}
         />
-        <span className="flex-1">{currentLocale.label}</span>
+        {!isCompact ? (
+          <span className="flex-1">{currentLocale.label}</span>
+        ) : (
+          <span className="hidden md:flex flex-1">{currentLocale.label}</span>
+        )}
         <ChevronDown
           className={cn(
-            'h-4 w-4 text-text-description transition-transform',
+            'text-text-description transition-transform flex-shrink-0',
+            isCompact ? 'h-3 w-3 md:h-4 md:w-4' : 'h-4 w-4',
             isOpen && 'rotate-180',
           )}
         />
@@ -55,7 +74,12 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
             className="fixed inset-0 z-10"
             onClick={() => setIsOpen(false)}
           />
-          <div className="absolute right-0 top-full z-20 mt-2 w-full rounded-lg border border-border-primary bg-white shadow-lg">
+          <div
+            className={cn(
+              'absolute right-0 top-full z-20 mt-2 rounded-lg border border-border-primary bg-white shadow-lg',
+              isCompact ? 'w-[120px] md:w-full' : 'w-full',
+            )}
+          >
             {LOCALES.map((loc) => (
               <button
                 key={loc.code}
