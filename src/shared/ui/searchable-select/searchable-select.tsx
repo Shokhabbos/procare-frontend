@@ -19,13 +19,14 @@ export type SelectOption<T = unknown> = {
 };
 
 export type SearchableSelectProps<T = unknown> = {
-  value: SelectOption<T> | null;
+  value: SelectOption<T>[] | SelectOption<T> | null;
   options: SelectOption<T>[];
   placeholder?: string;
   searchPlaceholder?: string;
-  onChange: (option: SelectOption<T>) => void;
+  onChange: (option: SelectOption<T> | SelectOption<T>[]) => void;
   disabled?: boolean;
   className?: string;
+  multiple?: boolean;
 };
 
 export function SearchableSelect<T = unknown>({
@@ -36,9 +37,18 @@ export function SearchableSelect<T = unknown>({
   onChange,
   disabled = false,
   className,
+  multiple = false,
 }: SearchableSelectProps<T>) {
   const [open, setOpen] = React.useState(false);
   const [search, setSearch] = React.useState('');
+
+  // Normalize value to array for multi-select
+  const selectedValues = React.useMemo(() => {
+    if (multiple) {
+      return Array.isArray(value) ? value : [];
+    }
+    return Array.isArray(value) ? [] : value ? [value] : [];
+  }, [value, multiple]);
 
   const filteredOptions = React.useMemo(() => {
     if (!search.trim()) {
@@ -52,11 +62,22 @@ export function SearchableSelect<T = unknown>({
 
   const handleSelect = React.useCallback(
     (option: SelectOption<T>) => {
-      onChange(option);
-      setOpen(false);
-      setSearch('');
+      if (multiple) {
+        const currentValues = Array.isArray(value) ? value : [];
+        const isAlreadySelected = currentValues.some(
+          (item) => item.value === option.value,
+        );
+        const newValues = isAlreadySelected
+          ? currentValues.filter((item) => item.value !== option.value)
+          : [...currentValues, option];
+        onChange(newValues);
+      } else {
+        onChange(option);
+        setOpen(false);
+        setSearch('');
+      }
     },
-    [onChange],
+    [onChange, multiple, value],
   );
 
   // Popover yopilganda qidiruv maydonini tozalash
@@ -84,9 +105,22 @@ export function SearchableSelect<T = unknown>({
             'data-[placeholder]:text-muted-foreground',
             className,
           )}
-          data-placeholder={!value}
+          data-placeholder={selectedValues.length === 0}
         >
-          <span className="truncate">{value ? value.label : placeholder}</span>
+          <span className="truncate">
+            {multiple
+              ? selectedValues.length === 0
+                ? placeholder
+                : selectedValues.length <= 2
+                  ? selectedValues.map((item) => item.label).join(', ')
+                  : `${selectedValues
+                      .slice(0, 2)
+                      .map((item) => item.label)
+                      .join(', ')}... +${selectedValues.length - 2} ta`
+              : selectedValues.length > 0
+                ? selectedValues[0].label
+                : placeholder}
+          </span>
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </button>
       </PopoverTrigger>
@@ -111,7 +145,9 @@ export function SearchableSelect<T = unknown>({
             <CommandEmpty>Hech narsa topilmadi.</CommandEmpty>
             <CommandGroup className="bg-white">
               {filteredOptions.map((option) => {
-                const isSelected = value?.value === option.value;
+                const isSelected = selectedValues.some(
+                  (item) => item.value === option.value,
+                );
                 return (
                   <CommandItem
                     key={option.value}

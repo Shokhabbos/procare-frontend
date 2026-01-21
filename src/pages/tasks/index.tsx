@@ -38,9 +38,7 @@ export default function TasksPage() {
   const t = useT();
   const setTasks = useTaskBoardStore((state) => state.setTasks);
   const { setMainVariant } = useOutletContext<DashboardOutletContext>();
-  const [selectedBranch, setSelectedBranch] = useState<SelectOption | null>(
-    null,
-  );
+  const [selectedBranches, setSelectedBranches] = useState<SelectOption[]>([]);
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   const [filterValues, setFilterValues] =
     useState<TaskFilterFormValues>(DEFAULT_VALUES);
@@ -80,14 +78,15 @@ export default function TasksPage() {
               }}
             />
             <SearchableSelect
-              value={selectedBranch}
+              value={selectedBranches}
               options={branchOptions}
               placeholder={t('common.selectBranch')}
               searchPlaceholder={t('common.searchBranch')}
-              onChange={(option) => {
-                setSelectedBranch(option);
-                console.log('Selected branch:', option);
-                // TODO: Filter tasks by branch
+              multiple={true}
+              onChange={(options) => {
+                setSelectedBranches(Array.isArray(options) ? options : []);
+                console.log('Selected branches:', options);
+                // TODO: Filter tasks by branches
               }}
             />
             <FilterButton onClick={() => setIsFilterModalOpen(true)} />
