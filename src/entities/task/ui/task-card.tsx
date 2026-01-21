@@ -78,6 +78,7 @@ const TaskCard = React.forwardRef<HTMLDivElement, TaskCardProps>(
           !isDragging && !isDragOverlay && 'cursor-grab active:cursor-grabbing',
           className,
         )}
+        style={{ touchAction: 'none' }}
         {...props}
       >
         {/* Header: Task ID va Priority */}

@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
-import { dropTargetForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
+import { useDroppable } from '@dnd-kit/core';
 import { MoreHorizontal, Pencil } from 'lucide-react';
 import { cn } from '@shared/lib';
 import { DropdownMenu } from '@shared/ui';
@@ -23,63 +22,33 @@ export interface TaskColumnProps extends Omit<
 export function TaskColumn({
   column,
   taskCount,
-  onDrop,
-  onDropToEnd,
+  onDrop: _onDrop,
+  onDropToEnd: _onDropToEnd,
   children,
   className,
   ...props
 }: TaskColumnProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const bottomDropRef = useRef<HTMLDivElement>(null);
-  const [isOver, setIsOver] = useState(false);
-  const [isOverBottom, setIsOverBottom] = useState(false);
   const isEmpty = taskCount === 0;
 
   // Column drop target - bo'sh column uchun
-  useEffect(() => {
-    const element = ref.current;
-    if (!element || !isEmpty) return;
-
-    return dropTargetForElements({
-      element,
-      getData: () => ({ status: column.id }),
-      canDrop: ({ source }) => {
-        return source.data.type === 'task';
-      },
-      onDragEnter: () => setIsOver(true),
-      onDragLeave: () => setIsOver(false),
-      onDrop: ({ source }) => {
-        setIsOver(false);
-        const taskId = source.data.taskId as string;
-        const sourceStatus = source.data.status as TaskStatus;
-        if (sourceStatus !== column.id) {
-          onDrop?.(taskId, column.id);
-        }
-      },
-    });
-  }, [column.id, onDrop, isEmpty]);
+  const { setNodeRef, isOver } = useDroppable({
+    id: column.id,
+    disabled: !isEmpty,
+    data: {
+      type: 'column',
+      status: column.id,
+    },
+  });
 
   // Bottom drop target - eng pastiga drop qilish uchun
-  useEffect(() => {
-    const element = bottomDropRef.current;
-    if (!element || isEmpty) return;
-
-    return dropTargetForElements({
-      element,
-      getData: () => ({ status: column.id, position: 'end' }),
-      canDrop: ({ source }) => {
-        return source.data.type === 'task';
-      },
-      onDragEnter: () => setIsOverBottom(true),
-      onDragLeave: () => setIsOverBottom(false),
-      onDrop: ({ source }) => {
-        setIsOverBottom(false);
-        const taskId = source.data.taskId as string;
-        // Bir xil status ichida ham eng pastiga qo'yish mumkin
-        onDropToEnd?.(taskId, column.id);
-      },
-    });
-  }, [column.id, onDropToEnd, isEmpty]);
+  const { setNodeRef: setBottomRef, isOver: isOverBottom } = useDroppable({
+    id: `${column.id}-end`,
+    disabled: isEmpty,
+    data: {
+      type: 'column-end',
+      status: column.id,
+    },
+  });
 
   return (
     <div
@@ -156,11 +125,12 @@ export function TaskColumn({
 
       {/* Column Content - Drop Target */}
       <div
-        ref={ref}
+        ref={setNodeRef}
         className={cn(
           'flex-1 p-4 transition-all duration-200 min-h-[400px] flex flex-col',
           isOver && 'bg-brand',
         )}
+        style={{ touchAction: 'none' }}
       >
         {isEmpty ? (
           <EmptyColumnState isOver={isOver} />
@@ -169,7 +139,7 @@ export function TaskColumn({
             <div className="space-y-[10px] flex-1">{children}</div>
             {/* Bottom drop zone - eng pastiga drop qilish uchun */}
             <div
-              ref={bottomDropRef}
+              ref={setBottomRef}
               className={cn(
                 'h-12 mt-4 rounded-lg transition-all duration-200 flex flex-col items-center justify-center gap-2',
                 isOverBottom
