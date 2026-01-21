@@ -55,6 +55,25 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Popover colors */
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    /* Accent and ring colors */
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 240 5.9% 10%;
+    --ring: 240 10% 3.9%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    /* Input colors */
+    --input: 240 5.9% 90%;
+    --border: 240 5.9% 90%;
+
+    /* Primary colors */
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
   }
 
   * {
