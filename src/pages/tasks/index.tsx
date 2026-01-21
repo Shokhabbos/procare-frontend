@@ -1,5 +1,5 @@
 import { useEffect, useCallback, useState } from 'react';
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext, useNavigate } from 'react-router-dom';
 import {
   Button,
   SearchInput,
@@ -36,6 +36,7 @@ const branchOptions: SelectOption[] = [
 
 export default function TasksPage() {
   const t = useT();
+  const navigate = useNavigate();
   const setTasks = useTaskBoardStore((state) => state.setTasks);
   const { setMainVariant } = useOutletContext<DashboardOutletContext>();
   const [selectedBranches, setSelectedBranches] = useState<SelectOption[]>([]);
@@ -90,7 +91,10 @@ export default function TasksPage() {
               }}
             />
             <FilterButton onClick={() => setIsFilterModalOpen(true)} />
-            <Button className="bg-brand-blue text-white hover:bg-brand-blue/90 gap-2">
+            <Button
+              className="bg-brand-blue text-white hover:bg-brand-blue/90 gap-2"
+              onClick={() => navigate('/tasks/create')}
+            >
               <AddIcon size={16} className="text-white" />
               {t('buttons.add')}
             </Button>

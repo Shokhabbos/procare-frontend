@@ -13,7 +13,7 @@ export interface HeaderBottomProps {
  */
 export function HeaderBottom({ left, right }: HeaderBottomProps) {
   return (
-    <div className="min-h-[48px] md:min-h-[56px] lg:min-h-[64px] flex flex-col lg:flex-row lg:items-center justify-center px-3 md:px-4 lg:px-6 py-2 md:py-1.5 lg:py-0 bg-white rounded-xl border border-[#EBECEC]">
+    <div className="min-h-[48px] md:min-h-[56px] lg:min-h-[64px] flex flex-col lg:flex-row lg:items-center justify-start px-3 md:px-4 lg:px-6 py-2 md:py-1.5 lg:py-0 bg-white rounded-xl border border-[#EBECEC]">
       {/* Birinchi qator: Title (mobile & tablet), Chapda (desktop) */}
       {left && <div className="mb-2 md:mb-2 lg:mb-0">{left}</div>}
 

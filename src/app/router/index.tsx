@@ -20,6 +20,7 @@ const ResetPasswordPage = lazy(() => import('@pages/auth/reset-password'));
 const DashboardPage = lazy(() => import('@pages/dashboard'));
 const CustomersPage = lazy(() => import('@pages/customers'));
 const TasksPage = lazy(() => import('@pages/tasks'));
+const CreateTaskPage = lazy(() => import('@pages/tasks-create'));
 const AnalyticsPage = lazy(() => import('@pages/analytics'));
 
 const ServicesPage = lazy(() => import('@pages/services'));
@@ -119,6 +120,10 @@ export const router = createBrowserRouter([
           {
             path: ROUTES.TASKS,
             element: <TasksPage />,
+          },
+          {
+            path: '/tasks/create',
+            element: <CreateTaskPage />,
           },
           {
             path: ROUTES.CUSTOMERS,

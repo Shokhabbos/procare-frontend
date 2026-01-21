@@ -33,6 +33,12 @@ import UsersIconSvg from '@assets/svg/users-icon.svg?react';
 import AnalyticsIconSvg from '@assets/svg/analytics-icon.svg?react';
 import ProductsIconSvg from '@assets/svg/products-icon.svg?react';
 import MessageSquareIconSvg from '@assets/svg/message-square-icon.svg?react';
+import ArrowLeftIconSvg from '@assets/svg/arrow-left-icon.svg?react';
+import RoundedUserIconSvg from '@assets/svg/rounded-user-icon.svg?react';
+import DiagnosticsIconSvg from '@assets/svg/diagnostics-icon.svg?react';
+import RepairIconSvg from '@assets/svg/repair-icon.svg?react';
+import BranchesIconSvg from '@assets/svg/branches-icon.svg?react';
+import WarrantyIconSvg from '@assets/svg/warranty-icon.svg?react';
 
 import { createIcon } from '../icon';
 
@@ -55,3 +61,9 @@ export const UsersIcon = createIcon(UsersIconSvg);
 export const AnalyticsIcon = createIcon(AnalyticsIconSvg);
 export const ProductsIcon = createIcon(ProductsIconSvg);
 export const MessageSquareIcon = createIcon(MessageSquareIconSvg);
+export const ArrowLeftIcon = createIcon(ArrowLeftIconSvg);
+export const RoundedUserIcon = createIcon(RoundedUserIconSvg);
+export const DiagnosticsIcon = createIcon(DiagnosticsIconSvg);
+export const RepairIcon = createIcon(RepairIconSvg);
+export const BranchesIcon = createIcon(BranchesIconSvg);
+export const WarrantyIcon = createIcon(WarrantyIconSvg);
