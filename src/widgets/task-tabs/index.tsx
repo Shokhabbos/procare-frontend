@@ -10,6 +10,11 @@ import {
   WarrantyIcon,
 } from '@shared/ui/icons';
 import { AddCustomerModal, type Customer } from './add-customer-modal';
+import {
+  NestedDropdownSelector,
+  type TreeNode,
+} from './nested-dropdown-selector';
+import { deviceTreeData } from './device-tree-data';
 
 /**
  * TaskTabs widget - Tab navigation for create task page
@@ -95,6 +100,8 @@ export function TaskTabs() {
  */
 function TabContentAbout() {
   const [isAddCustomerModalOpen, setIsAddCustomerModalOpen] = useState(false);
+  const [isAddDeviceModalOpen, setIsAddDeviceModalOpen] = useState(false);
+  const [selectedDevice, setSelectedDevice] = useState<TreeNode | null>(null);
 
   const handleAddCustomer = () => {
     setIsAddCustomerModalOpen(true);
@@ -104,6 +111,23 @@ function TabContentAbout() {
     if (customer) {
       console.log('Selected customer:', customer);
       // TODO: API call to add customer to task
+    }
+  };
+
+  const handleAddDevice = () => {
+    setIsAddDeviceModalOpen(true);
+  };
+
+  const handleDeviceSelect = (node: TreeNode, path: TreeNode[]) => {
+    console.log('Selected device:', node, 'Path:', path);
+    setSelectedDevice(node);
+  };
+
+  const handleDeviceApply = () => {
+    if (selectedDevice) {
+      console.log('Device applied:', selectedDevice);
+      // TODO: API call to add device to task
+      setIsAddDeviceModalOpen(false);
     }
   };
 
@@ -146,18 +170,114 @@ function TabContentAbout() {
           <Button
             className="mx-auto block !outline-none align-middle middle shadow-none !bg-transparent border-none mb-1"
             variant="outline"
+            onClick={handleAddDevice}
           >
             Qo'shish
           </Button>
         </Card>
       </div>
 
+      {/* Customer Modal */}
       <AddCustomerModal
         open={isAddCustomerModalOpen}
         onClose={() => setIsAddCustomerModalOpen(false)}
         onApply={handleCustomerApply}
       />
+
+      {/* Device Modal */}
+      <AddDeviceModal
+        open={isAddDeviceModalOpen}
+        onClose={() => setIsAddDeviceModalOpen(false)}
+        onApply={handleDeviceApply}
+        onDeviceSelect={handleDeviceSelect}
+        selectedDevice={selectedDevice}
+      />
     </>
+  );
+}
+
+/**
+ * AddDeviceModal - Modal for adding device with nested dropdown
+ */
+type AddDeviceModalProps = {
+  open: boolean;
+  onClose: () => void;
+  onApply: () => void;
+  onDeviceSelect: (node: TreeNode, path: TreeNode[]) => void;
+  selectedDevice: TreeNode | null;
+};
+
+function AddDeviceModal({
+  open,
+  onClose,
+  onApply,
+  onDeviceSelect,
+  selectedDevice,
+}: AddDeviceModalProps) {
+  return (
+    <div
+      className={`fixed inset-0 z-50 ${open ? 'block' : 'hidden'}`}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) {
+          onClose();
+        }
+      }}
+    >
+      {/* Overlay */}
+      <div className="fixed inset-0 bg-black/60" />
+
+      {/* Modal */}
+      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[100]">
+        <div
+          role="dialog"
+          className="w-[500px] bg-white rounded-[24px] shadow-2xl flex flex-col"
+        >
+          {/* Header */}
+          <div className="border-b border-black-200 px-6 py-4">
+            <h2 className="text-20-regular text-body">Qurilma qo'shish</h2>
+          </div>
+
+          {/* Content */}
+          <div className="px-6 py-6 space-y-4">
+            <div>
+              <label className="block text-14-medium text-body mb-2">
+                Qurilmani tanlang
+              </label>
+              <NestedDropdownSelector
+                data={deviceTreeData}
+                onChange={onDeviceSelect}
+                placeholder="Qurilmani tanlang"
+              />
+            </div>
+
+            {selectedDevice && (
+              <div className="mt-4 p-3 bg-black-50 rounded-lg">
+                <p className="text-14-regular text-description">
+                  Tanlangan qurilma:
+                </p>
+                <p className="text-16-medium text-body mt-1">
+                  {selectedDevice.label}
+                </p>
+              </div>
+            )}
+          </div>
+
+          {/* Footer */}
+          <div className="border-t border-black-200 px-6 py-4 flex justify-between gap-3">
+            <Button variant="outline" onClick={onClose} className="flex-1">
+              Bekor qilish
+            </Button>
+            <Button
+              onClick={onApply}
+              disabled={!selectedDevice}
+              className="flex-1"
+            >
+              Qo'llash
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
