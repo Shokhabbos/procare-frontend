@@ -35,6 +35,19 @@
     "tasks": {
       "title": "Vazifalar"
     },
+    "tasksCreate": {
+      "title": "Yangi vazifa qo'shish",
+      "notifications": {
+        "title": "Xabarnomalar",
+        "emptyState": "Hozircha hech qanday xabar yo'q",
+        "inputPlaceholder": "Yozing..."
+      },
+      "addCustomer": {
+        "title": "Mijoz qo'shish",
+        "searchPlaceholder": "Mijozni tanlang",
+        "noResults": "Hech narsa topilmadi"
+      }
+    },
     "customers": {
       "title": "Mijozlar"
     },

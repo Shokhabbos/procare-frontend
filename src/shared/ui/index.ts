@@ -64,6 +64,9 @@ export type { CheckboxButtonProps } from './checkbox-button';
 export { FilterModal } from './filter-modal';
 export type { FilterModalProps } from './filter-modal';
 
+export { Modal } from './modal';
+export type { ModalProps, ModalSize, ModalFooterAction } from './modal';
+
 export { PageHeader } from './page-header';
 export type { PageHeaderProps } from './page-header';
 

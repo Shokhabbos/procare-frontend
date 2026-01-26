@@ -42,6 +42,19 @@ export interface Translations {
     tasks: {
       title: string;
     };
+    tasksCreate: {
+      title: string;
+      notifications: {
+        title: string;
+        emptyState: string;
+        inputPlaceholder: string;
+      };
+      addCustomer: {
+        title: string;
+        searchPlaceholder: string;
+        noResults: string;
+      };
+    };
     customers: {
       title: string;
     };
@@ -281,6 +294,9 @@ export type TranslationKey =
   | `nav.${keyof Translations['nav']}`
   | `pages.dashboard.${keyof Translations['pages']['dashboard']}`
   | `pages.tasks.${keyof Translations['pages']['tasks']}`
+  | `pages.tasksCreate.${keyof Translations['pages']['tasksCreate']}`
+  | `pages.tasksCreate.notifications.${keyof Translations['pages']['tasksCreate']['notifications']}`
+  | `pages.tasksCreate.addCustomer.${keyof Translations['pages']['tasksCreate']['addCustomer']}`
   | `pages.customers.${keyof Translations['pages']['customers']}`
   | `pages.analytics.${keyof Translations['pages']['analytics']}`
   | `pages.products.services.${keyof Translations['pages']['products']['services']}`

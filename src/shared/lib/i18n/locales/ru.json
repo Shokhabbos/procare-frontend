@@ -34,6 +34,19 @@
     "tasks": {
       "title": "Задачи"
     },
+    "tasksCreate": {
+      "title": "Создать задачу",
+      "notifications": {
+        "title": "Уведомления",
+        "emptyState": "Пока нет сообщений",
+        "inputPlaceholder": "Введите текст..."
+      },
+      "addCustomer": {
+        "title": "Добавить клиента",
+        "searchPlaceholder": "Выберите клиента",
+        "noResults": "Ничего не найдено"
+      }
+    },
     "customers": {
       "title": "Клиенты"
     },

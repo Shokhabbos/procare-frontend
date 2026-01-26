@@ -9,6 +9,7 @@ import {
   BranchesIcon,
   WarrantyIcon,
 } from '@shared/ui/icons';
+import { AddCustomerModal, type Customer } from './add-customer-modal';
 
 /**
  * TaskTabs widget - Tab navigation for create task page
@@ -93,34 +94,70 @@ export function TaskTabs() {
  * Content for "Haqida" tab
  */
 function TabContentAbout() {
-  return (
-    <div className="space-y-6">
-      {/* Customer Information Block */}
-      <Card className="p-6">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-20-medium text-body">Mijoz ma'lumotlari</h3>
-        </div>
-        <div className="text-center py-8 text-description">
-          <p className="mb-4 text-16-regular">
-            Hozircha hech qanday ma'lumot yo'q
-          </p>
-          <Button variant="outline">Qo'shish</Button>
-        </div>
-      </Card>
+  const [isAddCustomerModalOpen, setIsAddCustomerModalOpen] = useState(false);
 
-      {/* Device Information Block */}
-      <Card className="p-6">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-20-medium text-body">Qurilma ma'lumotlari</h3>
-        </div>
-        <div className="text-center py-8 text-description">
-          <p className="mb-4 text-16-regular">
-            Hozircha hech qanday ma'lumot yo'q
-          </p>
-          <Button variant="outline">Qo'shish</Button>
-        </div>
-      </Card>
-    </div>
+  const handleAddCustomer = () => {
+    setIsAddCustomerModalOpen(true);
+  };
+
+  const handleCustomerApply = (customer: Customer | null) => {
+    if (customer) {
+      console.log('Selected customer:', customer);
+      // TODO: API call to add customer to task
+    }
+  };
+
+  return (
+    <>
+      <div className="grid grid-cols-2 gap-4">
+        {/* Customer Information Block */}
+        <Card className="p-1 rounded-lg border">
+          <div className="bg-black-100 rounded-lg p-2 mb-2 ">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-20-medium text-body">Mijoz ma'lumotlari</h3>
+            </div>
+            <div className="text-center py-8 text-description flex-1 flex flex-col items-center justify-center">
+              <p className="mb-4 text-16-regular">
+                Hozircha hech qanday ma'lumot yo'q
+              </p>
+            </div>
+          </div>
+          <Button
+            className="mx-auto block !outline-none align-middle middle shadow-none !bg-transparent border-none mb-1"
+            variant="outline"
+            onClick={handleAddCustomer}
+          >
+            Qo'shish
+          </Button>
+        </Card>
+
+        {/* Device Information Block */}
+        <Card className="p-1 rounded-lg border">
+          <div className="bg-black-100 rounded-lg p-2 mb-2 ">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-20-medium text-body">Qurilma ma'lumotlari</h3>
+            </div>
+            <div className="text-center py-8 text-description flex-1 flex flex-col items-center justify-center">
+              <p className="mb-4 text-16-regular">
+                Hozircha hech qanday ma'lumot yo'q
+              </p>
+            </div>
+          </div>
+          <Button
+            className="mx-auto block !outline-none align-middle middle shadow-none !bg-transparent border-none mb-1"
+            variant="outline"
+          >
+            Qo'shish
+          </Button>
+        </Card>
+      </div>
+
+      <AddCustomerModal
+        open={isAddCustomerModalOpen}
+        onClose={() => setIsAddCustomerModalOpen(false)}
+        onApply={handleCustomerApply}
+      />
+    </>
   );
 }
 
