@@ -1,7 +1,12 @@
 import { useEffect, useCallback } from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import { Button } from '@shared/ui';
-import { ArrowLeftIcon, EmptyStateIcon, SendIcon } from '@shared/ui/icons';
+import {
+  ArrowLeftIcon,
+  EmptyStateIcon,
+  LinkIcon,
+  SendIcon,
+} from '@shared/ui/icons';
 import { TaskTabs } from '@widgets/task-tabs';
 import { TaskSidebar } from '@widgets/task-sidebar';
 import type { DashboardOutletContext } from '@app/layouts/dashboard-layout';
@@ -74,11 +79,18 @@ export default function CreateTaskPage() {
             </div>
           </div>
           <div className="flex items-center border-t pt-2">
-            <input
-              type="text"
-              placeholder="Type here"
-              className="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+            <div className="relative flex-1 flex items-center">
+              <LinkIcon
+                size={16}
+                className="absolute left-3 text-[#00BFFF] pointer-events-none"
+                aria-hidden
+              />
+              <input
+                type="text"
+                placeholder="Type here"
+                className="flex-1 w-full border border-gray-300 rounded-lg pl-9 pr-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
             <button className="ml-2 p-2 bg-brand-blue text-white rounded-lg flex items-center justify-center ">
               <SendIcon size={20} className="text-white" />
             </button>
