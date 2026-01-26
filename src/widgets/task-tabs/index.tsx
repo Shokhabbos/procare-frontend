@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Button } from '@shared/ui';
-import { Card } from '@shared/ui';
 import {
   RoundedUserIcon,
   DeliveryIcon,
@@ -15,6 +14,11 @@ import {
   type TreeNode,
 } from './nested-dropdown-selector';
 import { deviceTreeData } from './device-tree-data';
+import {
+  CustomerInfoCard,
+  DeviceInfoCard,
+  type DeviceSelection,
+} from './info-card';
 
 /**
  * TaskTabs widget - Tab navigation for create task page
@@ -101,96 +105,69 @@ export function TaskTabs() {
 function TabContentAbout() {
   const [isAddCustomerModalOpen, setIsAddCustomerModalOpen] = useState(false);
   const [isAddDeviceModalOpen, setIsAddDeviceModalOpen] = useState(false);
-  const [selectedDevice, setSelectedDevice] = useState<TreeNode | null>(null);
+  const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(
+    null,
+  );
+  const [selectedDevice, setSelectedDevice] = useState<DeviceSelection | null>(
+    null,
+  );
 
-  const handleAddCustomer = () => {
-    setIsAddCustomerModalOpen(true);
-  };
+  const handleAddCustomer = () => setIsAddCustomerModalOpen(true);
+  const handleAddDevice = () => setIsAddDeviceModalOpen(true);
 
   const handleCustomerApply = (customer: Customer | null) => {
-    if (customer) {
-      console.log('Selected customer:', customer);
-      // TODO: API call to add customer to task
-    }
-  };
-
-  const handleAddDevice = () => {
-    setIsAddDeviceModalOpen(true);
+    if (customer) setSelectedCustomer(customer);
+    // Modal o'zi onClose orqali yopiladi
   };
 
   const handleDeviceSelect = (node: TreeNode, path: TreeNode[]) => {
-    console.log('Selected device:', node, 'Path:', path);
-    setSelectedDevice(node);
+    setSelectedDevice({ node, path });
   };
 
   const handleDeviceApply = () => {
     if (selectedDevice) {
-      console.log('Device applied:', selectedDevice);
-      // TODO: API call to add device to task
       setIsAddDeviceModalOpen(false);
     }
   };
 
+  const handleCustomerDelete = () => setSelectedCustomer(null);
+  const handleDeviceDelete = () => setSelectedDevice(null);
+  const handleCustomerEdit = () => setIsAddCustomerModalOpen(true);
+  const handleDeviceEdit = () => setIsAddDeviceModalOpen(true);
+  const handleCustomerView = () => {}; // TODO: view customer
+  const handleDeviceView = () => {}; // TODO: view device
+
   return (
     <>
       <div className="grid grid-cols-2 gap-4">
-        {/* Customer Information Block */}
-        <Card className="p-1 rounded-lg border">
-          <div className="bg-black-100 rounded-lg p-2 mb-2 ">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-20-medium text-body">Mijoz ma'lumotlari</h3>
-            </div>
-            <div className="text-center py-8 text-description flex-1 flex flex-col items-center justify-center">
-              <p className="mb-4 text-16-regular">
-                Hozircha hech qanday ma'lumot yo'q
-              </p>
-            </div>
-          </div>
-          <Button
-            className="mx-auto block !outline-none align-middle middle shadow-none !bg-transparent border-none mb-1"
-            variant="outline"
-            onClick={handleAddCustomer}
-          >
-            Qo'shish
-          </Button>
-        </Card>
-
-        {/* Device Information Block */}
-        <Card className="p-1 rounded-lg border">
-          <div className="bg-black-100 rounded-lg p-2 mb-2 ">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-20-medium text-body">Qurilma ma'lumotlari</h3>
-            </div>
-            <div className="text-center py-8 text-description flex-1 flex flex-col items-center justify-center">
-              <p className="mb-4 text-16-regular">
-                Hozircha hech qanday ma'lumot yo'q
-              </p>
-            </div>
-          </div>
-          <Button
-            className="mx-auto block !outline-none align-middle middle shadow-none !bg-transparent border-none mb-1"
-            variant="outline"
-            onClick={handleAddDevice}
-          >
-            Qo'shish
-          </Button>
-        </Card>
+        <CustomerInfoCard
+          customer={selectedCustomer}
+          onAdd={handleAddCustomer}
+          onDelete={handleCustomerDelete}
+          onEdit={handleCustomerEdit}
+          onView={handleCustomerView}
+        />
+        <DeviceInfoCard
+          selection={selectedDevice}
+          onAdd={handleAddDevice}
+          onDelete={handleDeviceDelete}
+          onEdit={handleDeviceEdit}
+          onView={handleDeviceView}
+        />
       </div>
 
-      {/* Customer Modal */}
       <AddCustomerModal
         open={isAddCustomerModalOpen}
         onClose={() => setIsAddCustomerModalOpen(false)}
         onApply={handleCustomerApply}
       />
 
-      {/* Device Modal */}
       <AddDeviceModal
         open={isAddDeviceModalOpen}
         onClose={() => setIsAddDeviceModalOpen(false)}
         onApply={handleDeviceApply}
         onDeviceSelect={handleDeviceSelect}
-        selectedDevice={selectedDevice}
+        selectedDevice={selectedDevice?.node ?? null}
       />
     </>
   );

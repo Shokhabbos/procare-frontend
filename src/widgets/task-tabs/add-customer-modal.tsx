@@ -7,6 +7,8 @@ export interface Customer {
   id: string;
   name: string;
   phone: string;
+  username?: string;
+  source?: string;
 }
 
 interface AddCustomerModalProps {
@@ -17,7 +19,13 @@ interface AddCustomerModalProps {
 
 // Mock customer data - kelajakda API dan keladi
 const MOCK_CUSTOMERS: Customer[] = [
-  { id: '1', name: 'Foziljon Solijonov', phone: '+99890 000 00 00' },
+  {
+    id: '1',
+    name: 'Foziljon Solijonov',
+    phone: '+998 90 123 45 67',
+    username: '@Foziljon_25',
+    source: 'Meta',
+  },
   { id: '2', name: 'Foziljon Muhammadjonov', phone: '+998 90 222 33 44' },
   { id: '3', name: 'Foziljonov Abdurashid', phone: '+998 90 222 33 44' },
   { id: '4', name: 'Foziljonov Muhammadyusuf', phone: '+998 90 222 33 44' },

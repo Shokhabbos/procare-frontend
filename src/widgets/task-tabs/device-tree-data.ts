@@ -8,7 +8,14 @@ export const deviceTreeData: TreeNode[] = [
     id: 'ios',
     label: 'iOS',
     children: [
-      { id: 'iphone', label: 'iPhone' },
+      {
+        id: 'iphone',
+        label: 'iPhone',
+        children: [
+          { id: 'iphone-14-pro-max', label: 'iPhone 14 Pro Max' },
+          { id: 'iphone-15', label: 'iPhone 15' },
+        ],
+      },
       { id: 'ipad', label: 'iPad' },
     ],
   },
