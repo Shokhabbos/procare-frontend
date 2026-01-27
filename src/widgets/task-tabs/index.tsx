@@ -111,6 +111,9 @@ function TabContentAbout() {
   const [selectedDevice, setSelectedDevice] = useState<DeviceSelection | null>(
     null,
   );
+  const [pendingDeviceSelection, setPendingDeviceSelection] =
+    useState<DeviceSelection | null>(null);
+  const [pendingCustomer, setPendingCustomer] = useState<Customer | null>(null);
 
   const handleAddCustomer = () => setIsAddCustomerModalOpen(true);
   const handleAddDevice = () => setIsAddDeviceModalOpen(true);
@@ -120,26 +123,48 @@ function TabContentAbout() {
     // Modal o'zi onClose orqali yopiladi
   };
 
+  const handleCustomerModalClose = () => {
+    setPendingCustomer(null);
+    setIsAddCustomerModalOpen(false);
+  };
+
   const handleDeviceSelect = (node: TreeNode, path: TreeNode[]) => {
-    setSelectedDevice({ node, path });
+    setPendingDeviceSelection({ node, path });
   };
 
   const handleDeviceApply = () => {
-    if (selectedDevice) {
+    if (pendingDeviceSelection) {
+      setSelectedDevice(pendingDeviceSelection);
+      setPendingDeviceSelection(null);
       setIsAddDeviceModalOpen(false);
     }
   };
 
+  const handleDeviceModalClose = () => {
+    setPendingDeviceSelection(null);
+    setIsAddDeviceModalOpen(false);
+  };
+
   const handleCustomerDelete = () => setSelectedCustomer(null);
   const handleDeviceDelete = () => setSelectedDevice(null);
-  const handleCustomerEdit = () => setIsAddCustomerModalOpen(true);
-  const handleDeviceEdit = () => setIsAddDeviceModalOpen(true);
+  const handleCustomerEdit = () => {
+    if (selectedCustomer) {
+      setPendingCustomer(selectedCustomer);
+      setIsAddCustomerModalOpen(true);
+    }
+  };
+  const handleDeviceEdit = () => {
+    if (selectedDevice) {
+      setPendingDeviceSelection(selectedDevice);
+      setIsAddDeviceModalOpen(true);
+    }
+  };
   const handleCustomerView = () => {}; // TODO: view customer
   const handleDeviceView = () => {}; // TODO: view device
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-4 items-stretch">
         <CustomerInfoCard
           customer={selectedCustomer}
           onAdd={handleAddCustomer}
@@ -157,17 +182,24 @@ function TabContentAbout() {
       </div>
 
       <AddCustomerModal
+        key={`customer-modal-${isAddCustomerModalOpen ? (pendingCustomer?.id ?? 'add') : 'closed'}`}
         open={isAddCustomerModalOpen}
-        onClose={() => setIsAddCustomerModalOpen(false)}
+        onClose={handleCustomerModalClose}
         onApply={handleCustomerApply}
+        initialCustomer={pendingCustomer ?? null}
       />
 
       <AddDeviceModal
         open={isAddDeviceModalOpen}
-        onClose={() => setIsAddDeviceModalOpen(false)}
+        onClose={handleDeviceModalClose}
         onApply={handleDeviceApply}
         onDeviceSelect={handleDeviceSelect}
-        selectedDevice={selectedDevice?.node ?? null}
+        selectedDevice={pendingDeviceSelection?.node ?? null}
+        initialDeviceValue={
+          pendingDeviceSelection
+            ? pendingDeviceSelection.path.map((n) => n.label).join(' > ')
+            : ''
+        }
       />
     </>
   );
@@ -182,6 +214,7 @@ type AddDeviceModalProps = {
   onApply: () => void;
   onDeviceSelect: (node: TreeNode, path: TreeNode[]) => void;
   selectedDevice: TreeNode | null;
+  initialDeviceValue?: string;
 };
 
 function AddDeviceModal({
@@ -190,6 +223,7 @@ function AddDeviceModal({
   onApply,
   onDeviceSelect,
   selectedDevice,
+  initialDeviceValue = '',
 }: AddDeviceModalProps) {
   return (
     <div
@@ -220,21 +254,21 @@ function AddDeviceModal({
               <label className="block text-14-medium text-body mb-2">
                 Qurilmani tanlang
               </label>
-              <NestedDropdownSelector
-                data={deviceTreeData}
-                onChange={onDeviceSelect}
-                placeholder="Qurilmani tanlang"
-              />
+              {open && (
+                <NestedDropdownSelector
+                  key="add-device-selector"
+                  data={deviceTreeData}
+                  value={initialDeviceValue}
+                  onChange={onDeviceSelect}
+                  placeholder="Qurilmani tanlang"
+                />
+              )}
             </div>
 
             {selectedDevice && (
               <div className="mt-4 p-3 bg-black-50 rounded-lg">
-                <p className="text-14-regular text-description">
-                  Tanlangan qurilma:
-                </p>
-                <p className="text-16-medium text-body mt-1">
-                  {selectedDevice.label}
-                </p>
+                <p className="text-12-light">Tanlangan qurilma:</p>
+                <p className="text-14-regular  mt-1">{selectedDevice.label}</p>
               </div>
             )}
           </div>

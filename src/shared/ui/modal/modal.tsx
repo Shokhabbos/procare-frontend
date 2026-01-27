@@ -3,6 +3,7 @@ import { cn } from '@shared/lib';
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogFooter,
@@ -131,6 +132,9 @@ export function Modal({
         )}
         overlayStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}
       >
+        <DialogDescription className="sr-only">
+          {title ? `${title}. Modal content.` : 'Modal content.'}
+        </DialogDescription>
         {(title || showCloseButton) && (
           <DialogHeader className="border-b pb-4 border-black-200">
             {title && (

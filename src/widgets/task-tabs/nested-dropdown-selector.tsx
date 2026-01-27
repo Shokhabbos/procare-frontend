@@ -28,13 +28,13 @@ export type NestedDropdownSelectorProps = {
  */
 export function NestedDropdownSelector({
   data,
-  value: _value,
+  value,
   onChange,
   placeholder = 'Qurilmani tanlang',
   className,
 }: NestedDropdownSelectorProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedLabel, setSelectedLabel] = useState<string>('');
+  const [selectedLabel, setSelectedLabel] = useState<string>(() => value ?? '');
   const [triggerEl, setTriggerEl] = useState<HTMLElement | null>(null);
   const inputRef = useRef<HTMLButtonElement>(null);
 

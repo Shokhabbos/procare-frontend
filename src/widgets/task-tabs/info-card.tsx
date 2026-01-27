@@ -29,14 +29,14 @@ function InfoRow({ icon, label, value, valueHighlight }: InfoRowProps) {
       <div className="flex flex-shrink-0 items-center justify-center text-brand-blue [&_svg]:size-4">
         {icon}
       </div>
-      <span className="text-14-regular text-description flex-shrink-0">
+      <span className="text-12-light text-description flex-shrink-0">
         {label}
       </span>
       <div className="min-w-0 flex-1 border-b border-dashed border-black-200" />
       <span
         className={cn(
-          'text-14-regular flex-shrink-0 truncate',
-          valueHighlight ? 'text-brand-blue' : 'text-body',
+          '!text-14-light flex-shrink-0 truncate',
+          valueHighlight ? 'text-brand-blue' : 'text-14-light',
         )}
       >
         {value}
@@ -53,7 +53,7 @@ type CardActionsProps = {
 
 function CardActions({ onDelete, onEdit, onView }: CardActionsProps) {
   return (
-    <div className="flex items-center gap-0">
+    <div className="flex items-center gap-0 text-14-light">
       <Button
         variant="ghost"
         size="sm"
@@ -105,14 +105,14 @@ export function CustomerInfoCard({
   const isEmpty = !customer;
 
   return (
-    <div>
+    <div className="flex h-full flex-col">
       <h3 className="text-16-regular text-body mb-2">
         Mijoz ma&apos;lumotlari
       </h3>
-      <Card className="overflow-hidden rounded-lg border p-1">
-        <div className="rounded-lg bg-black-100 p-4">
+      <Card className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-lg border p-1">
+        <div className="flex min-h-[180px] flex-1 flex-col rounded-lg bg-black-100 p-4">
           {isEmpty ? (
-            <div className="flex flex-col items-center justify-center py-8">
+            <div className="flex flex-1 flex-col items-center justify-center py-8">
               <p className="text-16-regular text-description">
                 Hozircha hech qanday ma&apos;lumot yo&apos;q
               </p>
@@ -146,7 +146,7 @@ export function CustomerInfoCard({
         {isEmpty ? (
           <Button
             variant="outline"
-            className="mb-1 block !border-none !bg-transparent shadow-none"
+            className="mb-1 mx-auto block !border-none !bg-transparent shadow-none"
             onClick={onAdd}
           >
             Qo&apos;shish
@@ -185,14 +185,14 @@ export function DeviceInfoCard({
   const issuesLabel = "Yo'q";
 
   return (
-    <div>
+    <div className="flex h-full flex-col">
       <h3 className="text-16-regular text-body mb-2">
         Qurilma ma&apos;lumotlari
       </h3>
-      <Card className="overflow-hidden rounded-lg border p-1">
-        <div className="rounded-lg bg-black-100 p-4">
+      <Card className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-lg border p-1">
+        <div className="flex min-h-[180px] flex-1 flex-col rounded-lg bg-black-100 p-4">
           {isEmpty ? (
-            <div className="flex flex-col items-center justify-center py-8">
+            <div className="flex flex-1 flex-col items-center justify-center py-8">
               <p className="text-16-regular text-description">
                 Hozircha hech qanday ma&apos;lumot yo&apos;q
               </p>
@@ -221,7 +221,7 @@ export function DeviceInfoCard({
         {isEmpty ? (
           <Button
             variant="outline"
-            className="mb-1 block !border-none !bg-transparent shadow-none"
+            className="mb-1 mx-auto block !border-none !bg-transparent shadow-none"
             onClick={onAdd}
           >
             Qo&apos;shish

@@ -15,6 +15,8 @@ interface AddCustomerModalProps {
   open: boolean;
   onClose: () => void;
   onApply: (customer: Customer | null) => void;
+  /** Tahrirlash: avvalgi mijozni tanlangan qilib ochish */
+  initialCustomer?: Customer | null;
 }
 
 // Mock customer data - kelajakda API dan keladi
@@ -38,12 +40,14 @@ export function AddCustomerModal({
   open,
   onClose,
   onApply,
+  initialCustomer = null,
 }: AddCustomerModalProps) {
   const t = useT();
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState(() => initialCustomer?.name ?? '');
   const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(
-    null,
+    () => initialCustomer ?? null,
   );
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const filteredCustomers = useMemo(() => {
     if (!search.trim()) {
@@ -58,10 +62,14 @@ export function AddCustomerModal({
   }, [search]);
 
   const handleSelect = (customer: Customer) => {
+    console.log('[AddCustomerModal] Tanlandi:', customer.name, customer.id);
     setSelectedCustomer(customer);
+    setSearch(customer.name);
+    setIsDropdownOpen(false);
   };
 
   const handleApply = () => {
+    console.log("[AddCustomerModal] Qo'llash:", selectedCustomer);
     onApply(selectedCustomer);
     setSelectedCustomer(null);
     setSearch('');
@@ -69,6 +77,7 @@ export function AddCustomerModal({
   };
 
   const handleClose = () => {
+    console.log('[AddCustomerModal] Yopildi (Bekor qilish / overlay)');
     setSelectedCustomer(null);
     setSearch('');
     onClose();
@@ -90,11 +99,19 @@ export function AddCustomerModal({
           type="text"
           placeholder={t('pages.tasksCreate.addCustomer.searchPlaceholder')}
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setIsDropdownOpen(true);
+          }}
+          onFocus={() => search.trim() && setIsDropdownOpen(true)}
+          onBlur={() => setIsDropdownOpen(false)}
           className="w-full h-10 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue"
         />
-        {search.trim() && (
-          <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-50 max-h-[300px] overflow-y-auto">
+        {search.trim() && isDropdownOpen && (
+          <div
+            className="absolute top-full left-0 right-0 z-[100] mt-1 max-h-[300px] overflow-y-auto rounded-lg border border-gray-300 bg-white shadow-lg"
+            onMouseDown={(e) => e.preventDefault()}
+          >
             {filteredCustomers.length === 0 ? (
               <div className="py-6 text-center text-sm text-gray-500">
                 {t('pages.tasksCreate.addCustomer.noResults')}
@@ -104,22 +121,21 @@ export function AddCustomerModal({
                 {filteredCustomers.map((customer) => {
                   const isSelected = selectedCustomer?.id === customer.id;
                   return (
-                    <div
+                    <button
                       key={customer.id}
+                      type="button"
                       onClick={() => handleSelect(customer)}
                       className={cn(
-                        'group cursor-pointer px-3 py-2.5 rounded-lg',
+                        'group flex w-full cursor-pointer items-center justify-between rounded-lg px-3 py-2.5 text-left transition-colors',
+                        'hover:bg-black-100',
                         isSelected && 'bg-[#00BFFF]/10',
-                        'hover:bg-black-100 transition-colors',
                       )}
                     >
-                      <div className="flex items-center justify-between">
-                        <span className="text-14-light">{customer.name}</span>
-                        <span className="text-12-light text-description group-hover:text-brand-blue transition-colors">
-                          {customer.phone}
-                        </span>
-                      </div>
-                    </div>
+                      <span className="text-14-light">{customer.name}</span>
+                      <span className="text-12-light text-description transition-colors group-hover:text-brand-blue">
+                        {customer.phone}
+                      </span>
+                    </button>
                   );
                 })}
               </div>
