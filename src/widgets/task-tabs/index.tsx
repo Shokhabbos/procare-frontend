@@ -20,6 +20,7 @@ import {
   DeviceInfoCard,
   type DeviceSelection,
 } from './info-card';
+import { TabContentDelivery } from './tab-content-delivery';
 
 /**
  * TaskTabs widget - Tab navigation for create task page
@@ -27,36 +28,36 @@ import {
  */
 export function TaskTabs() {
   const t = useT();
-  const [activeTab, setActiveTab] = useState('haqida');
+  const [activeTab, setActiveTab] = useState('about');
 
   const tabs = [
     {
-      id: 'haqida',
+      id: 'about',
       label: t('pages.tasksCreate.tabs.about'),
       icon: RoundedUserIcon,
     },
     {
-      id: 'yetkazib-berish',
+      id: 'delivery',
       label: t('pages.tasksCreate.tabs.delivery'),
       icon: DeliveryIcon,
     },
     {
-      id: 'diagnostika',
+      id: 'diagnostics',
       label: t('pages.tasksCreate.tabs.diagnostics'),
       icon: DiagnosticsIcon,
     },
     {
-      id: 'tamirlash',
+      id: 'repair',
       label: t('pages.tasksCreate.tabs.repair'),
       icon: RepairIcon,
     },
     {
-      id: 'filiallar',
+      id: 'branches',
       label: t('pages.tasksCreate.tabs.branches'),
       icon: BranchesIcon,
     },
     {
-      id: 'kafolat',
+      id: 'warranty',
       label: t('pages.tasksCreate.tabs.warranty'),
       icon: WarrantyIcon,
     },
@@ -102,32 +103,27 @@ export function TaskTabs() {
 
       {/* Tab Content */}
       <div className="flex-1 min-h-0 overflow-auto p-4 md:p-6">
-        {activeTab === 'haqida' && <TabContentAbout />}
-        {activeTab === 'yetkazib-berish' && (
-          <TabContentPlaceholder
-            title={t('pages.tasksCreate.tabs.delivery')}
-            placeholder={t('pages.tasksCreate.placeholderTab')}
-          />
-        )}
-        {activeTab === 'diagnostika' && (
+        {activeTab === 'about' && <TabContentAbout />}
+        {activeTab === 'delivery' && <TabContentDelivery />}
+        {activeTab === 'diagnostics' && (
           <TabContentPlaceholder
             title={t('pages.tasksCreate.tabs.diagnostics')}
             placeholder={t('pages.tasksCreate.placeholderTab')}
           />
         )}
-        {activeTab === 'tamirlash' && (
+        {activeTab === 'repair' && (
           <TabContentPlaceholder
             title={t('pages.tasksCreate.tabs.repair')}
             placeholder={t('pages.tasksCreate.placeholderTab')}
           />
         )}
-        {activeTab === 'filiallar' && (
+        {activeTab === 'branches' && (
           <TabContentPlaceholder
             title={t('pages.tasksCreate.tabs.branches')}
             placeholder={t('pages.tasksCreate.placeholderTab')}
           />
         )}
-        {activeTab === 'kafolat' && (
+        {activeTab === 'warranty' && (
           <TabContentPlaceholder
             title={t('pages.tasksCreate.tabs.warranty')}
             placeholder={t('pages.tasksCreate.placeholderTab')}
@@ -139,7 +135,7 @@ export function TaskTabs() {
 }
 
 /**
- * Content for "Haqida" tab
+ * Content for "About" tab
  */
 function TabContentAbout() {
   const [isAddCustomerModalOpen, setIsAddCustomerModalOpen] = useState(false);

@@ -83,6 +83,9 @@ export type { BadgeProps } from './badge';
 export { SearchableSelect } from './searchable-select';
 export type { SelectOption, SearchableSelectProps } from './searchable-select';
 
+export { Switch } from './switch';
+export type { SwitchProps } from './switch';
+
 export {
   Popover,
   PopoverTrigger,
