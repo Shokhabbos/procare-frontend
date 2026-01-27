@@ -174,13 +174,16 @@ function DropdownPortal({
     }
   };
 
+  const maxWidth = `calc(100vw - ${position.left}px - 16px)`;
+
   return createPortal(
     <div
       ref={dropdownRef}
-      className="fixed z-[9999] flex gap-2"
+      className="fixed z-[9999] flex gap-2 overflow-x-auto overflow-y-hidden [scrollbar-width:thin] [-webkit-overflow-scrolling:touch]"
       style={{
         top: `${position.top}px`,
         left: `${position.left}px`,
+        maxWidth,
       }}
     >
       {/* Birinchi panel - root data (input ostida) */}
@@ -229,7 +232,7 @@ function DropdownPanel({
 }: DropdownPanelProps) {
   // 5ta element uchun max height (har biri ~42px)
   return (
-    <div className="w-[220px] bg-white rounded-lg shadow-xl border border-black-200 overflow-hidden">
+    <div className="w-[220px] min-w-[220px] flex-shrink-0 bg-white rounded-lg shadow-xl border border-black-200 overflow-hidden">
       <style>
         {`
           .dropdown-scroll::-webkit-scrollbar {

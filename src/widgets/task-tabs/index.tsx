@@ -63,11 +63,11 @@ export function TaskTabs() {
   ];
 
   return (
-    <div className="flex-1 flex flex-col">
+    <div className="flex-1 flex flex-col min-h-0">
       {/* Tab Navigation */}
-      <div className="border-b border-primary p-4">
+      <div className="border-b border-primary p-3 md:p-4 flex-shrink-0">
         <nav
-          className="flex items-center px-6 bg-black-50 rounded-[10px] py-[4px]"
+          className="flex items-center overflow-x-auto overflow-y-hidden md:overflow-visible px-3 md:px-6 bg-black-50 rounded-[10px] py-[4px] [scrollbar-width:thin]"
           aria-label="Tabs"
         >
           {tabs.map((tab, index) => (
@@ -75,10 +75,10 @@ export function TaskTabs() {
               <button
                 onClick={() => setActiveTab(tab.id)}
                 className={`
-                  px-1 font-medium text-14-light whitespace-nowrap transition-all py-[7px]
+                  px-1 md:px-1.5 font-medium text-12-light md:text-14-light whitespace-nowrap transition-all py-1.5 md:py-[7px]
                   ${
                     activeTab === tab.id
-                      ? 'bg-brand-blue border-brand text-white text-14-light py-[7px] px-[10px] rounded-[10px]'
+                      ? 'bg-brand-blue border-brand text-white text-12-light md:text-14-light py-1.5 md:py-[7px] px-2 md:px-[10px] rounded-[10px]'
                       : 'border-transparent text-description hover:text-body hover:border-primary'
                   }
                 `}
@@ -86,14 +86,14 @@ export function TaskTabs() {
                 {tab.icon && (
                   <tab.icon
                     size={16}
-                    className="mr-2"
+                    className="mr-1.5 md:mr-2 w-3.5 h-3.5 md:w-4 md:h-4 flex-shrink-0"
                     color={activeTab === tab.id ? 'white' : '#00BFFF'}
                   />
                 )}
                 {tab.label}
               </button>
               {index < tabs.length - 1 && (
-                <div className="w-px h-6 bg-black-200 mx-2" />
+                <div className="w-px h-5 md:h-6 bg-black-200 mx-1.5 md:mx-2 flex-shrink-0" />
               )}
             </React.Fragment>
           ))}
@@ -101,7 +101,7 @@ export function TaskTabs() {
       </div>
 
       {/* Tab Content */}
-      <div className="flex-1 p-6">
+      <div className="flex-1 min-h-0 overflow-auto p-4 md:p-6">
         {activeTab === 'haqida' && <TabContentAbout />}
         {activeTab === 'yetkazib-berish' && (
           <TabContentPlaceholder
@@ -203,7 +203,7 @@ function TabContentAbout() {
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-4 items-stretch">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-stretch">
         <CustomerInfoCard
           customer={selectedCustomer}
           onAdd={handleAddCustomer}
@@ -276,10 +276,10 @@ function AddDeviceModal({
     >
       <div className="fixed inset-0 bg-black/60" />
 
-      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[100]">
+      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[100] w-[calc(100vw-2rem)] max-w-[500px] max-h-[calc(100vh-2rem)] overflow-y-auto">
         <div
           role="dialog"
-          className="w-[500px] bg-white rounded-[24px] shadow-2xl flex flex-col"
+          className="w-full bg-white rounded-[24px] shadow-2xl flex flex-col"
         >
           <div className="border-b border-black-200 px-6 py-4">
             <h2 className="text-20-regular text-body">

@@ -55,35 +55,35 @@ type CardActionsProps = {
 function CardActions({ onDelete, onEdit, onView }: CardActionsProps) {
   const t = useT();
   return (
-    <div className="flex items-center gap-0 text-14-light">
+    <div className="flex items-center gap-0 text-12-light md:text-14-light">
       <Button
         variant="ghost"
         size="sm"
         onClick={onDelete}
-        className="gap-1.5 rounded-none text-brand-red hover:bg-bg-error hover:text-brand-red"
+        className="gap-1 md:gap-1.5 rounded-none text-brand-red hover:bg-bg-error hover:text-brand-red px-2 md:px-3 min-w-0"
       >
-        <Trash2 className="size-4" />
-        {t('buttons.delete')}
+        <Trash2 className="size-3.5 md:size-4 flex-shrink-0" />
+        <span className="truncate">{t('buttons.delete')}</span>
       </Button>
-      <div className="h-4 w-px bg-black-200" />
+      <div className="h-4 w-px bg-black-200 flex-shrink-0" />
       <Button
         variant="ghost"
         size="sm"
         onClick={onEdit}
-        className="gap-1.5 rounded-none text-brand-blue hover:bg-bg-blue hover:text-brand-blue"
+        className="gap-1 md:gap-1.5 rounded-none text-brand-blue hover:bg-bg-blue hover:text-brand-blue px-2 md:px-3 min-w-0"
       >
-        <Pencil className="size-4" />
-        {t('buttons.edit')}
+        <Pencil className="size-3.5 md:size-4 flex-shrink-0" />
+        <span className="truncate">{t('buttons.edit')}</span>
       </Button>
-      <div className="h-4 w-px bg-black-200" />
+      <div className="h-4 w-px bg-black-200 flex-shrink-0" />
       <Button
         variant="ghost"
         size="sm"
         onClick={onView}
-        className="gap-1.5 rounded-none text-brand-blue hover:bg-bg-blue hover:text-brand-blue"
+        className="gap-1 md:gap-1.5 rounded-none text-brand-blue hover:bg-bg-blue hover:text-brand-blue px-2 md:px-3 min-w-0"
       >
-        <Eye className="size-4" />
-        {t('buttons.view')}
+        <Eye className="size-3.5 md:size-4 flex-shrink-0" />
+        <span className="truncate">{t('buttons.view')}</span>
       </Button>
     </div>
   );

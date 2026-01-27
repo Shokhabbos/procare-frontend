@@ -43,7 +43,7 @@ export function LanguageSwitcher({
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
           'flex w-full items-center gap-1.5 md:gap-2 rounded-lg border border-border-primary bg-white text-14-regular text-text-body transition-colors hover:bg-bg-primary focus:outline-none focus:ring-2 focus:ring-brand-blue/20',
-          isCompact ? 'p-1.5 md:p-2' : 'px-3 py-2',
+          isCompact ? 'p-1.5' : 'px-3 py-2',
         )}
       >
         <img

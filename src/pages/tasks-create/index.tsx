@@ -31,13 +31,13 @@ export default function CreateTaskPage() {
   }, [setHeaderLeft, setHeaderRight, setMainVariant, handleBack]);
 
   return (
-    <div className="flex h-full gap-4">
-      <div className="flex-1 bg-white rounded-xl border border-gray-200">
+    <div className="flex flex-col lg:flex-row h-full gap-3 md:gap-4 min-h-0">
+      <div className="flex-1 min-w-0 w-full bg-white rounded-xl border border-gray-200 overflow-hidden">
         <TaskTabs />
       </div>
 
-      <div className="w-80 flex flex-col gap-4">
-        <div className="bg-white rounded-xl border border-gray-200 p-4">
+      <div className="w-full lg:w-80 lg:flex-shrink-0 lg:min-w-[20rem] flex flex-col gap-3 md:gap-4">
+        <div className="bg-white rounded-xl border border-gray-200 p-3 md:p-4">
           <TaskSidebar />
         </div>
         <TaskNotificationsSection />
