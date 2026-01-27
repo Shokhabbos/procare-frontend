@@ -1,18 +1,25 @@
+import { useState } from 'react';
 import { TaskStatusSelect } from '@features/task-status-select';
 import { TaskPrioritySelect } from '@features/task-priority-select';
-import { UserIcon } from '@shared/ui/icons';
+import { SearchableSelect, type SelectOption } from '@shared/ui';
+
+const EMPLOYEE_OPTIONS: SelectOption[] = [
+  { value: '1', label: 'Ali Valiyev' },
+  { value: '2', label: 'Dilnoza Karimova' },
+  { value: '3', label: 'Bekzod Toshmatov' },
+  { value: '4', label: 'Foziljon Solijonov' },
+  { value: '5', label: 'Foziljon Muhammadjonov' },
+  { value: '6', label: 'Foziljonov Abdurashid' },
+];
 
 /**
  * TaskSidebar widget - Right sidebar for create task page
  * FSD widget: UI composition only, no business logic
  */
 export function TaskSidebar() {
-  // Mock employees data
-  const employees = [
-    { id: '1', name: 'Ali Valiyev', avatar: null },
-    { id: '2', name: 'Dilnoza Karimova', avatar: null },
-    { id: '3', name: 'Bekzod Toshmatov', avatar: null },
-  ];
+  const [selectedEmployees, setSelectedEmployees] = useState<SelectOption[]>(
+    [],
+  );
 
   return (
     <div className="h-full flex flex-col">
@@ -34,30 +41,17 @@ export function TaskSidebar() {
 
         {/* Assigned Employees */}
         <div>
-          <label className="block text-14-light mb-2">Xodimlar</label>
-          <div className="flex -space-x-2">
-            {employees.map((employee) => (
-              <div
-                key={employee.id}
-                className="w-8 h-8 rounded-full bg-gray-200 border-2 border-white flex items-center justify-center"
-                title={employee.name}
-              >
-                {employee.avatar ? (
-                  <img
-                    src={employee.avatar}
-                    alt={employee.name}
-                    className="w-full h-full rounded-full object-cover"
-                  />
-                ) : (
-                  <UserIcon size={16} className="text-gray-500" />
-                )}
-              </div>
-            ))}
-            {/* Add employee button */}
-            <div className="w-8 h-8 rounded-full bg-gray-100 border-2 border-white flex items-center justify-center cursor-pointer hover:bg-gray-200">
-              <span className="text-xs text-gray-600">+</span>
-            </div>
-          </div>
+          <label className="block text-14-light mb-1">Xodimlar</label>
+          <SearchableSelect
+            multiple
+            value={selectedEmployees}
+            options={EMPLOYEE_OPTIONS}
+            placeholder="Xodimlarni tanlang"
+            searchPlaceholder="Xodimlarni qidirish"
+            onChange={(option) => {
+              if (Array.isArray(option)) setSelectedEmployees(option);
+            }}
+          />
         </div>
       </div>
     </div>

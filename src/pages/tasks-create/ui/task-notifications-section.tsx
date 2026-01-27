@@ -16,7 +16,7 @@ export function TaskNotificationsSection() {
       <div className="text-center text-gray-500 mb-4 flex-1 flex items-center justify-center">
         <div className="flex flex-col items-center">
           <EmptyStateIcon size={80} className="mb-4" />
-          <p className="text-gray-500">
+          <p className="text-gray-500 text-12-light">
             {t('pages.tasksCreate.notifications.emptyState')}
           </p>
         </div>
