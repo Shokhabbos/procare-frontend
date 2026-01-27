@@ -46,7 +46,46 @@
         "title": "Mijoz qo'shish",
         "searchPlaceholder": "Mijozni tanlang",
         "noResults": "Hech narsa topilmadi"
-      }
+      },
+      "sidebar": {
+        "taskStatusTitle": "Vazifa holati",
+        "status": "Status",
+        "priority": "Prioritet",
+        "employees": "Xodimlar",
+        "selectStatus": "Statusni tanlang",
+        "searchStatus": "Statusni qidirish",
+        "selectEmployees": "Xodimlarni tanlang",
+        "searchEmployees": "Xodimlarni qidirish"
+      },
+      "tabs": {
+        "about": "Haqida",
+        "delivery": "Yetkazib berish va ijara",
+        "diagnostics": "Diagnostika",
+        "repair": "Ta'mirlash",
+        "branches": "Filiallar",
+        "warranty": "Kafolat"
+      },
+      "tabsContent": {
+        "customerInfo": "Mijoz ma'lumotlari",
+        "deviceInfo": "Qurilma ma'lumotlari",
+        "noDataYet": "Hozircha hech qanday ma'lumot yo'q"
+      },
+      "deviceModal": {
+        "title": "Qurilma qo'shish",
+        "selectDevice": "Qurilmani tanlang",
+        "selectedDevice": "Tanlangan qurilma:"
+      },
+      "infoRows": {
+        "customer": "Mijoz",
+        "phone": "Telefon raqami",
+        "username": "Foydalanuvchi nomi",
+        "source": "Manba",
+        "os": "Operatsion sistema",
+        "selectedDevice": "Tanlangan qurilma",
+        "enteredIssues": "Kiritilgan muammolar",
+        "no": "Yo'q"
+      },
+      "placeholderTab": "Ushbu bo'lim hozircha ishlanmoqda..."
     },
     "customers": {
       "title": "Mijozlar"
@@ -204,6 +243,7 @@
     "add": "Qo'shish",
     "edit": "Tahrirlash",
     "delete": "O'chirish",
+    "view": "Ko'rish",
     "save": "Saqlash",
     "cancel": "Bekor qilish",
     "submit": "Yuborish",

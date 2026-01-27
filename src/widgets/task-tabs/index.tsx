@@ -8,6 +8,7 @@ import {
   BranchesIcon,
   WarrantyIcon,
 } from '@shared/ui/icons';
+import { useT } from '@shared/lib/i18n';
 import { AddCustomerModal, type Customer } from './add-customer-modal';
 import {
   NestedDropdownSelector,
@@ -25,19 +26,40 @@ import {
  * FSD widget: UI composition only, no business logic
  */
 export function TaskTabs() {
+  const t = useT();
   const [activeTab, setActiveTab] = useState('haqida');
 
   const tabs = [
-    { id: 'haqida', label: 'Haqida', icon: RoundedUserIcon },
+    {
+      id: 'haqida',
+      label: t('pages.tasksCreate.tabs.about'),
+      icon: RoundedUserIcon,
+    },
     {
       id: 'yetkazib-berish',
-      label: 'Yetkazib berish va ijara',
+      label: t('pages.tasksCreate.tabs.delivery'),
       icon: DeliveryIcon,
     },
-    { id: 'diagnostika', label: 'Diagnostika', icon: DiagnosticsIcon },
-    { id: 'tamirlash', label: "Ta'mirlash", icon: RepairIcon },
-    { id: 'filiallar', label: 'Filiallar', icon: BranchesIcon },
-    { id: 'kafolat', label: 'Kafolat', icon: WarrantyIcon },
+    {
+      id: 'diagnostika',
+      label: t('pages.tasksCreate.tabs.diagnostics'),
+      icon: DiagnosticsIcon,
+    },
+    {
+      id: 'tamirlash',
+      label: t('pages.tasksCreate.tabs.repair'),
+      icon: RepairIcon,
+    },
+    {
+      id: 'filiallar',
+      label: t('pages.tasksCreate.tabs.branches'),
+      icon: BranchesIcon,
+    },
+    {
+      id: 'kafolat',
+      label: t('pages.tasksCreate.tabs.warranty'),
+      icon: WarrantyIcon,
+    },
   ];
 
   return (
@@ -82,18 +104,35 @@ export function TaskTabs() {
       <div className="flex-1 p-6">
         {activeTab === 'haqida' && <TabContentAbout />}
         {activeTab === 'yetkazib-berish' && (
-          <TabContentPlaceholder title="Yetkazib berish va ijara" />
+          <TabContentPlaceholder
+            title={t('pages.tasksCreate.tabs.delivery')}
+            placeholder={t('pages.tasksCreate.placeholderTab')}
+          />
         )}
         {activeTab === 'diagnostika' && (
-          <TabContentPlaceholder title="Diagnostika" />
+          <TabContentPlaceholder
+            title={t('pages.tasksCreate.tabs.diagnostics')}
+            placeholder={t('pages.tasksCreate.placeholderTab')}
+          />
         )}
         {activeTab === 'tamirlash' && (
-          <TabContentPlaceholder title="Ta'mirlash" />
+          <TabContentPlaceholder
+            title={t('pages.tasksCreate.tabs.repair')}
+            placeholder={t('pages.tasksCreate.placeholderTab')}
+          />
         )}
         {activeTab === 'filiallar' && (
-          <TabContentPlaceholder title="Filiallar" />
+          <TabContentPlaceholder
+            title={t('pages.tasksCreate.tabs.branches')}
+            placeholder={t('pages.tasksCreate.placeholderTab')}
+          />
         )}
-        {activeTab === 'kafolat' && <TabContentPlaceholder title="Kafolat" />}
+        {activeTab === 'kafolat' && (
+          <TabContentPlaceholder
+            title={t('pages.tasksCreate.tabs.warranty')}
+            placeholder={t('pages.tasksCreate.placeholderTab')}
+          />
+        )}
       </div>
     </div>
   );
@@ -225,6 +264,7 @@ function AddDeviceModal({
   selectedDevice,
   initialDeviceValue = '',
 }: AddDeviceModalProps) {
+  const t = useT();
   return (
     <div
       className={`fixed inset-0 z-50 ${open ? 'block' : 'hidden'}`}
@@ -234,25 +274,23 @@ function AddDeviceModal({
         }
       }}
     >
-      {/* Overlay */}
       <div className="fixed inset-0 bg-black/60" />
 
-      {/* Modal */}
       <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[100]">
         <div
           role="dialog"
           className="w-[500px] bg-white rounded-[24px] shadow-2xl flex flex-col"
         >
-          {/* Header */}
           <div className="border-b border-black-200 px-6 py-4">
-            <h2 className="text-20-regular text-body">Qurilma qo'shish</h2>
+            <h2 className="text-20-regular text-body">
+              {t('pages.tasksCreate.deviceModal.title')}
+            </h2>
           </div>
 
-          {/* Content */}
           <div className="px-6 py-6 space-y-4">
             <div>
               <label className="block text-14-medium text-body mb-2">
-                Qurilmani tanlang
+                {t('pages.tasksCreate.deviceModal.selectDevice')}
               </label>
               {open && (
                 <NestedDropdownSelector
@@ -260,30 +298,31 @@ function AddDeviceModal({
                   data={deviceTreeData}
                   value={initialDeviceValue}
                   onChange={onDeviceSelect}
-                  placeholder="Qurilmani tanlang"
+                  placeholder={t('pages.tasksCreate.deviceModal.selectDevice')}
                 />
               )}
             </div>
 
             {selectedDevice && (
               <div className="mt-4 p-3 bg-black-50 rounded-lg">
-                <p className="text-12-light">Tanlangan qurilma:</p>
-                <p className="text-14-regular  mt-1">{selectedDevice.label}</p>
+                <p className="text-12-light">
+                  {t('pages.tasksCreate.deviceModal.selectedDevice')}
+                </p>
+                <p className="text-14-regular mt-1">{selectedDevice.label}</p>
               </div>
             )}
           </div>
 
-          {/* Footer */}
           <div className="border-t border-black-200 px-6 py-4 flex justify-between gap-3">
             <Button variant="outline" onClick={onClose} className="flex-1">
-              Bekor qilish
+              {t('buttons.cancel')}
             </Button>
             <Button
               onClick={onApply}
               disabled={!selectedDevice}
               className="flex-1"
             >
-              Qo'llash
+              {t('buttons.apply')}
             </Button>
           </div>
         </div>
@@ -295,11 +334,17 @@ function AddDeviceModal({
 /**
  * Placeholder content for other tabs
  */
-function TabContentPlaceholder({ title }: { title: string }) {
+function TabContentPlaceholder({
+  title,
+  placeholder,
+}: {
+  title: string;
+  placeholder: string;
+}) {
   return (
     <div className="text-center py-12 text-description">
       <h3 className="text-20-medium text-body mb-2">{title}</h3>
-      <p className="text-16-regular">Ushbu bo'lim hozircha ishlanmoqda...</p>
+      <p className="text-16-regular">{placeholder}</p>
     </div>
   );
 }

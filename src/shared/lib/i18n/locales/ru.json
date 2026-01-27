@@ -45,7 +45,46 @@
         "title": "Добавить клиента",
         "searchPlaceholder": "Выберите клиента",
         "noResults": "Ничего не найдено"
-      }
+      },
+      "sidebar": {
+        "taskStatusTitle": "Статус задачи",
+        "status": "Статус",
+        "priority": "Приоритет",
+        "employees": "Сотрудники",
+        "selectStatus": "Выберите статус",
+        "searchStatus": "Поиск статуса",
+        "selectEmployees": "Выберите сотрудников",
+        "searchEmployees": "Поиск сотрудников"
+      },
+      "tabs": {
+        "about": "О задаче",
+        "delivery": "Доставка и аренда",
+        "diagnostics": "Диагностика",
+        "repair": "Ремонт",
+        "branches": "Филиалы",
+        "warranty": "Гарантия"
+      },
+      "tabsContent": {
+        "customerInfo": "Данные клиента",
+        "deviceInfo": "Данные устройства",
+        "noDataYet": "Пока нет данных"
+      },
+      "deviceModal": {
+        "title": "Добавить устройство",
+        "selectDevice": "Выберите устройство",
+        "selectedDevice": "Выбранное устройство:"
+      },
+      "infoRows": {
+        "customer": "Клиент",
+        "phone": "Номер телефона",
+        "username": "Имя пользователя",
+        "source": "Источник",
+        "os": "ОС",
+        "selectedDevice": "Выбранное устройство",
+        "enteredIssues": "Внесённые проблемы",
+        "no": "Нет"
+      },
+      "placeholderTab": "Этот раздел в разработке..."
     },
     "customers": {
       "title": "Клиенты"
@@ -203,6 +242,7 @@
     "add": "Добавить",
     "edit": "Редактировать",
     "delete": "Удалить",
+    "view": "Смотреть",
     "save": "Сохранить",
     "cancel": "Отмена",
     "submit": "Отправить",

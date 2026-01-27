@@ -54,6 +54,45 @@ export interface Translations {
         searchPlaceholder: string;
         noResults: string;
       };
+      sidebar: {
+        taskStatusTitle: string;
+        status: string;
+        priority: string;
+        employees: string;
+        selectStatus: string;
+        searchStatus: string;
+        selectEmployees: string;
+        searchEmployees: string;
+      };
+      tabs: {
+        about: string;
+        delivery: string;
+        diagnostics: string;
+        repair: string;
+        branches: string;
+        warranty: string;
+      };
+      tabsContent: {
+        customerInfo: string;
+        deviceInfo: string;
+        noDataYet: string;
+      };
+      deviceModal: {
+        title: string;
+        selectDevice: string;
+        selectedDevice: string;
+      };
+      infoRows: {
+        customer: string;
+        phone: string;
+        username: string;
+        source: string;
+        os: string;
+        selectedDevice: string;
+        enteredIssues: string;
+        no: string;
+      };
+      placeholderTab: string;
     };
     customers: {
       title: string;
@@ -211,6 +250,7 @@ export interface Translations {
     add: string;
     edit: string;
     delete: string;
+    view: string;
     save: string;
     cancel: string;
     submit: string;
@@ -297,6 +337,11 @@ export type TranslationKey =
   | `pages.tasksCreate.${keyof Translations['pages']['tasksCreate']}`
   | `pages.tasksCreate.notifications.${keyof Translations['pages']['tasksCreate']['notifications']}`
   | `pages.tasksCreate.addCustomer.${keyof Translations['pages']['tasksCreate']['addCustomer']}`
+  | `pages.tasksCreate.sidebar.${keyof Translations['pages']['tasksCreate']['sidebar']}`
+  | `pages.tasksCreate.tabs.${keyof Translations['pages']['tasksCreate']['tabs']}`
+  | `pages.tasksCreate.tabsContent.${keyof Translations['pages']['tasksCreate']['tabsContent']}`
+  | `pages.tasksCreate.deviceModal.${keyof Translations['pages']['tasksCreate']['deviceModal']}`
+  | `pages.tasksCreate.infoRows.${keyof Translations['pages']['tasksCreate']['infoRows']}`
   | `pages.customers.${keyof Translations['pages']['customers']}`
   | `pages.analytics.${keyof Translations['pages']['analytics']}`
   | `pages.products.services.${keyof Translations['pages']['products']['services']}`

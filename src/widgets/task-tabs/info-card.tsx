@@ -13,6 +13,7 @@ import {
 import { Button } from '@shared/ui';
 import { Card } from '@shared/ui';
 import { cn } from '@shared/lib';
+import { useT } from '@shared/lib/i18n';
 import type { Customer } from './add-customer-modal';
 import type { TreeNode } from './nested-dropdown-selector';
 
@@ -52,6 +53,7 @@ type CardActionsProps = {
 };
 
 function CardActions({ onDelete, onEdit, onView }: CardActionsProps) {
+  const t = useT();
   return (
     <div className="flex items-center gap-0 text-14-light">
       <Button
@@ -61,7 +63,7 @@ function CardActions({ onDelete, onEdit, onView }: CardActionsProps) {
         className="gap-1.5 rounded-none text-brand-red hover:bg-bg-error hover:text-brand-red"
       >
         <Trash2 className="size-4" />
-        O&apos;chirish
+        {t('buttons.delete')}
       </Button>
       <div className="h-4 w-px bg-black-200" />
       <Button
@@ -71,7 +73,7 @@ function CardActions({ onDelete, onEdit, onView }: CardActionsProps) {
         className="gap-1.5 rounded-none text-brand-blue hover:bg-bg-blue hover:text-brand-blue"
       >
         <Pencil className="size-4" />
-        Tahrirlash
+        {t('buttons.edit')}
       </Button>
       <div className="h-4 w-px bg-black-200" />
       <Button
@@ -81,7 +83,7 @@ function CardActions({ onDelete, onEdit, onView }: CardActionsProps) {
         className="gap-1.5 rounded-none text-brand-blue hover:bg-bg-blue hover:text-brand-blue"
       >
         <Eye className="size-4" />
-        Ko&apos;rish
+        {t('buttons.view')}
       </Button>
     </div>
   );
@@ -102,42 +104,43 @@ export function CustomerInfoCard({
   onEdit,
   onView,
 }: CustomerInfoCardProps) {
+  const t = useT();
   const isEmpty = !customer;
 
   return (
     <div className="flex h-full flex-col">
       <h3 className="text-16-regular text-body mb-2">
-        Mijoz ma&apos;lumotlari
+        {t('pages.tasksCreate.tabsContent.customerInfo')}
       </h3>
       <Card className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-lg border p-1">
         <div className="flex min-h-[180px] flex-1 flex-col rounded-lg bg-black-100 p-4">
           {isEmpty ? (
             <div className="flex flex-1 flex-col items-center justify-center py-8">
               <p className="text-16-regular text-description">
-                Hozircha hech qanday ma&apos;lumot yo&apos;q
+                {t('pages.tasksCreate.tabsContent.noDataYet')}
               </p>
             </div>
           ) : (
             <div className="space-y-0">
               <InfoRow
                 icon={<UserIcon size={16} color="#00BFFF" />}
-                label="Mijoz"
+                label={t('pages.tasksCreate.infoRows.customer')}
                 value={customer.name}
               />
               <InfoRow
                 icon={<PhoneIcon size={16} color="#00BFFF" />}
-                label="Telefon raqami"
+                label={t('pages.tasksCreate.infoRows.phone')}
                 value={customer.phone}
                 valueHighlight
               />
               <InfoRow
                 icon={<AtSign className="size-4" />}
-                label="Foydalanuvchi nomi"
+                label={t('pages.tasksCreate.infoRows.username')}
                 value={customer.username ?? '—'}
               />
               <InfoRow
                 icon={<Share2 className="size-4" />}
-                label="Manba"
+                label={t('pages.tasksCreate.infoRows.source')}
                 value={customer.source ?? '—'}
               />
             </div>
@@ -149,7 +152,7 @@ export function CustomerInfoCard({
             className="mb-1 mx-auto block !border-none !bg-transparent shadow-none"
             onClick={onAdd}
           >
-            Qo&apos;shish
+            {t('buttons.add')}
           </Button>
         ) : (
           <CardActions onDelete={onDelete} onEdit={onEdit} onView={onView} />
@@ -179,41 +182,41 @@ export function DeviceInfoCard({
   onEdit,
   onView,
 }: DeviceInfoCardProps) {
+  const t = useT();
   const isEmpty = !selection;
   const osLabel = selection ? (selection.path[0]?.label ?? '—') : '';
   const deviceLabel = selection ? selection.node.label : '';
-  const issuesLabel = "Yo'q";
 
   return (
     <div className="flex h-full flex-col">
       <h3 className="text-16-regular text-body mb-2">
-        Qurilma ma&apos;lumotlari
+        {t('pages.tasksCreate.tabsContent.deviceInfo')}
       </h3>
       <Card className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-lg border p-1">
         <div className="flex min-h-[180px] flex-1 flex-col rounded-lg bg-black-100 p-4">
           {isEmpty ? (
             <div className="flex flex-1 flex-col items-center justify-center py-8">
               <p className="text-16-regular text-description">
-                Hozircha hech qanday ma&apos;lumot yo&apos;q
+                {t('pages.tasksCreate.tabsContent.noDataYet')}
               </p>
             </div>
           ) : (
             <div className="space-y-0">
               <InfoRow
                 icon={<Cpu className="size-4" />}
-                label="Operatsion sistema"
+                label={t('pages.tasksCreate.infoRows.os')}
                 value={osLabel}
               />
               <InfoRow
                 icon={<Smartphone className="size-4" />}
-                label="Tanlangan qurilma"
+                label={t('pages.tasksCreate.infoRows.selectedDevice')}
                 value={deviceLabel}
                 valueHighlight
               />
               <InfoRow
                 icon={<Wrench className="size-4" />}
-                label="Kiritilgan muammolar"
-                value={issuesLabel}
+                label={t('pages.tasksCreate.infoRows.enteredIssues')}
+                value={t('pages.tasksCreate.infoRows.no')}
               />
             </div>
           )}
@@ -224,7 +227,7 @@ export function DeviceInfoCard({
             className="mb-1 mx-auto block !border-none !bg-transparent shadow-none"
             onClick={onAdd}
           >
-            Qo&apos;shish
+            {t('buttons.add')}
           </Button>
         ) : (
           <CardActions onDelete={onDelete} onEdit={onEdit} onView={onView} />
