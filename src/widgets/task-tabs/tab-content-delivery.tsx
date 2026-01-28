@@ -109,25 +109,29 @@ function AddressSection() {
             <p className="text-12-light">*Yoki xaritadan tanlang</p>
           </div>
         </div>
+      </div>
 
-        {/* Secondary Address Toggle */}
-        <div className="flex items-center justify-between py-2">
-          <label
-            htmlFor="secondary-address-toggle"
-            className="text-14-regular text-body cursor-pointer"
-          >
-            Boshqa manzilga yetkazib berish
-          </label>
-          <Switch
-            id="secondary-address-toggle"
-            checked={showSecondaryAddress}
-            onCheckedChange={setShowSecondaryAddress}
-          />
+      {/* Secondary Address Toggle - Alohida bo'lim */}
+      <div className="border-t border-gray-200 bg-white">
+        <div className="p-4">
+          <div className="flex items-center justify-between">
+            <label
+              htmlFor="secondary-address-toggle"
+              className="text-14-regular text-body cursor-pointer"
+            >
+              Boshqa manzilga yetkazib berish
+            </label>
+            <Switch
+              id="secondary-address-toggle"
+              checked={showSecondaryAddress}
+              onCheckedChange={setShowSecondaryAddress}
+            />
+          </div>
         </div>
 
         {/* Secondary Address Section */}
         {showSecondaryAddress && (
-          <div className="space-y-4 pl-4 border-l-2 border-brand-blue">
+          <div className="px-4 pb-4 space-y-4 border-t border-gray-200 pt-4">
             <div>
               <label className="block text-14-regular text-body mb-2">
                 Yetkazib berish manzili
@@ -253,25 +257,29 @@ function CourierSection() {
             }
           />
         </div>
+      </div>
 
-        {/* Secondary Courier Toggle */}
-        <div className="flex items-center justify-between py-2">
-          <label
-            htmlFor="secondary-courier-toggle"
-            className="text-14-regular text-body cursor-pointer"
-          >
-            Boshqa kuryer yetkazib beradi
-          </label>
-          <Switch
-            id="secondary-courier-toggle"
-            checked={showSecondaryCourier}
-            onCheckedChange={setShowSecondaryCourier}
-          />
+      {/* Secondary Courier Toggle - Alohida bo'lim */}
+      <div className="border-t border-gray-200 bg-white">
+        <div className="p-4">
+          <div className="flex items-center justify-between">
+            <label
+              htmlFor="secondary-courier-toggle"
+              className="text-14-regular text-body cursor-pointer"
+            >
+              Boshqa kuryer yetkazib beradi
+            </label>
+            <Switch
+              id="secondary-courier-toggle"
+              checked={showSecondaryCourier}
+              onCheckedChange={setShowSecondaryCourier}
+            />
+          </div>
         </div>
 
         {/* Secondary Courier Section */}
         {showSecondaryCourier && (
-          <div className="space-y-4 pl-4 border-l-2 border-brand-blue">
+          <div className="px-4 pb-4 space-y-4 border-t border-gray-200 pt-4">
             <div>
               <label className="block text-14-regular text-body mb-2">
                 Kuryerni tanlang <span className="text-brand-red">*</span>
